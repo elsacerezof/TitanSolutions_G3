@@ -1,0 +1,14 @@
+<resources>
+    <string name="app_name">ProyectoTUS</string>
+    <string name="title_activity_paradas">Paradas</string>
+    <string name="title_activity_menu">Menu</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
+    <string name="action_settings">Settings</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Fragmento paradas</string>
+    <string name="title_activity_seleccion_navigation_drawer">SeleccionNavigationDrawer</string>
+</resources>
