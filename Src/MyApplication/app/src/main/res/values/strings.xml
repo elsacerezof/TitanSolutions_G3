@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">TUS Santander</string>
+    <string name="app_carga_datos_ok">Datos obtenidos con éxito</string>
+    <string name="app_carga_datos_enproceso">Cargando datos</string>
+    <string name="title_home">Home</string>
+    <string name="title_dashboard">Dashboard</string>
+    <string name="title_notifications">Notifications</string>
+    <string name="navigationOption1">Paradas</string>
+    <string name="navigationOption2">Lineas</string>
+    <string name="navigationOption3">Otros</string>
+    <string name="action_settings">Settings</string>
+</resources>
