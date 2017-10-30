@@ -23,7 +23,7 @@ public class ActivityInicialLogo extends AppCompatActivity {
                 Intent intent = new Intent(ActivityInicialLogo.this, SeleccionNavigationDrawer.class);
                 startActivity(intent);
                 finish();
-            };
+            }
         }, DURACION_SPLASH);
     }
 }
