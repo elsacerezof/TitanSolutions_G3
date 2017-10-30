@@ -1,0 +1,6 @@
+
+=squid:S1148"#Use a logger to log this exception.(€ÉÔ…ıÿÿÿÿ
+Tsquid:S1161":Add the "@Override" annotation above this method signature(§·âÿÿÿÿÿ
+hsquid:S00101"MRename this class name to match the regular expression '^[A-Z][a-zA-Z0-9]*$'.(Ç›˜Áıÿÿÿÿ
+rsquid:S00120"WRename this package name to match the regular expression '^[a-z]+(\.[a-z][a-z0-9]*)*$'.(Êµº¦ùÿÿÿÿ
+1squid:S1643"Use a StringBuilder instead.(¼öü®

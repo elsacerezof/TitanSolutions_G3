@@ -95,7 +95,5 @@ public class ListParadasPresenter  {
             listParadasView.showProgress(false);
             Toast.makeText(context, R.string.app_carga_datos_ok, Toast.LENGTH_SHORT).show();
         }
-
     }
-
 }// ListParadasPresenter

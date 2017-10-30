@@ -1,0 +1,8 @@
+
+Lsquid:S1905"+Remove this unnecessary cast to "TextView".(Çíã»ûÿÿÿÿ8è²Şåö+
+Ysquid:UselessImportCheck"1Remove this unused import 'java.util.LinkedList'.(»Äğ18è²Şåö+
+Xsquid:UselessImportCheck"*Remove this unused import 'java.util.Map'.(¼è½Òşÿÿÿÿ8è²Şåö+
+\squid:UselessImportCheck".Remove this unused import 'java.util.HashMap'.(™˜”€ùÿÿÿÿ8è²Şåö+
+rsquid:S00120"WRename this package name to match the regular expression '^[a-z]+(\.[a-z][a-z0-9]*)*$'.(Äíÿÿÿÿÿ
+Gsquid:S1905"+Remove this unnecessary cast to "TextView".(Ëõí¥8è²Şåö+
+_squid:UselessImportCheck"1Remove this unused import 'java.util.Collection'.(¹ÉĞšùÿÿÿÿ8è²Şåö+

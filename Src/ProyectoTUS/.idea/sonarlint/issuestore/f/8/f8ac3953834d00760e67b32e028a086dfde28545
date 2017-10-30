@@ -1,0 +1,12 @@
+
+qsquid:S1488"\Immediately return this expression instead of assigning it to the temporary variable "view".(ôùþé
+esquid:CommentedOutCodeLine"<This block of commented-out lines of code should be removed.(žêÇ£ýÿÿÿÿ
+3squid:S2131"Use "Integer.toString" instead.(Æ“Ð<
+Nsquid:S1135"2Complete the task associated to this TODO comment.(…ïœ†8÷Í–æö+
+Vsquid:S1161":Add the "@Override" annotation above this method signature(ñ”Ò8œ®ºæö+
+Osquid:S1068"5Remove this unused "dataCommunication" private field.(ªèöÕþÿÿÿÿ
+[squid:UselessImportCheck"3Remove this unused import 'android.content.Intent'.(³ð‹G8ùÉÃæö+
+Ysquid:UselessImportCheck"1Remove this unused import 'java.util.LinkedList'.(»Äð18¸Üåæö+
+asquid:CallToDeprecatedMethod"6Remove this use of "ProgressDialog"; it is deprecated.(Žÿ¢ÿÿÿÿÿ
+rsquid:S00120"WRename this package name to match the regular expression '^[a-z]+(\.[a-z][a-z0-9]*)*$'.(Äíÿÿÿÿÿ
+asquid:CallToDeprecatedMethod"6Remove this use of "ProgressDialog"; it is deprecated.(’çÕÁýÿÿÿÿ

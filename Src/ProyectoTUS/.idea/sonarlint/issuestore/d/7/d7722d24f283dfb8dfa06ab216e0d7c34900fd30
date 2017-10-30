@@ -1,0 +1,7 @@
+
+`squid:CommentedOutCodeLine"<This block of commented-out lines of code should be removed.(™ü·Ì
+Jsquid:S1068"0Remove this unused "mTextMessage" private field.(×°¼ùøÿÿÿÿ
+esquid:CommentedOutCodeLine"<This block of commented-out lines of code should be removed.(×ûÖÒýÿÿÿÿ
+rsquid:S00120"WRename this package name to match the regular expression '^[a-z]+(\.[a-z][a-z0-9]*)*$'.(Äíÿÿÿÿÿ
+S"squid:SwitchLastCaseIsDefaultCheck""Add a default case to this switch.(øå´¡ÿÿÿÿÿ
+isquid:MaximumInheritanceDepth"=This class has 10 parents which is greater than 5 authorized.(Ó¯´ÿÿÿÿÿ

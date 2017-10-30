@@ -24,13 +24,13 @@ import es.unican.alejandro.tus_practica3.R;
  * //http://www.viralandroid.com/2016/04/custom-android-listview-example.html
  */
 
-public class ListParadasAdapter extends ArrayAdapter {
+public class ListParadasAdapterSorted extends ArrayAdapter {
     List<Parada> paradasBus;
     Context context;
 
-    public ListParadasAdapter (Context context, List<Parada> paradasBus){
+    public ListParadasAdapterSorted (Context context, List<Parada> paradasBus){
         super(context, R.layout.custom_list_paradas_layout,paradasBus);
-        //Collections.sort(paradasBus);
+        Collections.sort(paradasBus);
         this.context = context;
         this.paradasBus = paradasBus;
     }// ListparadasAdapter

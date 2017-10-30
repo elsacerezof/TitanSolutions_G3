@@ -1,0 +1,4 @@
+
+rsquid:S00120"WRename this package name to match the regular expression '^[a-z]+(\.[a-z][a-z0-9]*)*$'.(Ğ¥¿¤ûÿÿÿÿ
+zsquid:S1210"YOverride "equals(Object obj)" to comply with the contract of the "compareTo(T o)" method.(¾¬­úÿÿÿÿ8â»¦äö+
+|squid:S3923"[Remove this conditional structure or edit its code blocks so that they're not all the same.(´óùÿÿÿÿ8óÈäö+

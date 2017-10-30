@@ -3,9 +3,14 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
     <item
-        android:id="@+id/action_settings"
+        android:id="@+id/action_ordenar_alfa"
         android:orderInCategory="100"
-        android:title="Ajustes"
+        android:title="Ordenar alfabéticamente"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/action_return_original"
+        android:orderInCategory="100"
+        android:title="Volver a original"
         app:showAsAction="never" />
 
 </menu>

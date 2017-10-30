@@ -35,6 +35,7 @@ public class MainActivity extends AppCompatActivity implements DataCommunication
 
     }//onCreate
 
+
     @Override
     public int getLineaIdentifier() {
         return lineaIdentifier;

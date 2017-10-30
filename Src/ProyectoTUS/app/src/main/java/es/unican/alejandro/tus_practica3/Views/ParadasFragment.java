@@ -1,16 +1,20 @@
 package es.unican.alejandro.tus_practica3.Views;
 
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.ListFragment;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
 
+import java.util.Collections;
+import java.util.LinkedList;
 import java.util.List;
 
 import es.unican.alejandro.tus_practica3.Model.Parada;
@@ -57,6 +61,17 @@ public class ParadasFragment extends ListFragment implements IListParadasView {
         getListView().setAdapter(listLineasAdapter);
     }
 
+    //TODO
+    public void showSortedList(List<Parada> lineaList){
+        if(lineaList!=null) {
+            ListParadasAdapterSorted listParadasAdapterSorted = new ListParadasAdapterSorted(getContext(), lineaList);
+            getListView().setAdapter(listParadasAdapterSorted);
+        }else{
+            dialog.dismiss();
+        }
+    }
+
+
     /**
      * Este método cuando es llamado se encarga de mostrar un progressDialog
      * @param state si es true pone el progressDialog en la interfaz, si es false lo cancela
@@ -76,5 +91,12 @@ public class ParadasFragment extends ListFragment implements IListParadasView {
 
         inflater.inflate(R.menu.menu,menu);
 
+    }
+
+    public boolean onOptionsItemSelected(MenuItem item){
+        List<Parada> paradaList=listLineasPresenter.getListaParadasBus();
+        Collections.sort(paradaList);
+        showSortedList(paradaList);
+        return true;
     }
 }
