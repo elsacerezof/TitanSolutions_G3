@@ -1,14 +1,12 @@
 <resources>
-    <string name="app_name">ProyectoTUS</string>
-    <string name="title_activity_paradas">Paradas</string>
-    <string name="title_activity_menu">Menu</string>
-
-    <string name="navigation_drawer_open">Open navigation drawer</string>
-    <string name="navigation_drawer_close">Close navigation drawer</string>
-
+    <string name="app_name">TUS Santander</string>
+    <string name="app_carga_datos_ok">Datos obtenidos con éxito</string>
+    <string name="app_carga_datos_enproceso">Cargando datos</string>
+    <string name="title_home">Home</string>
+    <string name="title_dashboard">Dashboard</string>
+    <string name="title_notifications">Notifications</string>
+    <string name="navigationOption1">Paradas</string>
+    <string name="navigationOption2">Lineas</string>
+    <string name="navigationOption3">Otros</string>
     <string name="action_settings">Settings</string>
-
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Fragmento paradas</string>
-    <string name="title_activity_seleccion_navigation_drawer">SeleccionNavigationDrawer</string>
 </resources>
