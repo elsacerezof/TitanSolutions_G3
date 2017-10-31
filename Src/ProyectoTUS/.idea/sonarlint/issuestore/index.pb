@@ -1,19 +1,9 @@
 
-P
- app\src\main\AndroidManifest.xml,a\c\ac6e0c942798c8a768fab2e3ab7e6a6b69b346f1
-u
-Eapp\src\main\java\es\unican\alejandro\tus_practica3\Model\Parada.java,7\d\7d87481f314f4544551a93a9fbf7333b950ef358
-Ç
-Rapp\src\main\java\es\unican\alejandro\tus_practica3\Views\ActivityInicialLogo.java,3\1\312d3dc767f91e087b7548e8a4058fc68117b4e6
-Å
-Qapp\src\main\java\es\unican\alejandro\tus_practica3\Views\ListParadasAdapter.java,2\7\27b2286afa91502d72d6c4bac7856f7a7fcce370
-á
-Wapp\src\main\java\es\unican\alejandro\tus_practica3\Views\ListParadasAdapterSorted.java,6\0\605a411fc8e57c34b665045dda75896b3795aa5f
-Ü
-Vapp\src\main\java\es\unican\alejandro\tus_practica3\Model\DataLoaders\RemoteFetch.java,e\7\e7d04898a9b788bd642beb122a463d0312868397
-~
-Napp\src\main\java\es\unican\alejandro\tus_practica3\Views\ParadasFragment.java,f\8\f8ac3953834d00760e67b32e028a086dfde28545
-{
-Kapp\src\main\java\es\unican\alejandro\tus_practica3\Views\MainActivity.java,d\7\d7722d24f283dfb8dfa06ab216e0d7c34900fd30
 á
 Wapp\src\main\java\es\unican\alejandro\tus_practica3\Presenter\ListParadasPresenter.java,0\5\0542620b04de7cd74f3e4a88bb53ccbf03020805
+Å
+Qapp\src\main\java\es\unican\alejandro\tus_practica3\Views\ListParadasAdapter.java,2\7\27b2286afa91502d72d6c4bac7856f7a7fcce370
+Ü
+Vapp\src\main\java\es\unican\alejandro\tus_practica3\Model\DataLoaders\RemoteFetch.java,e\7\e7d04898a9b788bd642beb122a463d0312868397
+Ö
+Uapp\src\main\java\es\unican\alejandro\tus_practica3\Model\DataLoaders\ParserJSON.java,0\5\05c1568c1b081ce9390157f28847a45cafc0752b
