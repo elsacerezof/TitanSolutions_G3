@@ -34,12 +34,16 @@ public class ListParadasAdapter extends ArrayAdapter {
     @Override
     public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
         LayoutInflater layoutInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        View viewRow = layoutInflater.inflate(R.layout.custom_list_paradas_layout,null,true);
-        TextView textViewName = (TextView) viewRow.findViewById(R.id.textViewName);
-        TextView textViewNumero = (TextView) viewRow.findViewById(R.id.textViewNumero);
-        textViewName.setText(paradasBus.get(position).getName().trim());
-        textViewNumero.setText(paradasBus.get(position).getNumero().trim());
+        View viewRow = layoutInflater.inflate(R.layout.custom_list_paradas_layout, null, true);
+        if(paradasBus.size()>1) {
 
+            TextView textViewName = (TextView) viewRow.findViewById(R.id.textViewName);
+            TextView textViewNumero = (TextView) viewRow.findViewById(R.id.textViewNumero);
+            textViewName.setText(paradasBus.get(position).getName().trim());
+            textViewNumero.setText(paradasBus.get(position).getNumero().trim());
+
+
+        }
         return viewRow;
     }
 

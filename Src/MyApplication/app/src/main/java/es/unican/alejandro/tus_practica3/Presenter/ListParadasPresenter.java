@@ -5,6 +5,9 @@ import android.os.AsyncTask;
 import android.util.Log;
 import android.widget.Toast;
 
+import java.io.BufferedInputStream;
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.List;
 
 import es.unican.alejandro.tus_practica3.Model.DataLoaders.ParserJSON;
@@ -44,19 +47,32 @@ public class ListParadasPresenter  {
      * a readArrayParadasBus (ParserJSON)
      * @return
      */
-    public boolean obtenParadas(){
+    public boolean obtenParadas(InputStream i){
         try {
-            remoteFetchParadas.getJSON(RemoteFetch.URL_PARADAS_BUS);
-            listaParadasBus = ParserJSON.readArrayParadasBus(remoteFetchParadas.getBufferedData());
+
+            listaParadasBus = ParserJSON.readArrayParadasBus(i);
             Log.d("ENTRA", "Obten gasolineras:"+listaParadasBus.size());
             return true;
         }catch(Exception e){
             Log.e("ERROR","Error en la obtención de las paradas de Bus: "+e.getMessage());
+            //Toast.makeText(context, R.string.app_carga_datos_ok, Toast.LENGTH_SHORT).show();
             e.printStackTrace();
+
             return false;
         }//try
     }//obtenParadas
+    public InputStream getDescargaParadas()
+    {
 
+        try {
+            remoteFetchParadas.getJSON(RemoteFetch.URL_PARADAS_BUS);
+            return remoteFetchParadas.getBufferedData();
+        } catch (IOException e) {
+            e.printStackTrace();
+            return null;
+        }
+
+    }
 
     public List<Parada> getListaParadasBus() {
         return listaParadasBus;
@@ -86,14 +102,28 @@ public class ListParadasPresenter  {
         @Override
         protected Boolean doInBackground(Object... objects) {
             // Se cargan "de fondo" las líneas en el hilo destinado a la tarea
-            return obtenParadas();
+
+            return obtenParadas(getDescargaParadas());
         }
 
         protected void onPostExecute(Boolean bool) {
             // Una vez ejecutado, se muestra el listado y el mensaje de carga completa, desactivando el de espera
-            listParadasView.showList(getListaParadasBus());
-            listParadasView.showProgress(false);
-            Toast.makeText(context, R.string.app_carga_datos_ok, Toast.LENGTH_SHORT).show();
+
+                if(getListaParadasBus()==null)
+                {
+                    Toast.makeText(context,R.string.app_fallo_conexion, Toast.LENGTH_SHORT).show();
+                    listParadasView.showList(getListaParadasBus());
+                }
+                else {
+                    listParadasView.showList(getListaParadasBus());
+                    listParadasView.showProgress(false);
+                    Toast.makeText(context, R.string.app_carga_datos_ok, Toast.LENGTH_SHORT).show();
+                }
+
+
+
+
+
         }
 
     }

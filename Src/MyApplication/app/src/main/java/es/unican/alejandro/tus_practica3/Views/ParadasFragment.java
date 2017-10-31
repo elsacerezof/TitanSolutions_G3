@@ -1,6 +1,7 @@
 package es.unican.alejandro.tus_practica3.Views;
 
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.ListFragment;
 import android.util.Log;
@@ -10,6 +11,7 @@ import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import java.util.List;
 
@@ -25,6 +27,7 @@ public class ParadasFragment extends ListFragment implements IListParadasView {
     private DataCommunication dataCommunication;
     private ProgressDialog dialog;
     private ListParadasPresenter listLineasPresenter;
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -53,8 +56,14 @@ public class ParadasFragment extends ListFragment implements IListParadasView {
 
     @Override
     public void showList(List<Parada> lineaList) {
-        ListParadasAdapter listLineasAdapter = new ListParadasAdapter(getContext(), lineaList);
-        getListView().setAdapter(listLineasAdapter);
+        if(lineaList!=null) {
+            ListParadasAdapter listLineasAdapter = new ListParadasAdapter(getContext(), lineaList);
+            getListView().setAdapter(listLineasAdapter);
+        }
+        else{
+            //Toast.makeText(context,"error", Toast.LENGTH_SHORT).show();
+            dialog.dismiss();
+        }
     }
 
     /**
