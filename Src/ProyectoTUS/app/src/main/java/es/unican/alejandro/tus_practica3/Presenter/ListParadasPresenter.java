@@ -48,10 +48,10 @@ public class ListParadasPresenter  {
         try {
             remoteFetchParadas.getJSON(RemoteFetch.URL_PARADAS_BUS);
             listaParadasBus = ParserJSON.readArrayParadasBus(remoteFetchParadas.getBufferedData());
-            Log.d("ENTRA", "Obten gasolineras:"+listaParadasBus.size());
+            Log.d("ENTRA", "Obten paradas:"+listaParadasBus.size());
             return true;
         }catch(Exception e){
-            Log.e("ERROR","Error en la obtención de las paradas de Bus: "+e.getMessage());
+            Log.e("ERROR","Error en la obtención de las paradas de bus: "+e.getMessage());
             e.printStackTrace();
             return false;
         }//try
