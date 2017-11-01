@@ -11,18 +11,15 @@
         android:roundIcon="@mipmap/ic_launcher"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".Views.MainActivity"></activity>
-        <activity android:name=".Views.ActivityInicialLogo">
+        <activity android:name=".Views.MainActivity"
+            android:screenOrientation="portrait"></activity>
+        <activity android:name=".Views.ActivityInicialLogo"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity
-            android:name=".Views.ListParadasAdapterSorted"
-            android:label="@string/title_activity_list_paradas_adapter_sorted"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
-
 </manifest>
