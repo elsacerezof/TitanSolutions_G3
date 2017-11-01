@@ -12,10 +12,10 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
 
-        <activity android:name="es.unican.alejandro.tus_practica3.Views.MainActivity">
+        <activity android:name="es.unican.alejandro.tus_practica3.Views.MainActivity" android:screenOrientation="portrait">
 
         </activity>
-        <activity android:name=".Views.ActivityInicialLogo">
+        <activity android:name=".Views.ActivityInicialLogo" android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
