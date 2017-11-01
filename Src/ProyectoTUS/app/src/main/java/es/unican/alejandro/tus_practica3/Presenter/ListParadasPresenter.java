@@ -42,7 +42,7 @@ public class ListParadasPresenter  {
      * de esta clase. Para realizar esto internamente realiza una llamada a la función
      * getJSON (RemoteFetch) para seguidamente parsear el JSON obtenido con la llamada
      * a readArrayParadasBus (ParserJSON)
-     * @return
+     * @return boolean
      */
     public boolean obtenParadas(){
         try {
@@ -52,7 +52,7 @@ public class ListParadasPresenter  {
             return true;
         }catch(Exception e){
             Log.e("ERROR","Error en la obtención de las paradas de bus: "+e.getMessage());
-            e.printStackTrace();
+            Log.w("", e);
             return false;
         }//try
     }//obtenParadas
@@ -89,6 +89,7 @@ public class ListParadasPresenter  {
             return obtenParadas();
         }
 
+        @Override
         protected void onPostExecute(Boolean bool) {
             // Una vez ejecutado, se muestra el listado y el mensaje de carga completa, desactivando el de espera
             listParadasView.showList(getListaParadasBus());

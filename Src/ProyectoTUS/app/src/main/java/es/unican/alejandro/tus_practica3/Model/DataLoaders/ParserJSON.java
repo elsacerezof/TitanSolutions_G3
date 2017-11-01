@@ -17,15 +17,19 @@ import es.unican.alejandro.tus_practica3.Model.Parada;
  */
 public class ParserJSON{
 
+    private ParserJSON(){
+
+    }
+
     /**
-     * Método para obtener todas las paradas de buses
+     * Metodo para obtener todas las paradas de buses
      * @param in InputStream del JSON con las paradas de buses
      * @return Lista con todas las paradas
      * @throws IOException
      */
     public static List<Parada> readArrayParadasBus (InputStream in) throws IOException {
             JsonReader reader = new JsonReader(new InputStreamReader(in, "UTF-8"));
-            List<Parada> listParadasBus = new ArrayList<Parada>();
+            List<Parada> listParadasBus = new ArrayList<>();
             reader.beginObject(); //summary y resources
             while (reader.hasNext()){
                     String name = reader.nextName();
@@ -49,7 +53,8 @@ public class ParserJSON{
      */
     private static Parada readParada (JsonReader reader) throws IOException {
         reader.beginObject(); //Leemos un object
-        String name ="", numero="";
+        String name ="";
+        String numero="";
         int identifier=-1;
         while(reader.hasNext()) {
             String n = reader.nextName();

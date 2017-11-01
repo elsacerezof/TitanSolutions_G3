@@ -8,16 +8,13 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
-import android.widget.TextView;
 
 import es.unican.alejandro.tus_practica3.R;
 
 public class MainActivity extends AppCompatActivity implements DataCommunication {
 
-    //private ListView listViewParadas;
     private int lineaIdentifier;
     private int paradaIdentifier;
-    private TextView mTextMessage;
     private int count=0;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,7 +55,6 @@ public class MainActivity extends AppCompatActivity implements DataCommunication
         public boolean onNavigationItemSelected(@NonNull MenuItem item) {
             switch (item.getItemId()) {
                 case R.id.navigation_home:
-                    //mTextMessage.setText(R.string.title_home);
 
                     if(count==0)
                     {
@@ -78,6 +74,9 @@ public class MainActivity extends AppCompatActivity implements DataCommunication
                 case R.id.navigation_notifications:
 
                     return true;
+
+                default:
+                    break;
             }
             return false;
         }

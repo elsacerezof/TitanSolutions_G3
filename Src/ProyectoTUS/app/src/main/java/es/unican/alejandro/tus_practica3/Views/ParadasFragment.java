@@ -1,7 +1,6 @@
 package es.unican.alejandro.tus_practica3.Views;
 
 import android.app.ProgressDialog;
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.ListFragment;
 import android.util.Log;
@@ -14,7 +13,6 @@ import android.view.ViewGroup;
 import android.widget.ListView;
 
 import java.util.Collections;
-import java.util.LinkedList;
 import java.util.List;
 
 import es.unican.alejandro.tus_practica3.Model.Parada;
@@ -26,15 +24,13 @@ import es.unican.alejandro.tus_practica3.R;
  */
 public class ParadasFragment extends ListFragment implements IListParadasView {
 
-    private DataCommunication dataCommunication;
     private ProgressDialog dialog;
     private ListParadasPresenter listLineasPresenter;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_paradas_list, container, false);
-        return view;
+        return(inflater.inflate(R.layout.fragment_paradas_list, container, false));
     }
 
     @Override
@@ -48,11 +44,8 @@ public class ParadasFragment extends ListFragment implements IListParadasView {
 
     @Override
     public void onListItemClick(ListView listView, View view, int position, long id) {
-        Log.d("pulsado", ""+position);
+        Log.d("pulsado", ""+Integer.toString(position));
         //Haciendo uso de la interfaz DataCommunication podemos enviar los datos entre fragmentos
-        //Ejemplo:
-        //dataCommunication = (DataCommunication) getContext();
-        //dataCommunication.setLineaIdentifier(datosBuses.getListaLineasBus().get(position).getIdentifier());
     }
 
     @Override
@@ -61,7 +54,6 @@ public class ParadasFragment extends ListFragment implements IListParadasView {
         getListView().setAdapter(listLineasAdapter);
     }
 
-    //TODO
     public void showSortedList(List<Parada> lineaList){
         if(lineaList!=null) {
             ListParadasAdapterSorted listParadasAdapterSorted = new ListParadasAdapterSorted(getContext(), lineaList);
@@ -93,6 +85,7 @@ public class ParadasFragment extends ListFragment implements IListParadasView {
 
     }
 
+    @Override
     public boolean onOptionsItemSelected(MenuItem item){
         List<Parada> paradaList=listLineasPresenter.getListaParadasBus();
         Collections.sort(paradaList);

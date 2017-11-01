@@ -9,12 +9,7 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
-import java.util.Collection;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.LinkedList;
 import java.util.List;
-import java.util.Map;
 
 import es.unican.alejandro.tus_practica3.Model.Parada;
 import es.unican.alejandro.tus_practica3.R;
@@ -25,12 +20,11 @@ import es.unican.alejandro.tus_practica3.R;
  */
 
 public class ListParadasAdapter extends ArrayAdapter {
-    List<Parada> paradasBus;
-    Context context;
+    private List<Parada> paradasBus;
+    private Context context;
 
     public ListParadasAdapter (Context context, List<Parada> paradasBus){
         super(context, R.layout.custom_list_paradas_layout,paradasBus);
-        //Collections.sort(paradasBus);
         this.context = context;
         this.paradasBus = paradasBus;
     }// ListparadasAdapter
@@ -43,8 +37,8 @@ public class ListParadasAdapter extends ArrayAdapter {
 
         LayoutInflater layoutInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View viewRow = layoutInflater.inflate(R.layout.custom_list_paradas_layout,null,true);
-        TextView textViewName = (TextView) viewRow.findViewById(R.id.textViewName);
-        TextView textViewNumero = (TextView) viewRow.findViewById(R.id.textViewNumero);
+        TextView textViewName = viewRow.findViewById(R.id.textViewName);
+        TextView textViewNumero =  viewRow.findViewById(R.id.textViewNumero);
         textViewName.setText(paradasBus.get(position).getName().trim());
         textViewNumero.setText(paradasBus.get(position).getNumero().trim());
 

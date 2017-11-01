@@ -43,6 +43,7 @@ public class Parada implements Comparable{
         this.identifier = identifier;
     }
 
+
     @Override
     public int compareTo(@NonNull Object o) {
 
@@ -50,14 +51,10 @@ public class Parada implements Comparable{
         String nombreP1=this.getName();
         String nombreP2=parada.getName();
 
-        int compare=nombreP1.compareTo(nombreP2);
-        if (compare<0){
-            //nombre P1 va antes que nombre P2
-        }else if(compare>0){
-            //nombre P2 va antes que nombreP1
-        }else{
-            //son iguales
-        }
-        return compare;
+        //si es menor que 0, nombre p1 va antes que nombre p2
+        //si mayor que 0, lo contrario
+        //si es 0, son iguales
+        return(nombreP1.compareTo(nombreP2));
     }
+
 }

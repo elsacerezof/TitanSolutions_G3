@@ -1,8 +1,7 @@
 package es.unican.alejandro.tus_practica3.Model.DataLoaders;
 
 
-import android.os.AsyncTask;
-import android.util.Log;
+
 
 import java.io.BufferedInputStream;
 import java.io.IOException;
