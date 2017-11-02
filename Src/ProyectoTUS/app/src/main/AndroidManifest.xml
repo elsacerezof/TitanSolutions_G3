@@ -1,25 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="es.unican.elsacf.proyectotus">
+    package="es.unican.alejandro.tus_practica3">
+
+    <uses-permission android:name="android.permission.INTERNET" />
 
     <application
         android:allowBackup="true"
         android:icon="@mipmap/logo_app"
         android:label="@string/app_name"
+<<<<<<< HEAD
         android:roundIcon="@mipmap/logo_app"
+=======
+        android:roundIcon="@mipmap/ic_launcher"
+>>>>>>> US242062-OrdenarParadasAlfabeticamente
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".ActivityInicialLogo">
+        <activity android:name=".Views.MainActivity"
+            android:screenOrientation="portrait"></activity>
+        <activity android:name=".Views.ActivityInicialLogo"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity
-            android:name=".SeleccionNavigationDrawer"
-            android:label="@string/title_activity_seleccion_navigation_drawer"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
-
 </manifest>

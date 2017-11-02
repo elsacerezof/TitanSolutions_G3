@@ -1,4 +1,5 @@
 <resources>
+<<<<<<< HEAD
     <string name="app_name">Proyecto TUS (G3)</string>
     <string name="title_activity_paradas">Paradas</string>
     <string name="title_activity_menu">Menu</string>
@@ -10,4 +11,18 @@
 
     <string name="hello_blank_fragment">Aquí aparecerá la lista de paradas correspondiente</string>
     <string name="title_activity_seleccion_navigation_drawer">Paradas</string>
+=======
+    <string name="app_name">TUS Santander</string>
+    <string name="app_carga_datos_ok">Datos obtenidos con éxito</string>
+    <string name="app_carga_datos_enproceso">Cargando datos</string>
+    <string name="title_home">Home</string>
+    <string name="title_dashboard">Dashboard</string>
+    <string name="title_notifications">Notifications</string>
+    <string name="navigationOption1">Paradas</string>
+    <string name="navigationOption2">Lineas</string>
+    <string name="navigationOption3">Otros</string>
+    <string name="action_settings">Settings</string>
+    <string name="title_activity_list_paradas_adapter_sorted">ListParadasAdapterSorted</string>
+    <string name="app_fallo_conexion">Fallo en la conexión</string>
+>>>>>>> US242062-OrdenarParadasAlfabeticamente
 </resources>
