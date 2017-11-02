@@ -6,17 +6,9 @@
 
     <application
         android:allowBackup="true"
-        android:icon="@mipmap/logo_app"
+        android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
-<<<<<<< HEAD
-<<<<<<< HEAD
-        android:roundIcon="@mipmap/logo_app"
-=======
         android:roundIcon="@mipmap/ic_launcher"
->>>>>>> US242062-OrdenarParadasAlfabeticamente
-=======
-        android:roundIcon="@mipmap/ic_launcher"
->>>>>>> US243482-ListarParadas
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".Views.MainActivity"
