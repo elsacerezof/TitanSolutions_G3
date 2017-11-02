@@ -50,8 +50,14 @@ public class ParadasFragment extends ListFragment implements IListParadasView {
 
     @Override
     public void showList(List<Parada> lineaList) {
-        ListParadasAdapter listLineasAdapter = new ListParadasAdapter(getContext(), lineaList);
-        getListView().setAdapter(listLineasAdapter);
+        if(lineaList!=null) {
+            ListParadasAdapter listLineasAdapter = new ListParadasAdapter(getContext(), lineaList);
+            getListView().setAdapter(listLineasAdapter);
+        }
+        else
+        {
+            dialog.dismiss();
+        }
     }
 
     public void showSortedList(List<Parada> lineaList){
@@ -88,7 +94,9 @@ public class ParadasFragment extends ListFragment implements IListParadasView {
     @Override
     public boolean onOptionsItemSelected(MenuItem item){
         List<Parada> paradaList=listLineasPresenter.getListaParadasBus();
-        Collections.sort(paradaList);
+        if(paradaList!=null) {
+            Collections.sort(paradaList);
+        }
         showSortedList(paradaList);
         return true;
     }
