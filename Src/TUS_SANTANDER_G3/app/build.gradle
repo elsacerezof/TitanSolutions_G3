@@ -5,7 +5,7 @@ android {
         config {
             keyAlias 'key'
             keyPassword 'aspire6530'
-            storeFile file('C:/Users/Javier/Desktop/TUS_SANTANDER_G3/clave_apk_jmv.jks')
+            storeFile file('/Users/jsmr/Desktop/Unican/ProyectoAndoridGrupo/Firma/key.jks')
             storePassword 'aspire6530'
         }
     }

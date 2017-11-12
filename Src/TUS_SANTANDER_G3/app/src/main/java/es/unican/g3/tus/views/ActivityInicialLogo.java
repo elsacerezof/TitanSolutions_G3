@@ -10,7 +10,7 @@ import es.unican.alejandro.tus_practica3.R;
 public class ActivityInicialLogo extends AppCompatActivity {
 
     // Duración en milisegundos que se mostrará el splash
-    private static final int DURACION_SPLASH = 2000; // 2 segundos
+    private static final int DURACION_SPLASH = 3000; // 2 segundos
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
