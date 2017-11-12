@@ -2,7 +2,6 @@ package es.unican.g3.tus.presenter;
 
 import android.app.Activity;
 import android.content.Context;
-import android.content.Intent;
 import android.os.AsyncTask;
 import android.util.Log;
 import android.widget.Toast;
@@ -11,7 +10,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.List;
 
-import es.unican.alejandro.tus_practica3.R;
+import es.unican.g3.tus.R;
 import es.unican.g3.tus.model.Database;
 import es.unican.g3.tus.model.Linea;
 import es.unican.g3.tus.model.Parada;

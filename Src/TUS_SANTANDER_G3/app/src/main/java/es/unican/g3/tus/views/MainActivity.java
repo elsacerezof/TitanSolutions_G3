@@ -9,7 +9,8 @@ import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
 
-import es.unican.alejandro.tus_practica3.R;
+import es.unican.g3.tus.R;
+
 
 public class MainActivity extends AppCompatActivity implements DataCommunication {
 

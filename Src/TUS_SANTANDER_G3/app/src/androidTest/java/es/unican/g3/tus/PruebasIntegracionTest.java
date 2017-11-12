@@ -8,7 +8,6 @@ import java.io.InputStream;
 import java.util.Collections;
 import java.util.List;
 
-import es.unican.alejandro.tus_practica3.R;
 import es.unican.g3.tus.model.Parada;
 import es.unican.g3.tus.model.dataloaders.ParserJSON;
 import es.unican.g3.tus.model.dataloaders.RemoteFetch;

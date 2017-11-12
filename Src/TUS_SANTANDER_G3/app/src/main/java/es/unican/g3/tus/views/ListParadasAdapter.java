@@ -12,7 +12,7 @@ import android.widget.TextView;
 import java.util.Collections;
 import java.util.List;
 
-import es.unican.alejandro.tus_practica3.R;
+import es.unican.g3.tus.R;
 import es.unican.g3.tus.model.Parada;
 
 /**

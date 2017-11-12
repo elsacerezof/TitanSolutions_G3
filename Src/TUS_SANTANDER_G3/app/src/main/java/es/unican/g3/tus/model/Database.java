@@ -184,7 +184,7 @@ public class Database extends SQLiteOpenHelper {
                 null, null, null, null, null);
         if(c.moveToFirst()) {
             do {
-                Linea linea = new Linea(c.getString(1), c.getString(2), c.getInt(3));
+                Linea linea = new Linea(c.getString(2), c.getString(1), c.getInt(3));
                 listaLineas.add(linea);
             } while (c.moveToNext());
         }
