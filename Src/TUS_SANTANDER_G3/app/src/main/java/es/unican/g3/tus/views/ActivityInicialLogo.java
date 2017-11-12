@@ -5,7 +5,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 
-import es.unican.alejandro.tus_practica3.R;
+import es.unican.g3.tus.R;
 import es.unican.g3.tus.presenter.LoadDataAsync;
 
 public class ActivityInicialLogo extends AppCompatActivity {

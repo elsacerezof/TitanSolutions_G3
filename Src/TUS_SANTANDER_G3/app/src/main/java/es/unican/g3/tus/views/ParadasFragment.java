@@ -1,8 +1,6 @@
 package es.unican.g3.tus.views;
 
 import android.app.ProgressDialog;
-import android.app.SearchManager;
-import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.ListFragment;
 import android.support.v7.widget.SearchView;
@@ -19,7 +17,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-import es.unican.alejandro.tus_practica3.R;
+import es.unican.g3.tus.R;
 import es.unican.g3.tus.model.Parada;
 import es.unican.g3.tus.presenter.ListParadasPresenter;
 
@@ -127,13 +125,13 @@ public class ParadasFragment extends ListFragment implements IListParadasView{
     @Override
     public boolean onOptionsItemSelected(MenuItem item){
 
-
+        boolean resultado= false;
 
         if(item.getItemId()==R.id.action_search)
         {
 
 
-                return true;
+            resultado= true;
         }
         else {
             List<Parada> paradaList = listLineasPresenter.getListaParadasBus();
@@ -141,8 +139,10 @@ public class ParadasFragment extends ListFragment implements IListParadasView{
                 Collections.sort(paradaList);
             }
             showList(paradaList, true);
-            return true;
+            resultado= true;
         }
+
+        return resultado;
 
     }
 }

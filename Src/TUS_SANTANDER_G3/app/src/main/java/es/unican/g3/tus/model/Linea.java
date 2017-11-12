@@ -1,8 +1,6 @@
 package es.unican.g3.tus.model;
 
 
-import android.support.annotation.NonNull;
-
 /**
  * Linea
  */
@@ -36,6 +34,7 @@ public class Linea{
         Linea linea = (Linea) o;
         return this.identifier == linea.getIdentifier();
     }
+
 
 
 

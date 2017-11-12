@@ -12,14 +12,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
 
-import java.util.Collections;
 import java.util.List;
 
-import es.unican.alejandro.tus_practica3.R;
+import es.unican.g3.tus.R;
 import es.unican.g3.tus.model.Linea;
-import es.unican.g3.tus.model.Parada;
 import es.unican.g3.tus.presenter.ListLineasPresenter;
-import es.unican.g3.tus.presenter.ListParadasPresenter;
 
 /**
  * A fragment representing a list of Items.
