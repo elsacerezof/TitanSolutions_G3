@@ -61,15 +61,18 @@ public class ListLineasAdapter extends ArrayAdapter {
                 textViewName.setTextColor(Color.parseColor("#25b3d8"));
 
                 break;
-            case "5":
+            case "5C1":
+            case "5C2":
                 textViewName.setTextColor(Color.parseColor("#969696"));
 
                 break;
-            case "6":
+            case "6C1":
+            case "6C2":
                 textViewName.setTextColor(Color.parseColor("#008032"));
 
                 break;
-            case "7":
+            case "7C1":
+            case "7C2":
                 textViewName.setTextColor(Color.parseColor("#f66210"));
 
                 break;
@@ -118,14 +121,9 @@ public class ListLineasAdapter extends ArrayAdapter {
 
                 break;
             case "N1":
-                textViewName.setTextColor(Color.parseColor("#000000"));
-
-                break;
             case "N2":
-                textViewName.setTextColor(Color.parseColor("#000000"));
-
-                break;
             case "N3":
+            default:
                 textViewName.setTextColor(Color.parseColor("#000000"));
 
                 break;
