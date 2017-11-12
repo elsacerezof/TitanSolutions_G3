@@ -51,8 +51,8 @@ public class LineasFragment extends ListFragment implements IListLineasView{
         if(lineaList!=null) {
             ListLineasAdapter listLineasAdapter;
             if(ordenadas) {
-                //listLineasAdapter = new ListParadasAdapter(getContext(), lineaList, true);
-                //getListView().setAdapter(listLineasAdapter);
+                listLineasAdapter = new ListLineasAdapter(getContext(), lineaList, true);
+                getListView().setAdapter(listLineasAdapter);
             }else{
                 listLineasAdapter = new ListLineasAdapter(getContext(), lineaList, false);
                 getListView().setAdapter(listLineasAdapter);

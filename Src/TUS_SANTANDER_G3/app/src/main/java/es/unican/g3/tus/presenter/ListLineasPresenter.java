@@ -3,6 +3,7 @@ package es.unican.g3.tus.presenter;
 import android.content.Context;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import es.unican.g3.tus.model.Database;
@@ -21,7 +22,6 @@ import es.unican.g3.tus.views.ParadasFragment;
 public class ListLineasPresenter {
     private IListLineasView listLineasView;
     private List<Linea> listaLineasBus;
-    private List<Linea> listaAux= new ArrayList<Linea>();
     private RemoteFetch remoteFetchLineas;
     private Context context;
 
@@ -29,19 +29,7 @@ public class ListLineasPresenter {
         this.listLineasView = listLineasView;
         Database db = new Database(context);
         this.listaLineasBus = db.recuperarLineas();
-        for(int p=0;p<1000;p++)
-        {
-            for(int i=0;i<listaLineasBus.size();i++)
-            {
-
-                if(listaLineasBus.get(i).getIdentifier()==p)
-                {
-                    listaAux.add(listaLineasBus.get(i));
-                }
-            }
-        }
-        listaLineasBus=listaAux;
-        listLineasView.showList(listaLineasBus, false);
+        listLineasView.showList(listaLineasBus, true);
     }// ListParadasPresenter
 
     public List<Linea> getListaLineasBus() {
