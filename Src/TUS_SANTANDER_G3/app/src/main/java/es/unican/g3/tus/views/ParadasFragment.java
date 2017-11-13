@@ -27,7 +27,7 @@ import es.unican.g3.tus.presenter.ListParadasPresenter;
 public class ParadasFragment extends ListFragment implements IListParadasView{
 
     private ProgressDialog dialog;
-    private ListParadasPresenter listLineasPresenter;
+    private ListParadasPresenter listParadasPresenter;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -38,9 +38,9 @@ public class ParadasFragment extends ListFragment implements IListParadasView{
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        this.listLineasPresenter = new ListParadasPresenter(getContext(),this);
-        listLineasPresenter.getListaParadasBus().get(3).setAlias("mi casita");
-        listLineasPresenter.getListaParadasBus().get(5).setNotas("domino");
+        this.listParadasPresenter = new ListParadasPresenter(getContext(),this);
+        listParadasPresenter.getListaParadasBus().get(3).setAlias("mi casita");
+        listParadasPresenter.getListaParadasBus().get(5).setNotas("domino");
         this.dialog = new ProgressDialog(getContext());
         setHasOptionsMenu(true);
     }
@@ -83,43 +83,59 @@ public class ParadasFragment extends ListFragment implements IListParadasView{
         }
 
     }
+
+    /**
+     * Este método se encarga de devolver un listado con todas las paradas que tienen alguna
+     * coincidencia en alguno de sus campos con el texto indicado
+     *
+     * @param filterText texto con el que filtrar los resultados
+     * @return
+     */
+    public List<Parada> searchFilterList (List<Parada> paradas, String filterText) {
+
+        // Almacén de paradas coincidentes con el término de búsqueda
+        List<Parada> paradaFiltradas = new ArrayList<Parada>();
+
+        // Se recorren las paradas, almacenando aquellas que muestran coincidencias
+        for(int i = 0; i < paradas.size(); i++)
+        {
+            if(paradas.get(i).getName().indexOf(filterText)!=-1 ||
+                    paradas.get(i).getAlias().indexOf(filterText)!=-1 ||
+                    paradas.get(i).getNumero().indexOf(filterText)!=-1 ||
+                    paradas.get(i).getNotas().indexOf(filterText)!=-1)
+            {
+                paradaFiltradas.add(paradas.get(i));
+            }
+        }
+
+        return paradaFiltradas;
+    }
+
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
 
         inflater.inflate(R.menu.menu,menu);
 
+        // Interfaz gráfica búsqueda
+        SearchView searchView = (SearchView) menu.findItem(R.id.action_search).getActionView();
+        searchView.setQueryHint(getString(R.string.search_placeholder));
 
-        SearchView searchView = (SearchView) menu.findItem(R.id.action_search)
-                .getActionView();
-
-
+        // Atención de las consultas de búsqueda
         SearchView.OnQueryTextListener queryTextListener = new SearchView.OnQueryTextListener() {
-            public boolean onQueryTextChange(String newText) {
-                // this is your adapter that will be filtered
-                List<Parada> paradaList = new ArrayList<Parada>();
-                for(int i=0;i<listLineasPresenter.getListaParadasBus().size();i++)
-                {
-                    if(listLineasPresenter.getListaParadasBus().get(i).getName().indexOf(newText)!=-1 ||
-                            listLineasPresenter.getListaParadasBus().get(i).getAlias().indexOf(newText)!=-1 ||
-                            listLineasPresenter.getListaParadasBus().get(i).getNumero().indexOf(newText)!=-1 ||
-                            listLineasPresenter.getListaParadasBus().get(i).getNotas().indexOf(newText)!=-1)
-                    {
-                        paradaList.add(listLineasPresenter.getListaParadasBus().get(i));
-                    }
-                }
-                showList(paradaList,false);
+            public List<Parada> paradas = listParadasPresenter.getListaParadasBus();
+
+            public boolean onQueryTextChange(String filterText) {
+                showList(searchFilterList(paradas, filterText), false);
                 return true;
             }
 
             public boolean onQueryTextSubmit(String query) {
-                //Here u can get the value "query" which is entered in the search box.
-
                 return true;
             }
         };
+
         searchView.setOnQueryTextListener(queryTextListener);
 
-        //return super.onCreateOptionsMenu(menu);
     }
 
     @Override
@@ -127,14 +143,10 @@ public class ParadasFragment extends ListFragment implements IListParadasView{
 
         boolean resultado= false;
 
-        if(item.getItemId()==R.id.action_search)
-        {
-
-
+        if(item.getItemId()==R.id.action_search) {
             resultado= true;
-        }
-        else {
-            List<Parada> paradaList = listLineasPresenter.getListaParadasBus();
+        } else {
+            List<Parada> paradaList = listParadasPresenter.getListaParadasBus();
             if (paradaList != null) {
                 Collections.sort(paradaList);
             }
