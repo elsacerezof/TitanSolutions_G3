@@ -24,11 +24,8 @@ public class ListParadasAdapter extends ArrayAdapter {
     private List<Parada> paradasBus;
     private Context context;
 
-    public ListParadasAdapter (Context context, List<Parada> paradasBus, boolean ordenadas){
+    public ListParadasAdapter (Context context, List<Parada> paradasBus){
         super(context, R.layout.custom_list_paradas_layout,paradasBus);
-        if(ordenadas){
-            Collections.sort(paradasBus);
-        }
         this.context = context;
         this.paradasBus = paradasBus;
     }// ListparadasAdapter

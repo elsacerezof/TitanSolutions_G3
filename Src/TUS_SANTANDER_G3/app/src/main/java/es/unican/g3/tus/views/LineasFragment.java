@@ -12,6 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
 
+import java.util.Collections;
 import java.util.List;
 
 import es.unican.g3.tus.R;
@@ -29,7 +30,7 @@ public class LineasFragment extends ListFragment implements IListLineasView{
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        return(inflater.inflate(R.layout.fragment_paradas_list, container, false));
+        return(inflater.inflate(R.layout.fragment_lineas_list, container, false));
     }
 
     @Override
@@ -51,10 +52,11 @@ public class LineasFragment extends ListFragment implements IListLineasView{
         if(lineaList!=null) {
             ListLineasAdapter listLineasAdapter;
             if(ordenadas) {
-                listLineasAdapter = new ListLineasAdapter(getContext(), lineaList, true);
+                Collections.sort(lineaList);
+                listLineasAdapter = new ListLineasAdapter(getContext(), lineaList);
                 getListView().setAdapter(listLineasAdapter);
             }else{
-                listLineasAdapter = new ListLineasAdapter(getContext(), lineaList, false);
+                listLineasAdapter = new ListLineasAdapter(getContext(), lineaList);
                 getListView().setAdapter(listLineasAdapter);
             }
         }

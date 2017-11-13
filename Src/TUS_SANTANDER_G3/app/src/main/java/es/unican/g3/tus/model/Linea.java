@@ -34,33 +34,46 @@ public class Linea implements Comparable{
 
     public boolean equals(Object o) {
         Linea linea = (Linea) o;
-        return this.identifier == linea.getIdentifier();
+        return this.identifier == linea.getIdentifier() && this.name.equals(linea.getName()) && this.numero.equals(linea.getNumero());
     }
 
     @Override
     public int compareTo(Object o) {
         Linea linea = (Linea) o;
 
-        // Número base
+        // Se fijan valores de prioridad de ordenación según el tipo de parada
         String numeroL1 = this.getNumero();
+        double numeroL1Prioridad = 0;
+        if(numeroL1.matches("[0-9]{1}[C][0-9]{1,}")) {
+            numeroL1Prioridad = Double.parseDouble(numeroL1.replaceAll("C", "."));
+        }else if(numeroL1.matches("[E][0-9]{1,}")){
+            numeroL1Prioridad = Double.parseDouble(numeroL1.replaceAll("E", "10"));
+        }else if(numeroL1.matches("[N][0-9]{1,}")){
+            numeroL1Prioridad = Double.parseDouble(numeroL1.replaceAll("N", "20"));
+        }else if(numeroL1.matches("[0-9]{1,}")){
+            numeroL1Prioridad = Double.parseDouble(numeroL1);
+        }
 
-        // Número a comparar
+        // Se fijan valores de prioridad de ordenación según el tipo de parada
         String numeroL2 = linea.getNumero();
+        double numeroL2Prioridad = 0;
+        if(numeroL2.matches("[0-9]{1}[C][0-9]{1,}")){
+            numeroL2Prioridad = Double.parseDouble(numeroL2.replaceAll("C", "."));
+        }else if(numeroL2.matches("[E][0-9]{1,}")){
+            numeroL2Prioridad = Double.parseDouble(numeroL2.replaceAll("E", "10"));
+        }else if(numeroL2.matches("[N][0-9]{1,}")){
+            numeroL2Prioridad = Double.parseDouble(numeroL2.replaceAll("N", "200"));
+        }else if(numeroL2.matches("[0-9]{1,}")){
+            numeroL2Prioridad = Double.parseDouble(numeroL2);
+        }
 
-        // si es menor que 0, número L1 va antes que número L2
-        // si mayor que 0, lo contrario
-        // si es 0, son iguales
-        if(!Character.isDigit(numeroL2.charAt(0))) {
-            // Líneas especiales (NX, EX) al final
+        // Se devuelve la ordenación calculada
+        if(numeroL1Prioridad < numeroL2Prioridad){
             return -1;
-        } else if(!Character.isDigit(numeroL1.charAt(0))) {
-            // Líneas especiales (NX, EX) al final
+        }else if(numeroL1Prioridad > numeroL2Prioridad){
             return 1;
-        } else {
-            // Se eliminan los códigos de parada (C1, C2...) para comparar
-            int numeroLimpioL1 = Integer.parseInt(numeroL1.replaceAll("[A-Z,a-z]{1}[0-9]", ""));
-            int numeroLimpioL2 = Integer.parseInt(numeroL2.replaceAll("[A-Z,a-z]{1}[0-9]", ""));
-            return (numeroLimpioL1 - numeroLimpioL2);
+        }else{
+            return 0;
         }
     }
 
