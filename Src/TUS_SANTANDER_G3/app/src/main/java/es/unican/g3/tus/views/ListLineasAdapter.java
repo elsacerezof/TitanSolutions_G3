@@ -25,11 +25,8 @@ public class ListLineasAdapter extends ArrayAdapter {
     private List<Linea> lineasBus;
     private Context context;
 
-    public ListLineasAdapter(Context context, List<Linea> lineasBus, boolean ordenadas){
+    public ListLineasAdapter(Context context, List<Linea> lineasBus){
         super(context, R.layout.custom_list_lineas_layout,lineasBus);
-        if(ordenadas){
-            Collections.sort(lineasBus);
-        }
         this.context = context;
         this.lineasBus = lineasBus;
     }// ListparadasAdapter

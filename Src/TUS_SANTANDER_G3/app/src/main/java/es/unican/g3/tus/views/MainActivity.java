@@ -24,8 +24,8 @@ public class MainActivity extends AppCompatActivity implements DataCommunication
 
         ParadasFragment fragmentParadas = new ParadasFragment();
         FragmentManager fm = getSupportFragmentManager();
-        FragmentTransaction ft =  fm.beginTransaction();
-        ft.replace(R.id.frameLayoutElements,fragmentParadas);
+        FragmentTransaction ft = fm.beginTransaction();
+        ft.replace(R.id.frameLayoutElements, fragmentParadas);
         ft.commit();
         count++;
         BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
@@ -56,13 +56,11 @@ public class MainActivity extends AppCompatActivity implements DataCommunication
             switch (item.getItemId()) {
                 case R.id.navigation_home:
 
-
-                        ParadasFragment fragmentParadas = new ParadasFragment();
-                        FragmentManager fm = getSupportFragmentManager();
-                        FragmentTransaction ft =  fm.beginTransaction();
-                        ft.replace(R.id.frameLayoutElements,fragmentParadas);
-                        ft.commit();
-
+                    ParadasFragment fragmentParadas = new ParadasFragment();
+                    FragmentManager fm = getSupportFragmentManager();
+                    FragmentTransaction ft =  fm.beginTransaction();
+                    ft.replace(R.id.frameLayoutElements,fragmentParadas);
+                    ft.commit();
 
                     return true;
                 case R.id.navigation_dashboard:

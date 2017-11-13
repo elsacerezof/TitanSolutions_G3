@@ -56,10 +56,11 @@ public class ParadasFragment extends ListFragment implements IListParadasView{
         if(lineaList!=null) {
             ListParadasAdapter listParadasAdapter;
             if(ordenadas) {
-                listParadasAdapter = new ListParadasAdapter(getContext(), lineaList, true);
+                Collections.sort(lineaList);
+                listParadasAdapter = new ListParadasAdapter(getContext(), lineaList);
                 getListView().setAdapter(listParadasAdapter);
             }else{
-                listParadasAdapter = new ListParadasAdapter(getContext(), lineaList, false);
+                listParadasAdapter = new ListParadasAdapter(getContext(), lineaList);
                 getListView().setAdapter(listParadasAdapter);
             }
         }
@@ -91,7 +92,7 @@ public class ParadasFragment extends ListFragment implements IListParadasView{
      * @param filterText texto con el que filtrar los resultados
      * @return
      */
-    public List<Parada> searchFilterList (List<Parada> paradas, String filterText) {
+    public static List<Parada> searchFilterList (List<Parada> paradas, String filterText) {
 
         // Almacén de paradas coincidentes con el término de búsqueda
         List<Parada> paradaFiltradas = new ArrayList<Parada>();
