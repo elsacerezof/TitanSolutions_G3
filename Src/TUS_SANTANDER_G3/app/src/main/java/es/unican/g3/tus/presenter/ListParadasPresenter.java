@@ -14,10 +14,10 @@ import es.unican.g3.tus.views.ParadasFragment;
 public class ListParadasPresenter  {
     private IListParadasView listParadasView;
     private List<Parada> listaParadasBus;
-    private RemoteFetch remoteFetchParadas;
     private Context context;
 
     public ListParadasPresenter(Context context, ParadasFragment listParadasView){
+        this.context = context;
         this.listParadasView = listParadasView;
         Database db = new Database(context);
         this.listaParadasBus = db.recuperarParadas();
