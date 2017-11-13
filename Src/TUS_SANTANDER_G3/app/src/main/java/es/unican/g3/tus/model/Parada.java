@@ -10,8 +10,8 @@ import android.support.annotation.NonNull;
 public class Parada implements Comparable{
 
     private String name;
-    private String alias;
-    private String notas;
+    private String alias="";
+    private String notas="";
     private String numero;
     private int identifier;
 
@@ -64,5 +64,10 @@ public class Parada implements Comparable{
         //si mayor que 0, lo contrario
         //si es 0, son iguales
         return(nombreP1.compareTo(nombreP2));
+    }
+
+    public boolean equals(Object o) {
+        Parada parada = (Parada) o;
+        return this.identifier == parada.getIdentifier();
     }
 }

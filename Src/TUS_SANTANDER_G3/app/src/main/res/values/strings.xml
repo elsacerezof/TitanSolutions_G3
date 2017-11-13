@@ -12,4 +12,6 @@
     <string name="title_activity_list_paradas_adapter_sorted">ListParadasAdapterSorted</string>
     <string name="app_fallo_conexion">Fallo en la conexión</string>
     <string name="nombre_base_datos">g3_database.db</string>
+    <string name="search_placeholder">Buscar...</string>
+
 </resources>

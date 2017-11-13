@@ -9,7 +9,8 @@ import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
 
-import es.unican.alejandro.tus_practica3.R;
+import es.unican.g3.tus.R;
+
 
 public class MainActivity extends AppCompatActivity implements DataCommunication {
 
@@ -24,12 +25,11 @@ public class MainActivity extends AppCompatActivity implements DataCommunication
         ParadasFragment fragmentParadas = new ParadasFragment();
         FragmentManager fm = getSupportFragmentManager();
         FragmentTransaction ft =  fm.beginTransaction();
-        ft.add(R.id.frameLayoutElements,fragmentParadas);
+        ft.replace(R.id.frameLayoutElements,fragmentParadas);
         ft.commit();
         count++;
         BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
-
     }//onCreate
 
 
@@ -56,19 +56,22 @@ public class MainActivity extends AppCompatActivity implements DataCommunication
             switch (item.getItemId()) {
                 case R.id.navigation_home:
 
-                    if(count==0)
-                    {
+
                         ParadasFragment fragmentParadas = new ParadasFragment();
                         FragmentManager fm = getSupportFragmentManager();
                         FragmentTransaction ft =  fm.beginTransaction();
-                        ft.add(R.id.frameLayoutElements,fragmentParadas);
+                        ft.replace(R.id.frameLayoutElements,fragmentParadas);
                         ft.commit();
-                        count++;
-                    }
+
 
                     return true;
                 case R.id.navigation_dashboard:
 
+                    LineasFragment fragmentLineas = new LineasFragment();
+                    FragmentManager fm1 = getSupportFragmentManager();
+                    FragmentTransaction ft1 =  fm1.beginTransaction();
+                    ft1.replace(R.id.frameLayoutElements,fragmentLineas);
+                    ft1.commit();
 
                     return true;
                 case R.id.navigation_notifications:

@@ -11,14 +11,13 @@ import java.net.URL;
 
 public class RemoteFetch {
 
-    //URL para obtener un listado de las líneas de Bus de Santander (pero no de las sublineas)
-    public static final String URL_LINEAS_BUS="http://datos.santander.es/api/rest/datasets/lineas_bus.json";
+    // URL para obtener un listado de las líneas de Bus de Santander (pero no de las sublineas)
+    public static final String URL_LINEAS_BUS = "http://datos.santander.es/api/rest/datasets/lineas_bus.json";
 
+    // URL para obtener un listado de las paradas de Bus de Santander
+    public static final String URL_PARADAS_BUS = "http://datos.santander.es/api/rest/datasets/paradas_bus.json";
 
-
-    public static final String URL_PARADAS_BUS="http://datos.santander.es/api/rest/datasets/paradas_bus.json";
-
-
+    // Contenido del JSON
     private BufferedInputStream bufferedData;
 
     /**
