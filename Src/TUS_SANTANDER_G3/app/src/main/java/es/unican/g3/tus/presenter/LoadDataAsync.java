@@ -39,7 +39,6 @@ public class LoadDataAsync extends AsyncTask<Object, Boolean, Boolean> {
         this.remoteFetchLineas = new RemoteFetch();
         this.contextLlamador = context;
         this.activityLlamadora = activity;
-
     }
 
     /**
