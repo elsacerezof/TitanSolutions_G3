@@ -96,14 +96,15 @@ public class ParadasFragment extends ListFragment implements IListParadasView{
 
         // Almacén de paradas coincidentes con el término de búsqueda
         List<Parada> paradaFiltradas = new ArrayList<Parada>();
+        String filterTextLowercase = filterText.toLowerCase();
 
         // Se recorren las paradas, almacenando aquellas que muestran coincidencias
         for(int i = 0; i < paradas.size(); i++)
         {
-            if(paradas.get(i).getName().indexOf(filterText)!=-1 ||
-                    paradas.get(i).getAlias().indexOf(filterText)!=-1 ||
-                    paradas.get(i).getNumero().indexOf(filterText)!=-1 ||
-                    paradas.get(i).getNotas().indexOf(filterText)!=-1)
+            if(paradas.get(i).getName().toLowerCase().indexOf(filterTextLowercase)!=-1 ||
+                    paradas.get(i).getAlias().toLowerCase().indexOf(filterTextLowercase)!=-1 ||
+                    paradas.get(i).getNumero().toLowerCase().indexOf(filterTextLowercase)!=-1 ||
+                    paradas.get(i).getNotas().toLowerCase().indexOf(filterTextLowercase)!=-1)
             {
                 paradaFiltradas.add(paradas.get(i));
             }
