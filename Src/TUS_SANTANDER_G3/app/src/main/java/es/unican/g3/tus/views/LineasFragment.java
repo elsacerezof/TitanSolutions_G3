@@ -90,10 +90,6 @@ public class LineasFragment extends ListFragment implements IListLineasView{
     @Override
     public boolean onOptionsItemSelected(MenuItem item){
         List<Linea> lineaList=listLineasPresenter.getListaLineasBus();
-        if(lineaList!=null) {
-            //Collections.sort(lineaList);
-        }
-
         showList(lineaList, true);
         return true;
     }

@@ -1,8 +1,6 @@
 package es.unican.g3.tus.model;
 
 
-import android.util.Log;
-
 /**
  * Linea
  */
@@ -33,8 +31,19 @@ public class Linea implements Comparable{
     }
 
     public boolean equals(Object o) {
-        Linea linea = (Linea) o;
-        return this.identifier == linea.getIdentifier() && this.name.equals(linea.getName()) && this.numero.equals(linea.getNumero());
+        boolean aRetornar;
+        if(o==null || this.getClass()!=o.getClass()){
+            aRetornar=false;
+        }else {
+            Linea linea = (Linea) o;
+            aRetornar = this.identifier == linea.getIdentifier() && this.name.equals(linea.getName())
+                    && this.numero.equals(linea.getNumero());
+        }
+        return aRetornar;
+    }
+
+    public int hashCode(){
+        return 5*getIdentifier()*getName().hashCode()*getNumero().hashCode();
     }
 
     @Override
