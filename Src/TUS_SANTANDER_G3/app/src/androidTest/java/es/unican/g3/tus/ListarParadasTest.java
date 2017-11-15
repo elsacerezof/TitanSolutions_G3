@@ -7,7 +7,6 @@ import org.junit.Test;
 import java.io.InputStream;
 import java.util.List;
 
-import es.unican.alejandro.tus_practica3.R;
 import es.unican.g3.tus.model.Parada;
 import es.unican.g3.tus.presenter.ListParadasPresenter;
 
@@ -32,7 +31,7 @@ public class ListarParadasTest {
 
         // Se crea el objeto Presenter que cuenta con los métodos a probar, proporcionando el JSON local
         ListParadasPresenter presenter = new ListParadasPresenter(null, null);
-        presenter.obtenParadas(is);
+        //presenter.obtenParadas(is);
         List<Parada> paradas = presenter.getListaParadasBus();
 
         // Paradas que deberían leerse y procesarse en el método obtenParadas
@@ -73,7 +72,7 @@ public class ListarParadasTest {
 
         // Se crea el objeto Presenter que cuenta con los métodos a probar, proporcionando JSON fallido
         ListParadasPresenter presenter = new ListParadasPresenter(null, null);
-        presenter.obtenParadas(null);
+        //presenter.obtenParadas(null);
 
         // Comprobación de que no se devuelven paradas
         List<Parada> paradas = presenter.getListaParadasBus();

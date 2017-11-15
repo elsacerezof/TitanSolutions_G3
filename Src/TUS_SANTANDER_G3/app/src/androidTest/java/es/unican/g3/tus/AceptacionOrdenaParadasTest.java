@@ -16,7 +16,6 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
-import es.unican.alejandro.tus_practica3.R;
 import es.unican.g3.tus.views.ActivityInicialLogo;
 
 import static android.support.test.InstrumentationRegistry.getInstrumentation;
