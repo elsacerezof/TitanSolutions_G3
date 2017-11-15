@@ -1,4 +1,4 @@
-package es.unican.g3.tus;
+package es.unican.g3.tus.views;
 
 
 import android.support.test.espresso.ViewInteraction;
@@ -15,10 +15,6 @@ import org.hamcrest.TypeSafeMatcher;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-
-import java.util.Timer;
-
-import javax.xml.datatype.Duration;
 
 import es.unican.g3.tus.views.ActivityInicialLogo;
 
@@ -41,7 +37,7 @@ public class AceptacionActivityInicialLogoTest {
         // The recommended way to handle such scenarios is to use Espresso idling resources:
         // https://google.github.io/android-testing-support-library/docs/espresso/idling-resource/index.html
         try {
-            Thread.sleep(3000);
+            Thread.sleep(2000);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }

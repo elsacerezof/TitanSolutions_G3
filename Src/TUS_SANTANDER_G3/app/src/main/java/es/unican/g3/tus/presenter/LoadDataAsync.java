@@ -33,7 +33,7 @@ public class LoadDataAsync extends AsyncTask<Object, Boolean, Boolean> {
     private RemoteFetch remoteFetchLineas;
     private Context contextLlamador;
     private Activity activityLlamadora;
-    private static final String error="ERROR";
+    private static final String ERROR="ERROR";
 
     public LoadDataAsync(Activity activity, Context context) {
         this.remoteFetchParadas = new RemoteFetch();
@@ -90,11 +90,11 @@ public class LoadDataAsync extends AsyncTask<Object, Boolean, Boolean> {
                 Log.d("ENTRA", "Obten paradas: " + listaParadasBus.size());
                 return true;
             }else{
-                Log.e(error, "Input obtenparadas nulo");
+                Log.e(ERROR, "Input obtenparadas nulo");
                 return false;
             }
         }catch(Exception e){
-            Log.e(error,"Error en la obtención de las paradas de bus: "+e.getMessage());
+            Log.e(ERROR,"Error en la obtención de las paradas de bus: "+e.getMessage());
             Log.w("", e);
             return false;
         }//try
@@ -107,11 +107,11 @@ public class LoadDataAsync extends AsyncTask<Object, Boolean, Boolean> {
                 Log.d("ENTRA", "Obten lineas: " + listaLineasBus.size());
                 return true;
             }else{
-                Log.e(error, "Input obten lineas nulo");
+                Log.e(ERROR, "Input obten lineas nulo");
                 return false;
             }
         }catch(Exception e){
-            Log.e(error,"Error en la obtención de las lineas de bus: "+e.getMessage());
+            Log.e(ERROR,"Error en la obtención de las lineas de bus: "+e.getMessage());
             Log.w("", e);
             return false;
         }//try
