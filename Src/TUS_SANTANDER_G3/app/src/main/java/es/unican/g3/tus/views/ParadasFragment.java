@@ -95,7 +95,7 @@ public class ParadasFragment extends ListFragment implements IListParadasView{
     public static List<Parada> searchFilterList (List<Parada> paradas, String filterText) {
 
         // Almacén de paradas coincidentes con el término de búsqueda
-        List<Parada> paradaFiltradas = new ArrayList<Parada>();
+        List<Parada> paradaFiltradas = new ArrayList<>();
         String filterTextLowercase = filterText.toLowerCase();
 
         // Se recorren las paradas, almacenando aquellas que muestran coincidencias
@@ -124,7 +124,7 @@ public class ParadasFragment extends ListFragment implements IListParadasView{
 
         // Atención de las consultas de búsqueda
         SearchView.OnQueryTextListener queryTextListener = new SearchView.OnQueryTextListener() {
-            public List<Parada> paradas = listParadasPresenter.getListaParadasBus();
+            private List<Parada> paradas = listParadasPresenter.getListaParadasBus();
 
             public boolean onQueryTextChange(String filterText) {
                 showList(searchFilterList(paradas, filterText), false);

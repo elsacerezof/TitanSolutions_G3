@@ -16,6 +16,7 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
+
 import es.unican.g3.tus.views.ActivityInicialLogo;
 
 import static android.support.test.espresso.Espresso.onView;

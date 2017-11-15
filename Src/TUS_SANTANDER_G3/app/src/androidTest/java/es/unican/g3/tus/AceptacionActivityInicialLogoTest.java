@@ -16,6 +16,10 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
+import java.util.Timer;
+
+import javax.xml.datatype.Duration;
+
 import es.unican.g3.tus.views.ActivityInicialLogo;
 
 import static android.support.test.espresso.Espresso.onView;
@@ -37,7 +41,7 @@ public class AceptacionActivityInicialLogoTest {
         // The recommended way to handle such scenarios is to use Espresso idling resources:
         // https://google.github.io/android-testing-support-library/docs/espresso/idling-resource/index.html
         try {
-            Thread.sleep(2000);
+            Thread.sleep(3000);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }

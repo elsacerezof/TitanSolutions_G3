@@ -9,7 +9,6 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
-import java.util.Collections;
 import java.util.List;
 
 import es.unican.g3.tus.R;

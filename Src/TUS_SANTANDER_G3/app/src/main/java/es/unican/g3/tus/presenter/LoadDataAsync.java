@@ -33,12 +33,17 @@ public class LoadDataAsync extends AsyncTask<Object, Boolean, Boolean> {
     private RemoteFetch remoteFetchLineas;
     private Context contextLlamador;
     private Activity activityLlamadora;
+    private static final String error="ERROR";
 
     public LoadDataAsync(Activity activity, Context context) {
         this.remoteFetchParadas = new RemoteFetch();
         this.remoteFetchLineas = new RemoteFetch();
         this.contextLlamador = context;
         this.activityLlamadora = activity;
+    }
+
+    public Activity getActivityLlamadora(){
+        return activityLlamadora;
     }
 
     /**
@@ -85,11 +90,11 @@ public class LoadDataAsync extends AsyncTask<Object, Boolean, Boolean> {
                 Log.d("ENTRA", "Obten paradas: " + listaParadasBus.size());
                 return true;
             }else{
-                Log.e("ERROR", "Input obtenparadas nulo");
+                Log.e(error, "Input obtenparadas nulo");
                 return false;
             }
         }catch(Exception e){
-            Log.e("ERROR","Error en la obtención de las paradas de bus: "+e.getMessage());
+            Log.e(error,"Error en la obtención de las paradas de bus: "+e.getMessage());
             Log.w("", e);
             return false;
         }//try
@@ -102,11 +107,11 @@ public class LoadDataAsync extends AsyncTask<Object, Boolean, Boolean> {
                 Log.d("ENTRA", "Obten lineas: " + listaLineasBus.size());
                 return true;
             }else{
-                Log.e("ERROR", "Input obten lineas nulo");
+                Log.e(error, "Input obten lineas nulo");
                 return false;
             }
         }catch(Exception e){
-            Log.e("ERROR","Error en la obtención de las lineas de bus: "+e.getMessage());
+            Log.e(error,"Error en la obtención de las lineas de bus: "+e.getMessage());
             Log.w("", e);
             return false;
         }//try
@@ -135,10 +140,6 @@ public class LoadDataAsync extends AsyncTask<Object, Boolean, Boolean> {
      */
     @Override
     protected void onPostExecute(Boolean bool) {
-        // Se accede a la aplicación
-       // Intent intent = new Intent(contextLlamador, es.unican.g3.tus.views.MainActivity.class);
-        //contextLlamador.startActivity(intent);
-       // activityLlamadora.finish();
 
         // Se muestra mensaje de error o correcto
         if(getListaParadasBus() == null || getListaLineasBus()==null) {
