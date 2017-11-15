@@ -71,29 +71,29 @@ public class PruebasIntegracionTest {
         Collections.sort(lista);
 
         // Primera parada
-        assertEquals("Calle Arriba Fte . 103", lista.get(0).getName());
-        assertEquals("471", lista.get(0).getNumero());
-        assertEquals(29520,lista.get(0).getIdentifier());
+        assertEquals("Abilio Garcia baron 1 ( hote4l expres)", lista.get(0).getName());
+        assertEquals("296", lista.get(0).getNumero());
+        assertEquals(90,lista.get(0).getIdentifier());
 
         // Segunda parada
-        assertEquals("Ricardo Leon", lista.get(1).getName());
-        assertEquals("473", lista.get(1).getNumero());
-        assertEquals(29521,lista.get(1).getIdentifier());
+        assertEquals("Adarzo", lista.get(1).getName());
+        assertEquals("455", lista.get(1).getNumero());
+        assertEquals(26416,lista.get(1).getIdentifier());
 
         // Tercera parada
-        assertEquals("Marques de Hazas - 1", lista.get(2).getName());
-        assertEquals("479", lista.get(2).getNumero());
-        assertEquals(30589,lista.get(2).getIdentifier());
+        assertEquals("Adarzo", lista.get(2).getName());
+        assertEquals("235", lista.get(2).getNumero());
+        assertEquals(54,lista.get(2).getIdentifier());
 
         // Cuarta parada
-        assertEquals("Marques de Hazas - 2", lista.get(3).getName());
-        assertEquals("480", lista.get(3).getNumero());
-        assertEquals(30590,lista.get(3).getIdentifier());
+        assertEquals("Albert Einstein.14", lista.get(3).getName());
+        assertEquals("489", lista.get(3).getNumero());
+        assertEquals(41656,lista.get(3).getIdentifier());
 
         // Quinta parada
-        assertEquals("Jeronimo Sainz de la Maza ( Mercado Mexico )", lista.get(4).getName());
-        assertEquals("481", lista.get(4).getNumero());
-        assertEquals(30597,lista.get(4).getIdentifier());
+        assertEquals("Alcalde vega lamera 1", lista.get(4).getName());
+        assertEquals("171", lista.get(4).getNumero());
+        assertEquals(301,lista.get(4).getIdentifier());
 
     }
 

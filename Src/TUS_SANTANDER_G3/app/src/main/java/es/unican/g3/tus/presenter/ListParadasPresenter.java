@@ -7,7 +7,6 @@ import java.util.List;
 
 import es.unican.g3.tus.model.Database;
 import es.unican.g3.tus.model.Parada;
-import es.unican.g3.tus.model.dataloaders.RemoteFetch;
 import es.unican.g3.tus.views.IListParadasView;
 import es.unican.g3.tus.views.ParadasFragment;
 
@@ -28,4 +27,11 @@ public class ListParadasPresenter  {
         return listaParadasBus;
     }//getListaParadasBus
 
+    public IListParadasView getListParadasView(){
+        return listParadasView;
+    }
+
+    public Context getContext(){
+        return context;
+    }
 }// ListParadasPresenter

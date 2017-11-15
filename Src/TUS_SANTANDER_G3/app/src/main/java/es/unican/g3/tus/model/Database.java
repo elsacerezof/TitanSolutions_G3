@@ -37,6 +37,7 @@ public class Database extends SQLiteOpenHelper {
     private static final String IDENTIFICADOR ="IDENTIFICADOR";
     private static final String NOMBRE_PARADAS ="paradas";
     private static final String NOMBRE_LINEAS ="lineas";
+    private static final String DROP_TABLE="DROP TABLE IF EXISTS '";
 
     
     public Database(Context context) {
@@ -51,16 +52,16 @@ public class Database extends SQLiteOpenHelper {
 
     @Override
     public void onUpgrade(SQLiteDatabase sqLiteDatabase, int oldVersion, int newVersion) {
-        sqLiteDatabase.execSQL("DROP TABLE IF EXISTS '" + TABLA_PARADAS+ "'");
-        sqLiteDatabase.execSQL("DROP TABLE IF EXISTS '" + TABLA_LINEAS+ "'");
+        sqLiteDatabase.execSQL(DROP_TABLE + TABLA_PARADAS+ "'");
+        sqLiteDatabase.execSQL(DROP_TABLE + TABLA_LINEAS+ "'");
         onCreate(sqLiteDatabase);
     }
 
     public void reiniciar(){
         SQLiteDatabase db = getWritableDatabase();
         if(db != null) {
-            db.execSQL("DROP TABLE IF EXISTS '" + NOMBRE_PARADAS + "'");
-            db.execSQL("DROP TABLE IF EXISTS '" + NOMBRE_LINEAS + "'");
+            db.execSQL(DROP_TABLE + NOMBRE_PARADAS + "'");
+            db.execSQL(DROP_TABLE + NOMBRE_LINEAS + "'");
             db.execSQL(TABLA_PARADAS);
             db.execSQL(TABLA_LINEAS);
             db.close();

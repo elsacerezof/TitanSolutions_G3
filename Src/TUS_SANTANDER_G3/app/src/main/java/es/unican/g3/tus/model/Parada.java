@@ -67,7 +67,18 @@ public class Parada implements Comparable{
     }
 
     public boolean equals(Object o) {
-        Parada parada = (Parada) o;
-        return this.identifier == parada.getIdentifier() && this.name.equals(parada.getName()) && this.numero.equals(parada.getNumero());
+        boolean aRetornar;
+        if(o==null || this.getClass()!=o.getClass()){
+            aRetornar=false;
+        }else {
+            Parada parada = (Parada) o;
+            aRetornar=this.identifier == parada.getIdentifier() && this.name.equals(parada.getName())
+                    && this.numero.equals(parada.getNumero());
+        }
+        return aRetornar;
+    }
+
+    public int hashCode(){
+        return 5*getIdentifier()*getName().hashCode()*getNumero().hashCode();
     }
 }

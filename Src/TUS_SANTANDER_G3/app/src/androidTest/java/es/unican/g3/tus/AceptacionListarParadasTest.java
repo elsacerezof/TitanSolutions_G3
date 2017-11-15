@@ -1,4 +1,4 @@
-package es.unican.g3.tus;
+package es.unican.g3.tus.views;
 
 
 import android.support.test.espresso.ViewInteraction;
@@ -12,17 +12,18 @@ import android.view.ViewParent;
 import org.hamcrest.Description;
 import org.hamcrest.Matcher;
 import org.hamcrest.TypeSafeMatcher;
+import org.hamcrest.core.IsInstanceOf;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
-import es.unican.g3.tus.views.ActivityInicialLogo;
+import es.unican.g3.tus.R;
 
 import static android.support.test.espresso.Espresso.onView;
+import static android.support.test.espresso.action.ViewActions.click;
 import static android.support.test.espresso.assertion.ViewAssertions.matches;
 import static android.support.test.espresso.matcher.ViewMatchers.isDisplayed;
 import static android.support.test.espresso.matcher.ViewMatchers.withId;
-import static android.support.test.espresso.matcher.ViewMatchers.withText;
 import static org.hamcrest.Matchers.allOf;
 
 @LargeTest
@@ -33,7 +34,7 @@ public class AceptacionListarParadasTest {
     public ActivityTestRule<ActivityInicialLogo> mActivityTestRule = new ActivityTestRule<>(ActivityInicialLogo.class);
 
     @Test
-    public void aceptacionListarParadas2Test() {
+    public void aceptacionListarParadasTest() {
         // Added a sleep statement to match the app's execution delay.
         // The recommended way to handle such scenarios is to use Espresso idling resources:
         // https://google.github.io/android-testing-support-library/docs/espresso/idling-resource/index.html
@@ -43,65 +44,99 @@ public class AceptacionListarParadasTest {
             e.printStackTrace();
         }
 
-        ViewInteraction textView = onView(
-                allOf(withId(R.id.textViewNumero), withText("471"),
-                        childAtPosition(
-                                childAtPosition(
-                                        withId(android.R.id.list),
-                                        0),
-                                0),
-                        isDisplayed()));
-        textView.check(matches(withText("471")));
+        ViewInteraction bottomNavigationItemView = onView(
+                allOf(withId(R.id.navigation_home), isDisplayed()));
+        bottomNavigationItemView.perform(click());
 
-        ViewInteraction textView2 = onView(
-                allOf(withId(R.id.textViewName), withText("Calle Arriba Fte . 103"),
-                        childAtPosition(
+        ViewInteraction linearLayout = onView(
+                allOf(childAtPosition(
+                        allOf(withId(android.R.id.list),
                                 childAtPosition(
-                                        withId(android.R.id.list),
-                                        0),
-                                1),
+                                        IsInstanceOf.<View>instanceOf(android.widget.LinearLayout.class),
+                                        0)),
+                        0),
                         isDisplayed()));
-        textView2.check(matches(withText("Calle Arriba Fte . 103")));
+        linearLayout.check(matches(isDisplayed()));
 
-        ViewInteraction textView3 = onView(
-                allOf(withId(R.id.textViewNumero), withText("473"),
-                        childAtPosition(
+        ViewInteraction linearLayout2 = onView(
+                allOf(childAtPosition(
+                        allOf(withId(android.R.id.list),
                                 childAtPosition(
-                                        withId(android.R.id.list),
-                                        1),
-                                0),
+                                        IsInstanceOf.<View>instanceOf(android.widget.LinearLayout.class),
+                                        0)),
+                        1),
                         isDisplayed()));
-        textView3.check(matches(withText("473")));
+        linearLayout2.check(matches(isDisplayed()));
 
-        ViewInteraction textView4 = onView(
-                allOf(withId(R.id.textViewName), withText("Ricardo Leon"),
-                        childAtPosition(
+        ViewInteraction linearLayout3 = onView(
+                allOf(childAtPosition(
+                        allOf(withId(android.R.id.list),
                                 childAtPosition(
-                                        withId(android.R.id.list),
-                                        1),
-                                1),
+                                        IsInstanceOf.<View>instanceOf(android.widget.LinearLayout.class),
+                                        0)),
+                        2),
                         isDisplayed()));
-        textView4.check(matches(withText("Ricardo Leon")));
+        linearLayout3.check(matches(isDisplayed()));
 
-        ViewInteraction textView5 = onView(
-                allOf(withId(R.id.textViewNumero), withText("479"),
-                        childAtPosition(
+        ViewInteraction linearLayout4 = onView(
+                allOf(childAtPosition(
+                        allOf(withId(android.R.id.list),
                                 childAtPosition(
-                                        withId(android.R.id.list),
-                                        2),
-                                0),
+                                        IsInstanceOf.<View>instanceOf(android.widget.LinearLayout.class),
+                                        0)),
+                        3),
                         isDisplayed()));
-        textView5.check(matches(withText("479")));
+        linearLayout4.check(matches(isDisplayed()));
 
-        ViewInteraction textView6 = onView(
-                allOf(withId(R.id.textViewName), withText("Marques de Hazas - 1"),
-                        childAtPosition(
+        ViewInteraction linearLayout5 = onView(
+                allOf(childAtPosition(
+                        allOf(withId(android.R.id.list),
                                 childAtPosition(
-                                        withId(android.R.id.list),
-                                        2),
-                                1),
+                                        IsInstanceOf.<View>instanceOf(android.widget.LinearLayout.class),
+                                        0)),
+                        4),
                         isDisplayed()));
-        textView6.check(matches(withText("Marques de Hazas - 1")));
+        linearLayout5.check(matches(isDisplayed()));
+
+        ViewInteraction linearLayout6 = onView(
+                allOf(childAtPosition(
+                        allOf(withId(android.R.id.list),
+                                childAtPosition(
+                                        IsInstanceOf.<View>instanceOf(android.widget.LinearLayout.class),
+                                        0)),
+                        5),
+                        isDisplayed()));
+        linearLayout6.check(matches(isDisplayed()));
+
+        ViewInteraction linearLayout7 = onView(
+                allOf(childAtPosition(
+                        allOf(withId(android.R.id.list),
+                                childAtPosition(
+                                        IsInstanceOf.<View>instanceOf(android.widget.LinearLayout.class),
+                                        0)),
+                        6),
+                        isDisplayed()));
+        linearLayout7.check(matches(isDisplayed()));
+
+        ViewInteraction linearLayout8 = onView(
+                allOf(childAtPosition(
+                        allOf(withId(android.R.id.list),
+                                childAtPosition(
+                                        IsInstanceOf.<View>instanceOf(android.widget.LinearLayout.class),
+                                        0)),
+                        7),
+                        isDisplayed()));
+        linearLayout8.check(matches(isDisplayed()));
+
+        ViewInteraction linearLayout9 = onView(
+                allOf(childAtPosition(
+                        allOf(withId(android.R.id.list),
+                                childAtPosition(
+                                        IsInstanceOf.<View>instanceOf(android.widget.LinearLayout.class),
+                                        0)),
+                        8),
+                        isDisplayed()));
+        linearLayout9.check(matches(isDisplayed()));
 
     }
 
