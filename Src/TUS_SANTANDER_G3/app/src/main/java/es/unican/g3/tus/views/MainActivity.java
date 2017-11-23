@@ -10,6 +10,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
 
 import es.unican.g3.tus.R;
+import es.unican.g3.tus.model.Database;
 
 
 public class MainActivity extends AppCompatActivity implements DataCommunication {
@@ -54,25 +55,31 @@ public class MainActivity extends AppCompatActivity implements DataCommunication
         @Override
         public boolean onNavigationItemSelected(@NonNull MenuItem item) {
             switch (item.getItemId()) {
-                case R.id.navigation_home:
+                case R.id.navigation_portada:
 
                     ParadasFragment fragmentParadas = new ParadasFragment();
                     FragmentManager fm = getSupportFragmentManager();
                     FragmentTransaction ft =  fm.beginTransaction();
-                    ft.replace(R.id.frameLayoutElements,fragmentParadas);
+                    ft.replace(R.id.frameLayoutElements, fragmentParadas);
                     ft.commit();
 
                     return true;
-                case R.id.navigation_dashboard:
+                case R.id.navigation_lineas:
 
                     LineasFragment fragmentLineas = new LineasFragment();
                     FragmentManager fm1 = getSupportFragmentManager();
                     FragmentTransaction ft1 =  fm1.beginTransaction();
-                    ft1.replace(R.id.frameLayoutElements,fragmentLineas);
+                    ft1.replace(R.id.frameLayoutElements, fragmentLineas);
                     ft1.commit();
 
                     return true;
-                case R.id.navigation_notifications:
+                case R.id.navigation_grupos:
+
+                    GruposFragment fragmentGrupos = new GruposFragment();
+                    FragmentManager fm2 = getSupportFragmentManager();
+                    FragmentTransaction ft2 =  fm2.beginTransaction();
+                    ft2.replace(R.id.frameLayoutElements, fragmentGrupos);
+                    ft2.commit();
 
                     return true;
 

@@ -135,7 +135,7 @@ public class ParserJSON{
         if(tipo==0){
             return new Linea(name, numero, identifier);
         }else{
-            return new Parada(name,numero,identifier);
+            return new Parada(0, name, numero, identifier);
         }
     }
 

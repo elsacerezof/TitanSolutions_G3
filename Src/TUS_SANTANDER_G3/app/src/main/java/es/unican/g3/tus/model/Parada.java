@@ -2,6 +2,8 @@ package es.unican.g3.tus.model;
 
 import android.support.annotation.NonNull;
 
+import java.util.List;
+
 /**
  * Clase que almacena la información referente a una línea de TUS
  * Created by alejandro on 4/08/17.
@@ -9,16 +11,23 @@ import android.support.annotation.NonNull;
 
 public class Parada implements Comparable{
 
+    private int dbId;
     private String name;
     private String alias="";
     private String notas="";
     private String numero;
     private int identifier;
+    private int grupoAsignado = -1;
 
-    public Parada(String name, String numero, int identifier){
+    public Parada(int dbId, String name, String numero, int identifier){
+        this.dbId = dbId;
         this.name = name;
         this.numero = numero;
         this.identifier = identifier;
+    }
+
+    public int getDbId() {
+        return dbId;
     }
 
     public String getName() {
@@ -53,6 +62,10 @@ public class Parada implements Comparable{
 
     public void setNotas(String notas){ this.notas=notas;}
 
+    public int getGrupoAsignado(){ return grupoAsignado;}
+
+    public void setGrupoAsignado(int grupoAsignado){ this.grupoAsignado=grupoAsignado;}
+
     @Override
     public int compareTo(@NonNull Object o) {
 
@@ -73,9 +86,17 @@ public class Parada implements Comparable{
         }else {
             Parada parada = (Parada) o;
             aRetornar=this.identifier == parada.getIdentifier() && this.name.equals(parada.getName())
-                    && this.numero.equals(parada.getNumero());
+                    && this.numero.equals(parada.getNumero()) && this.grupoAsignado == parada.getGrupoAsignado();
         }
         return aRetornar;
+    }
+
+    public static Parada buscaParada(List<Parada> listaParadas, int id){
+        for(Parada parada : listaParadas){
+            if(parada.getDbId() == id)
+                return parada;
+        }
+        return null;
     }
 
     public int hashCode(){

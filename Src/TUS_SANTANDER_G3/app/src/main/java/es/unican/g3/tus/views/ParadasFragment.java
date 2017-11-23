@@ -11,6 +11,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ListView;
 
 import java.util.ArrayList;
@@ -28,6 +29,7 @@ public class ParadasFragment extends ListFragment implements IListParadasView{
 
     private ProgressDialog dialog;
     private ListParadasPresenter listParadasPresenter;
+    private List<Parada> fragmentListParadas;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -39,10 +41,22 @@ public class ParadasFragment extends ListFragment implements IListParadasView{
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         this.listParadasPresenter = new ListParadasPresenter(getContext(),this);
-        listParadasPresenter.getListaParadasBus().get(3).setAlias("mi casita");
-        listParadasPresenter.getListaParadasBus().get(5).setNotas("domino");
+        this.listParadasPresenter.getListaParadasBus().get(3).setAlias("mi casita");
+        this.listParadasPresenter.getListaParadasBus().get(5).setNotas("domino");
         this.dialog = new ProgressDialog(getContext());
+        // Habilitar opciones menú superior
         setHasOptionsMenu(true);
+
+        // Detectar y actuar ante un click largo
+        getListView().setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+            @Override
+            public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
+                DialogoEligeColorFragment dialogo = new DialogoEligeColorFragment();
+                dialogo.setParadaId(fragmentListParadas.get(position).getDbId());
+                dialogo.show(getFragmentManager(), "dialogo");
+                return true;
+            }
+        });
     }
 
     @Override
@@ -56,19 +70,18 @@ public class ParadasFragment extends ListFragment implements IListParadasView{
         if(lineaList!=null) {
             ListParadasAdapter listParadasAdapter;
             if(ordenadas) {
-                Collections.sort(lineaList);
-                listParadasAdapter = new ListParadasAdapter(getContext(), lineaList);
+                List<Parada> lineaListOrdenada = new ArrayList<>(lineaList);
+                Collections.sort(lineaListOrdenada);
+                listParadasAdapter = new ListParadasAdapter(getContext(), lineaListOrdenada);
                 getListView().setAdapter(listParadasAdapter);
+                this.fragmentListParadas = lineaListOrdenada;
             }else{
                 listParadasAdapter = new ListParadasAdapter(getContext(), lineaList);
                 getListView().setAdapter(listParadasAdapter);
+                this.fragmentListParadas = lineaList;
             }
         }
-        else{
-            dialog.dismiss();
-        }
     }
-
 
     /**
      * Este método cuando es llamado se encarga de mostrar un progressDialog
@@ -137,23 +150,23 @@ public class ParadasFragment extends ListFragment implements IListParadasView{
         };
 
         searchView.setOnQueryTextListener(queryTextListener);
-
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item){
 
-        boolean resultado= false;
+        boolean resultado = false;
 
-        if(item.getItemId()==R.id.action_search) {
-            resultado= true;
-        } else {
+        if(item.getItemId() == R.id.action_search) {
+            resultado = true;
+        } else if(item.getItemId() == R.id.action_ordenar_alfa){
             List<Parada> paradaList = listParadasPresenter.getListaParadasBus();
-            if (paradaList != null) {
-                Collections.sort(paradaList);
-            }
             showList(paradaList, true);
-            resultado= true;
+            resultado = true;
+        } else if(item.getItemId() == R.id.action_return_original){
+            List<Parada> paradaList = listParadasPresenter.getListaParadasBus();
+            showList(paradaList, false);
+            resultado = true;
         }
 
         return resultado;

@@ -3,11 +3,17 @@ package es.unican.g3.tus.model;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
+import android.database.sqlite.SQLiteConstraintException;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.util.Log;
+import android.widget.Toast;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+
+import es.unican.g3.tus.R;
 
 
 /**
@@ -15,9 +21,12 @@ import java.util.List;
  */
 
 public class Database extends SQLiteOpenHelper {
-    
+
+    // Contexto
+    private Context context;
+
     // Version
-    private static final int VERSION_BASEDATOS = 1;
+    private static final int VERSION_BASEDATOS = 2;
 
     // Nombre de nuestro archivo de base de datos
     private static final String NOMBRE_BASEDATOS = "database_g3.db";
@@ -29,42 +38,105 @@ public class Database extends SQLiteOpenHelper {
     private static final String TABLA_LINEAS = "CREATE TABLE lineas " +
             "(_id INTEGER PRIMARY KEY AUTOINCREMENT, NUMERO TEXT, NOMBRE TEXT, IDENTIFICADOR INT)";
 
-    // Campos tabla
-    private static final String NOMBRE ="NOMBRE";
-    private static final String ALIAS ="ALIAS";
-    private static final String NOTAS = "NOTAS";
-    private static final String NUMERO ="NUMERO";
-    private static final String IDENTIFICADOR ="IDENTIFICADOR";
-    private static final String NOMBRE_PARADAS ="paradas";
-    private static final String NOMBRE_LINEAS ="lineas";
-    private static final String DROP_TABLE="DROP TABLE IF EXISTS '";
+    private static final String TABLA_GRUPOS = "CREATE TABLE grupos " +
+            "(_id INTEGER PRIMARY KEY AUTOINCREMENT, NOMBRE TEXT, COLOR TEXT)";
 
-    
+    private static final String TABLA_GRUPOS_PARADAS = "CREATE TABLE grupos_paradas " +
+            "(_id INTEGER PRIMARY KEY AUTOINCREMENT, PARADA_ID INTEGER, GRUPO_ID INTEGER, " +
+            "FOREIGN KEY(PARADA_ID) REFERENCES paradas(_id), FOREIGN KEY(GRUPO_ID) REFERENCES grupos(_id))";
+
+    private static final String UNIQUEINDEX_GRUPOS_PARADAS = "CREATE UNIQUE INDEX grupo_parada " +
+            "ON grupos_paradas (PARADA_ID,GRUPO_ID);";
+
+    // Campos tabla
+    private static final String NOMBRE = "NOMBRE";
+    private static final String COLOR = "COLOR";
+    private static final String ALIAS = "ALIAS";
+    private static final String NOTAS = "NOTAS";
+    private static final String NUMERO = "NUMERO";
+    private static final String PARADA_ID = "PARADA_ID";
+    private static final String GRUPO_ID = "GRUPO_ID";
+    private static final String IDENTIFICADOR = "IDENTIFICADOR";
+    private static final String NOMBRE_PARADAS = "paradas";
+    private static final String NOMBRE_LINEAS = "lineas";
+    private static final String NOMBRE_GRUPOS = "grupos";
+    private static final String NOMBRE_GRUPOS_PARADAS = "grupos_paradas";
+    private static final String DROP_TABLE = "DROP TABLE IF EXISTS '";
+
     public Database(Context context) {
         super(context, NOMBRE_BASEDATOS, null, VERSION_BASEDATOS);
+        this.context = context;
     }
 
     @Override
     public void onCreate(SQLiteDatabase sqLiteDatabase) {
-        sqLiteDatabase.execSQL(TABLA_PARADAS);
-        sqLiteDatabase.execSQL(TABLA_LINEAS);
+        reiniciar(sqLiteDatabase);
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase sqLiteDatabase, int oldVersion, int newVersion) {
-        sqLiteDatabase.execSQL(DROP_TABLE + TABLA_PARADAS+ "'");
-        sqLiteDatabase.execSQL(DROP_TABLE + TABLA_LINEAS+ "'");
         onCreate(sqLiteDatabase);
     }
 
-    public void reiniciar(){
-        SQLiteDatabase db = getWritableDatabase();
+    private void inicializarGrupos(SQLiteDatabase sqLiteDatabase){
+        SQLiteDatabase db = sqLiteDatabase;
+
+        // Carga de grupos inicial
+        List<Grupo> grupos = new ArrayList<Grupo>();
+        grupos.add(new Grupo(0, "Aguamarina", "#00C2C2"));
+        grupos.add(new Grupo(0, "Amarillo", "#FFC501"));
+        grupos.add(new Grupo(0, "Azul", "#0062D8"));
+        grupos.add(new Grupo(0, "Celeste", "#00F7FF"));
+        grupos.add(new Grupo(0, "Cian", "#00A4EB"));
+        grupos.add(new Grupo(0, "Coral", "#FF7676"));
+        grupos.add(new Grupo(0, "Granate", "#7C0827"));
+        grupos.add(new Grupo(0, "Gris", "#808080"));
+        grupos.add(new Grupo(0, "Marrón", "#5A2D00"));
+        grupos.add(new Grupo(0, "Morado", "#940055"));
+        grupos.add(new Grupo(0, "Naranja", "#FF8000"));
+        grupos.add(new Grupo(0, "Negro", "#000000"));
+        grupos.add(new Grupo(0, "Rojo", "#DA0000"));
+        grupos.add(new Grupo(0, "Rosa", "#F859C8"));
+        grupos.add(new Grupo(0, "Verde", "#2CC100"));
+        grupos.add(new Grupo(0, "Violeta", "#4E0094"));
+
+        if(db != null){
+            db.execSQL(TABLA_GRUPOS);
+
+            for (Grupo grupo : grupos) {
+                ContentValues valores = new ContentValues();
+                valores.put(Database.NOMBRE, grupo.getNombre());
+                valores.put(Database.COLOR, grupo.getColor());
+                db.insert(NOMBRE_GRUPOS, null, valores);
+            }
+
+            db.execSQL(TABLA_GRUPOS_PARADAS);
+            db.execSQL(UNIQUEINDEX_GRUPOS_PARADAS);
+        }else{
+            muestraErrorBBDD();
+        }
+    }
+
+    public void reiniciar(SQLiteDatabase sqLiteDatabase){
+
+        SQLiteDatabase db;
+
+        if(sqLiteDatabase == null) {
+            db = getWritableDatabase();
+        }else{
+            db = sqLiteDatabase;
+        }
+
         if(db != null) {
             db.execSQL(DROP_TABLE + NOMBRE_PARADAS + "'");
             db.execSQL(DROP_TABLE + NOMBRE_LINEAS + "'");
+            db.execSQL(DROP_TABLE + NOMBRE_GRUPOS + "'");
+            db.execSQL(DROP_TABLE + NOMBRE_GRUPOS_PARADAS + "'");
             db.execSQL(TABLA_PARADAS);
             db.execSQL(TABLA_LINEAS);
-            db.close();
+            inicializarGrupos(db);
+        }else{
+            muestraErrorBBDD();
         }
     }
 
@@ -79,6 +151,8 @@ public class Database extends SQLiteOpenHelper {
             valores.put(Database.IDENTIFICADOR, codigo);
             db.insert(NOMBRE_PARADAS, null, valores);
             db.close();
+        }else{
+            muestraErrorBBDD();
         }
     }
 
@@ -91,6 +165,8 @@ public class Database extends SQLiteOpenHelper {
             valores.put(Database.IDENTIFICADOR, identificador);
             db.insert(NOMBRE_LINEAS, null, valores);
             db.close();
+        }else{
+            muestraErrorBBDD();
         }
     }
 
@@ -135,7 +211,7 @@ public class Database extends SQLiteOpenHelper {
                 null, null, null, null, null);
         if(c != null) {
             c.moveToFirst();
-            Parada parada = new Parada(c.getString(1), c.getString(4), c.getInt(5));
+            Parada parada = new Parada(c.getInt(0), c.getString(1), c.getString(4), c.getInt(5));
             db.close();
             c.close();
             return parada;
@@ -163,39 +239,118 @@ public class Database extends SQLiteOpenHelper {
     public List<Parada> recuperarParadas() {
         SQLiteDatabase db = getReadableDatabase();
         List<Parada> listaParadas = new ArrayList<>();
-        String[] valoresRecuperar = {"_id", Database.NOMBRE, Database.ALIAS, Database.NOTAS, Database.NUMERO, Database.IDENTIFICADOR};
-        Cursor c = db.query(Database.NOMBRE_PARADAS, valoresRecuperar, null,
-                null, null, null, null, null);
-        if(c.moveToFirst()){
-            do {
-                Parada parada = new Parada(c.getString(1), c.getString(4), c.getInt(5));
-                listaParadas.add(parada);
-            } while (c.moveToNext());
+
+        if(db != null){
+            String[] valoresRecuperar = {"_id", Database.NOMBRE, Database.ALIAS, Database.NOTAS, Database.NUMERO, Database.IDENTIFICADOR};
+            Cursor c = db.query(Database.NOMBRE_PARADAS, valoresRecuperar, null,
+                    null, null, null, null, null);
+            if(c.moveToFirst()){
+                do {
+                    Parada parada = new Parada(c.getInt(0), c.getString(1), c.getString(4), c.getInt(5));
+                    listaParadas.add(parada);
+                } while (c.moveToNext());
+            }
+            db.close();
+            c.close();
+        }else{
+            muestraErrorBBDD();
         }
-        db.close();
-        c.close();
+
         return listaParadas;
     }
 
     public List<Linea> recuperarLineas() {
         SQLiteDatabase db = getReadableDatabase();
         List<Linea> listaLineas = new ArrayList<>();
-        String[] valoresRecuperar = {"_id", Database.NUMERO, Database.NOMBRE, Database.IDENTIFICADOR};
-        Cursor c = db.query(Database.NOMBRE_LINEAS, valoresRecuperar, null,
-                null, null, null, null, null);
-        if(c.moveToFirst()) {
-            do {
-                Linea linea = new Linea(c.getString(2), c.getString(1), c.getInt(3));
-                listaLineas.add(linea);
-            } while (c.moveToNext());
+
+        if(db != null){
+            String[] valoresRecuperar = {"_id", Database.NUMERO, Database.NOMBRE, Database.IDENTIFICADOR};
+            Cursor c = db.query(Database.NOMBRE_LINEAS, valoresRecuperar, null,
+                    null, null, null, null, null);
+            if(c.moveToFirst()) {
+                do {
+                    Linea linea = new Linea(c.getString(2), c.getString(1), c.getInt(3));
+                    listaLineas.add(linea);
+                } while (c.moveToNext());
+            }
+            db.close();
+            c.close();
+        }else{
+            muestraErrorBBDD();
         }
-        db.close();
-        c.close();
+
         return listaLineas;
     }
 
-    public void sincronizarParadas(List<Parada> paradasRemotas) {
+    public List<Grupo> recuperarGrupos() {
+        SQLiteDatabase db = getReadableDatabase();
+        List<Grupo> listaGrupos = new ArrayList<Grupo>();
 
+        if(db != null){
+            String[] valoresRecuperar = {"_id", Database.NOMBRE, Database.COLOR};
+            Cursor c = db.query(Database.NOMBRE_GRUPOS, valoresRecuperar, null,
+                    null, null, null, null, null);
+            if(c.moveToFirst()) {
+                do {
+                    Grupo grupo = new Grupo(c.getInt(0), c.getString(1), c.getString(2));
+                    listaGrupos.add(grupo);
+                } while (c.moveToNext());
+            }
+            db.close();
+            c.close();
+        }else{
+            muestraErrorBBDD();
+        }
+
+        return listaGrupos;
+    }
+
+    public List<GrupoParada> recuperarParadasGrupo(List<Parada> paradas, List<Grupo> grupos) {
+        SQLiteDatabase db = getReadableDatabase();
+        List<GrupoParada> listaGrupoParada = new ArrayList<GrupoParada>();
+
+        if(db != null){
+            String[] valoresRecuperar = {"_id", Database.PARADA_ID, Database.GRUPO_ID};
+            Cursor c = db.query(Database.NOMBRE_GRUPOS_PARADAS, valoresRecuperar, null,
+                    null, null, null, null, null);
+            if(c.moveToFirst()) {
+                do {
+                    listaGrupoParada.add(new GrupoParada(Grupo.buscaGrupo(grupos, c.getInt(2)), Parada.buscaParada(paradas, c.getInt(1))));
+                } while (c.moveToNext());
+            }
+            db.close();
+            c.close();
+        }else{
+            muestraErrorBBDD();
+        }
+
+        return listaGrupoParada;
+    }
+
+    public void agregaParadaAColor(int paradaId, int grupoId){
+        SQLiteDatabase db = getWritableDatabase();
+        if(db != null){
+            ContentValues valores = new ContentValues();
+            valores.put(Database.PARADA_ID, paradaId);
+            valores.put(Database.GRUPO_ID, grupoId);
+            db.insert(Database.NOMBRE_GRUPOS_PARADAS, null, valores);
+            db.close();
+        }else{
+            muestraErrorBBDD();
+        }
+    }
+
+    public void eliminaParadaDeColor(int paradaId, int grupoId){
+        SQLiteDatabase db = getWritableDatabase();
+        if(db != null){
+            db.delete(Database.NOMBRE_GRUPOS_PARADAS, Database.PARADA_ID + "=? and " + Database.GRUPO_ID + "=?", new String[]{Integer.toString(paradaId), Integer.toString(grupoId)});
+            db.close();
+        }else{
+            muestraErrorBBDD();
+        }
+    }
+
+    public void sincronizarParadas(List<Parada> paradasRemotas) {
         // Obtener listado paradas locales
         List<Parada> paradasLocales = recuperarParadas();
 
@@ -206,11 +361,9 @@ public class Database extends SQLiteOpenHelper {
                 insertarParada(parada.getName(), null, null, Integer.parseInt(parada.getNumero()), parada.getIdentifier());
             }
         }
-
     }
 
     public void sincronizarLineas(List<Linea> lineasRemotas) {
-
         // Obtener listado líneas locales
         List<Linea> lineasLocales = recuperarLineas();
 
@@ -221,7 +374,10 @@ public class Database extends SQLiteOpenHelper {
                 insertarLinea(linea.getNumero(), linea.getName(), linea.getIdentifier());
             }
         }
+    }
 
+    public void muestraErrorBBDD(){
+        Toast.makeText(this.context, R.string.app_fallo_bbdd, Toast.LENGTH_LONG).show();
     }
 
 }
