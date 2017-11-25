@@ -340,10 +340,20 @@ public class Database extends SQLiteOpenHelper {
         }
     }
 
-    public void eliminaParadaDeColor(int paradaId, int grupoId){
+    public void eliminaParadaDeGrupo(int paradaId, int grupoId){
         SQLiteDatabase db = getWritableDatabase();
         if(db != null){
             db.delete(Database.NOMBRE_GRUPOS_PARADAS, Database.PARADA_ID + "=? and " + Database.GRUPO_ID + "=?", new String[]{Integer.toString(paradaId), Integer.toString(grupoId)});
+            db.close();
+        }else{
+            muestraErrorBBDD();
+        }
+    }
+
+    public void eliminaParadasDeGrupos(){
+        SQLiteDatabase db = getWritableDatabase();
+        if(db != null){
+            db.delete(Database.NOMBRE_GRUPOS_PARADAS, null, null);
             db.close();
         }else{
             muestraErrorBBDD();

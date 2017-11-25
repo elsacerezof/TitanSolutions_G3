@@ -74,7 +74,7 @@ public class ListGruposPresenter  {
         builder.setMessage(alertaTexto)
                 .setPositiveButton(R.string.window_delete_ok, new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
-                        db.eliminaParadaDeColor(parada.getDbId(), parada.getGrupoAsignado());
+                        db.eliminaParadaDeGrupo(parada.getDbId(), parada.getGrupoAsignado());
                         getlistGruposView().refreshView();
                     }
                 })
