@@ -20,7 +20,7 @@ import static org.junit.Assert.assertTrue;
 public class AnhadirParadaAGrupoTest {
 
     @Test
-    public void anhadirParadaAGrupoTestPU1(){
+    public void PU1US242777(){
         List<Parada> paradasList=new ArrayList<>();
         Parada parada1=new Parada(1,"Avenida de Cantabria 10", "213",322);
         Parada parada2=new Parada(2,"Avenida Cantabria 12", "221",323);
@@ -37,21 +37,21 @@ public class AnhadirParadaAGrupoTest {
         gruposList.add(gAmarillo);
         gruposList.add(gCian);
 
-        GrupoParada gp1=new GrupoParada(gAguamarina, parada1);
+        GrupoParada gp1=new GrupoParada(gAguamarina, paradasList.get(0));
         assertTrue(gp1.getParada().equals(paradasList.get(0)));
         assertTrue(gp1.getGrupo().equals(paradasList.get(0)));
 
-        GrupoParada gp2=new GrupoParada(gAmarillo, parada2);
+        GrupoParada gp2=new GrupoParada(gAmarillo, paradasList.get(1));
         assertTrue(gp2.getParada().equals(paradasList.get(1)));
         assertTrue(gp2.getGrupo().equals(paradasList.get(1)));
 
-        GrupoParada gp3=new GrupoParada(gCian, parada3);
+        GrupoParada gp3=new GrupoParada(gCian, paradasList.get(2));
         assertTrue(gp3.getParada().equals(paradasList.get(2)));
         assertTrue(gp3.getGrupo().equals(paradasList.get(2)));
     }
 
     @Test
-    public void anhadirParadaAGrupoTestPU2() {
+    public void PU2US242777() {
         List<Grupo> grupos=new ArrayList<>();
         List<GrupoParada> gruposParadas=new ArrayList<>();
 
