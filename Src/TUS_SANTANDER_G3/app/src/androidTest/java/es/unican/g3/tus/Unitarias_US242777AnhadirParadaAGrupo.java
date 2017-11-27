@@ -70,5 +70,4 @@ public class Unitarias_US242777AnhadirParadaAGrupo {
         assertTrue((ListGruposPresenter.getGruposConParadas(grupos,gruposParadas)).get(3).equals(gAmarillo));
         assertTrue((ListGruposPresenter.getGruposConParadas(grupos,gruposParadas)).get(4).equals(gp3.getParada()));
     }
-
 }

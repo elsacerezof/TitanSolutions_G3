@@ -46,10 +46,10 @@ public class IntegracionSprint2Test {
 
         // Paradas sin ordenar que deberían obtenerse
         List<Parada> paradasResultadoA = new ArrayList<Parada>();
-        Parada parada1 = new Parada("Avenida de Cantabria nº 76", "506", 50694);
-        Parada parada2 = new Parada("Ortega y Gasset.28", "500", 42064);
-        Parada parada3 = new Parada("Avenida de Cantabria nº 35", "505", 50693);
-        Parada parada4 = new Parada("Eusebio Santamaria.2", "495", 42038);
+        Parada parada1 = new Parada(1,"Avenida de Cantabria nº 76", "506", 50694);
+        Parada parada2 = new Parada(2,"Ortega y Gasset.28", "500", 42064);
+        Parada parada3 = new Parada(3,"Avenida de Cantabria nº 35", "505", 50693);
+        Parada parada4 = new Parada(4,"Eusebio Santamaria.2", "495", 42038);
         paradasResultadoA.add(parada1);
         paradasResultadoA.add(parada2);
         paradasResultadoA.add(parada3);
@@ -78,10 +78,10 @@ public class IntegracionSprint2Test {
 
         // Paradas ordenadas que deberían obtenerse en la prueba de ordenación
         List<Parada> paradasResultadoB = new ArrayList<Parada>();
-        Parada parada5 = new Parada("Abilio Garcia baron 1 ( hote4l expres)", "296", 90);
-        Parada parada6 = new Parada("Adarzo", "455", 26416);
-        Parada parada7 = new Parada("Adarzo", "235", 54);
-        Parada parada8 = new Parada("Albert Einstein.14", "489", 41656);
+        Parada parada5 = new Parada(5,"Abilio Garcia baron 1 ( hote4l expres)", "296", 90);
+        Parada parada6 = new Parada(6,"Adarzo", "455", 26416);
+        Parada parada7 = new Parada(7,"Adarzo", "235", 54);
+        Parada parada8 = new Parada(8,"Albert Einstein.14", "489", 41656);
         paradasResultadoB.add(parada5);
         paradasResultadoB.add(parada6);
         paradasResultadoB.add(parada7);
