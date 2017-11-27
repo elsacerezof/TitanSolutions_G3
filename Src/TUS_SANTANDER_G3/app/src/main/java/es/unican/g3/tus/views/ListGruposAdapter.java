@@ -4,6 +4,7 @@ import android.content.Context;
 import android.graphics.Color;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -59,36 +60,42 @@ public class ListGruposAdapter extends ArrayAdapter {
         return (getItemViewType(position) == TIPO_PARADA);
     }
 
+    @NonNull
     @Override
     public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
 
         LayoutInflater layoutInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
         int type = getItemViewType(position);
-
         if (convertView == null) {
-            if(type==TIPO_PARADA) {
-                convertView = layoutInflater.inflate(R.layout.custom_list_paradas_layout, parent, false);
-            }else if(type==TIPO_GRUPO){
+            switch (type) {
+                case TIPO_PARADA:
+                    convertView = layoutInflater.inflate(R.layout.custom_list_paradas_layout, parent, false);
+                    break;
+                case TIPO_GRUPO:
                     convertView = layoutInflater.inflate(R.layout.custom_list_grupocabecera_layout, parent, false);
+                    break;
             }
         }
 
-        else {
-            if(type==TIPO_PARADA) {
-                Parada parada = (Parada) getItem(position);
+        switch (type) {
+            case TIPO_PARADA:
+                Parada parada = (Parada)getItem(position);
                 TextView textViewName = convertView.findViewById(R.id.textViewName);
-                TextView textViewNumero = convertView.findViewById(R.id.textViewNumero);
+                TextView textViewNumero =  convertView.findViewById(R.id.textViewNumero);
                 textViewName.setText(parada.getName().trim());
                 textViewNumero.setText(parada.getNumero().trim());
-            }else if(type==TIPO_GRUPO){
-                    Grupo grupo = (Grupo) getItem(position);
-                    TextView title = convertView.findViewById(R.id.groupTitle);
-                    LinearLayout grupoCabecera = convertView.findViewById(R.id.linearLayoutGrupoCabecera);
-                    title.setText(grupo.getNombre());
-                    grupoCabecera.setBackgroundColor(Color.parseColor(grupo.getColor()));
-            }
+
+                break;
+            case TIPO_GRUPO:
+                Grupo grupo = (Grupo)getItem(position);
+                TextView title = (TextView)convertView.findViewById(R.id.groupTitle);
+                LinearLayout grupoCabecera = (LinearLayout)convertView.findViewById(R.id.linearLayoutGrupoCabecera);
+                title.setText(grupo.getNombre());
+                grupoCabecera.setBackgroundColor(Color.parseColor(grupo.getColor()));
+                break;
         }
+
         return convertView;
     }
 

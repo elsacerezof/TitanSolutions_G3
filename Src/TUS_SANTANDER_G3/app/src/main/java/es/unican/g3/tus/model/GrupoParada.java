@@ -30,7 +30,7 @@ public class GrupoParada {
 
     public static List<Parada> getParadasDeGrupo(List<GrupoParada> grupoParadaLista, int grupo){
 
-        List<Parada> paradas = new ArrayList<>();
+        List<Parada> paradas = new ArrayList<Parada>();
 
         for(GrupoParada grupoParada : grupoParadaLista){
             if(grupoParada.getGrupo().getId() == grupo){

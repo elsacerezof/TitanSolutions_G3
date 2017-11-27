@@ -38,10 +38,10 @@ public class ListGruposPresenter  {
     }// ListGruposPresenter
 
     public static List<Object> getGruposConParadas(List<Grupo> grupos, List<GrupoParada> grupoParadaList){
-        ArrayList<Object> listadoGruposConParadas = new ArrayList<>();
+        ArrayList<Object> listadoGruposConParadas = new ArrayList<Object>();
         for(Grupo grupo : grupos){
             List<Parada> paradas = GrupoParada.getParadasDeGrupo(grupoParadaList, grupo.getId());
-            if(!paradas.isEmpty()){
+            if(paradas.size() > 0){
                 listadoGruposConParadas.add(grupo);
                 for(Parada parada : paradas){
                     listadoGruposConParadas.add(parada);
