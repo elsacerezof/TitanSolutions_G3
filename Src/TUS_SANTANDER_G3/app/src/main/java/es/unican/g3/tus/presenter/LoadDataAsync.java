@@ -12,6 +12,7 @@ import java.util.List;
 
 import es.unican.g3.tus.R;
 import es.unican.g3.tus.model.Database;
+import es.unican.g3.tus.model.Estimacion;
 import es.unican.g3.tus.model.Linea;
 import es.unican.g3.tus.model.Parada;
 import es.unican.g3.tus.model.dataloaders.ParserJSON;
@@ -30,7 +31,9 @@ public class LoadDataAsync extends AsyncTask<Object, Boolean, Boolean> {
     private List<Parada> listaParadasBus;
     private RemoteFetch remoteFetchParadas;
     private List<Linea> listaLineasBus;
+    private List<Estimacion> listaEstimacionesBus;
     private RemoteFetch remoteFetchLineas;
+    private RemoteFetch remoteFetchEstimaciones;
     private Context contextLlamador;
     private Activity activityLlamadora;
     private static final String ERROR="ERROR";
@@ -38,6 +41,7 @@ public class LoadDataAsync extends AsyncTask<Object, Boolean, Boolean> {
     public LoadDataAsync(Activity activity, Context context) {
         this.remoteFetchParadas = new RemoteFetch();
         this.remoteFetchLineas = new RemoteFetch();
+        this.remoteFetchEstimaciones = new RemoteFetch();
         this.contextLlamador = context;
         this.activityLlamadora = activity;
     }
@@ -71,6 +75,21 @@ public class LoadDataAsync extends AsyncTask<Object, Boolean, Boolean> {
         try {
             remoteFetchLineas.getJSON(RemoteFetch.URL_LINEAS_BUS);
             return remoteFetchLineas.getBufferedData();
+        } catch (IOException e) {
+            Log.w("Error", e);
+            return null;
+        }
+    }
+    /**
+     * Descarga las estimaciones del servicio remoto externo.
+     *
+     * @return InputStream
+     */
+    private InputStream descargaEstimaciones()
+    {
+        try {
+            remoteFetchEstimaciones.getJSON(RemoteFetch.URL_ESTIMACIONES_BUS);
+            return remoteFetchEstimaciones.getBufferedData();
         } catch (IOException e) {
             Log.w("Error", e);
             return null;
@@ -116,6 +135,22 @@ public class LoadDataAsync extends AsyncTask<Object, Boolean, Boolean> {
             return false;
         }//try
     }//obtenParadas
+    public boolean obtenEstimaciones(InputStream i) {
+        try {
+            if(i != null) {
+                listaEstimacionesBus = ParserJSON.readArrayEstimacionesBus(i);
+                Log.d("ENTRA", "Obten lineas: " + listaEstimacionesBus.size());
+                return true;
+            }else{
+                Log.e(ERROR, "Input obten estimaciones nulo");
+                return false;
+            }
+        }catch(Exception e){
+            Log.e(ERROR,"Error en la obtención de las lineas de bus: "+e.getMessage());
+            Log.w("", e);
+            return false;
+        }//try
+    }//obtenParadas
 
 
     public List<Parada> getListaParadasBus() {
@@ -124,12 +159,16 @@ public class LoadDataAsync extends AsyncTask<Object, Boolean, Boolean> {
     public List<Linea> getListaLineasBus() {
         return listaLineasBus;
     }//getListaParadasBus
+    public List<Estimacion> getListaEstimacionesBus() {
+        return listaEstimacionesBus;
+    }//getListaParadasBus
 
     @Override
     protected Boolean doInBackground(Object... objects) {
         // Se cargan "de fondo" las paradas
         obtenParadas(descargaParadas());
         obtenLineas(descargaLineas());
+        obtenEstimaciones(descargaEstimaciones());
         return true;
     }
 
@@ -142,7 +181,7 @@ public class LoadDataAsync extends AsyncTask<Object, Boolean, Boolean> {
     protected void onPostExecute(Boolean bool) {
 
         // Se muestra mensaje de error o correcto
-        if(getListaParadasBus() == null || getListaLineasBus()==null) {
+        if(getListaParadasBus() == null || getListaLineasBus()==null || getListaEstimacionesBus()==null) {
             // Mensaje de error
             Toast.makeText(contextLlamador, R.string.app_fallo_conexion, Toast.LENGTH_SHORT).show();
         } else {
@@ -150,8 +189,10 @@ public class LoadDataAsync extends AsyncTask<Object, Boolean, Boolean> {
             Toast.makeText(contextLlamador, R.string.app_carga_datos_ok, Toast.LENGTH_SHORT).show();
             // Sincronización de datos remotos con locales
             Database db = new Database(contextLlamador);
+            //db.reiniciar();
             db.sincronizarParadas(getListaParadasBus());
             db.sincronizarLineas(getListaLineasBus());
+            db.sincronizarEstimaciones(getListaEstimacionesBus());
         }
     }
 

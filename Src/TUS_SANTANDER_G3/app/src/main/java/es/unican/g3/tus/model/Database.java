@@ -29,14 +29,22 @@ public class Database extends SQLiteOpenHelper {
     private static final String TABLA_LINEAS = "CREATE TABLE lineas " +
             "(_id INTEGER PRIMARY KEY AUTOINCREMENT, NUMERO TEXT, NOMBRE TEXT, IDENTIFICADOR INT)";
 
+    private static final String TABLA_ESTIMACIONES = "CREATE TABLE estimaciones " +
+            "(_id INTEGER PRIMARY KEY AUTOINCREMENT, DISTANCIA INT, TIEMPO INT, IDENTIFICADOR INT,PARADAID INT,LINEA TEXT)";
+
     // Campos tabla
     private static final String NOMBRE ="NOMBRE";
     private static final String ALIAS ="ALIAS";
     private static final String NOTAS = "NOTAS";
     private static final String NUMERO ="NUMERO";
     private static final String IDENTIFICADOR ="IDENTIFICADOR";
+    private static final String DISTANCIA ="DISTANCIA";
+    private static final String TIEMPO ="TIEMPO";
+    private static final String PARADAID ="PARADAID";
+    private static final String LINEA ="LINEA";
     private static final String NOMBRE_PARADAS ="paradas";
     private static final String NOMBRE_LINEAS ="lineas";
+    private static final String NOMBRE_ESTIMACIONES ="estimaciones";
     private static final String DROP_TABLE="DROP TABLE IF EXISTS '";
 
     
@@ -48,12 +56,14 @@ public class Database extends SQLiteOpenHelper {
     public void onCreate(SQLiteDatabase sqLiteDatabase) {
         sqLiteDatabase.execSQL(TABLA_PARADAS);
         sqLiteDatabase.execSQL(TABLA_LINEAS);
+        sqLiteDatabase.execSQL(TABLA_ESTIMACIONES);
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase sqLiteDatabase, int oldVersion, int newVersion) {
         sqLiteDatabase.execSQL(DROP_TABLE + TABLA_PARADAS+ "'");
         sqLiteDatabase.execSQL(DROP_TABLE + TABLA_LINEAS+ "'");
+        sqLiteDatabase.execSQL(DROP_TABLE + TABLA_ESTIMACIONES+ "'");
         onCreate(sqLiteDatabase);
     }
 
@@ -62,8 +72,10 @@ public class Database extends SQLiteOpenHelper {
         if(db != null) {
             db.execSQL(DROP_TABLE + NOMBRE_PARADAS + "'");
             db.execSQL(DROP_TABLE + NOMBRE_LINEAS + "'");
+            db.execSQL(DROP_TABLE + NOMBRE_ESTIMACIONES + "'");
             db.execSQL(TABLA_PARADAS);
             db.execSQL(TABLA_LINEAS);
+            db.execSQL(TABLA_ESTIMACIONES);
             db.close();
         }
     }
@@ -90,6 +102,19 @@ public class Database extends SQLiteOpenHelper {
             valores.put(Database.NOMBRE, nombre);
             valores.put(Database.IDENTIFICADOR, identificador);
             db.insert(NOMBRE_LINEAS, null, valores);
+            db.close();
+        }
+    }
+    public void insertarEstimacion(int distancia, int tiempo, int identificador, int paradaId,String linea){
+        SQLiteDatabase db = getWritableDatabase();
+        if(db != null){
+            ContentValues valores = new ContentValues();
+            valores.put(Database.DISTANCIA, distancia);
+            valores.put(Database.TIEMPO, tiempo);
+            valores.put(Database.IDENTIFICADOR, identificador);
+            valores.put(Database.PARADAID, paradaId);
+            valores.put(Database.LINEA, linea);
+            db.insert(NOMBRE_ESTIMACIONES, null, valores);
             db.close();
         }
     }
@@ -125,6 +150,11 @@ public class Database extends SQLiteOpenHelper {
     public void borrarLinea(int id){
         SQLiteDatabase db = getWritableDatabase();
         db.delete(Database.NOMBRE_LINEAS, Database.IDENTIFICADOR +id, null);
+        db.close();
+    }
+    public void borrarEstimacion(int id){
+        SQLiteDatabase db = getWritableDatabase();
+        db.delete(Database.NOMBRE_ESTIMACIONES, Database.IDENTIFICADOR+id, null);
         db.close();
     }
 
@@ -193,6 +223,23 @@ public class Database extends SQLiteOpenHelper {
         c.close();
         return listaLineas;
     }
+    public List<Estimacion> recuperarEstimaciones() {
+        SQLiteDatabase db = getReadableDatabase();
+        List<Estimacion> listaEstimaciones = new ArrayList<>();
+        String[] valoresRecuperar = {"_id", Database.DISTANCIA, Database.TIEMPO, Database.IDENTIFICADOR,Database.PARADAID,Database.LINEA};
+        Cursor c = db.query(Database.NOMBRE_ESTIMACIONES, valoresRecuperar, null,
+                null, null, null, null, null);
+        //Cursos c2=db.rawQuery("SELECT * FROM estimaciones");
+        if(c.moveToFirst()) {
+            do {
+                Estimacion estimacion = new Estimacion(c.getInt(2), c.getInt(1), c.getInt(3),c.getInt(4),c.getString(5));
+                listaEstimaciones.add(estimacion);
+            } while (c.moveToNext());
+        }
+        db.close();
+        c.close();
+        return listaEstimaciones;
+    }
 
     public void sincronizarParadas(List<Parada> paradasRemotas) {
 
@@ -220,6 +267,28 @@ public class Database extends SQLiteOpenHelper {
             if(!lineasLocales.contains(linea)){
                 insertarLinea(linea.getNumero(), linea.getName(), linea.getIdentifier());
             }
+        }
+
+    }
+    public void sincronizarEstimaciones(List<Estimacion> estimacionesRemotas) {
+
+        // Obtener listado líneas locales
+        List<Estimacion> estimacionesLocales = recuperarEstimaciones();
+
+        //for(int i=0;i<estimacionesLocales.size();i++)
+        //{
+         //   borrarEstimacion(estimacionesLocales.get(i).getIdentifier());
+        //}
+        SQLiteDatabase db = getWritableDatabase();
+        db.execSQL(DROP_TABLE + NOMBRE_ESTIMACIONES + "'");
+        db.execSQL(TABLA_ESTIMACIONES);
+        db.close();
+        // Sincronización de datos locales con remotos
+        for (Estimacion estimacion : estimacionesRemotas) {
+            // Si la línea remota no existe en las descargadas en la aplicación, se inserta
+
+                insertarEstimacion(estimacion.getDistancia(), estimacion.getTiempo(), estimacion.getIdentifier(),estimacion.getParadaId(),estimacion.getLinea());
+
         }
 
     }

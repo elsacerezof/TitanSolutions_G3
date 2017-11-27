@@ -7,6 +7,7 @@ import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
 
+import es.unican.g3.tus.model.Estimacion;
 import es.unican.g3.tus.model.Linea;
 import es.unican.g3.tus.model.Parada;
 
@@ -16,91 +17,122 @@ import es.unican.g3.tus.model.Parada;
  * Clase que contiene los metodos necesarios para parsear el JSON que devuelve el servicio "REST" con
  * los diferentes datos del TUS de Santander
  */
-public class ParserJSON{
+public class ParserJSON {
 
-    private ParserJSON(){}
+    private ParserJSON() {
+    }
 
     /**
      * Metodo para obtener todas las paradas de buses
+     *
      * @param in InputStream del JSON con las paradas de buses
      * @return Lista con todas las paradas
      * @throws IOException excepcion de entrada/salida
      */
-    public static List<Parada> readArrayParadasBus (InputStream in) throws IOException {
-            return readArray(in, 0);
-        }
+    public static List<Parada> readArrayParadasBus(InputStream in) throws IOException {
+        return readArray(in, 0);
+    }
 
     /**
      * Metodo para obtener todas las lineas de buses
+     *
      * @param in InputStream del JSON con las lineas de buses
      * @return Lista con todas las lineas
      * @throws IOException excepcion de entrada/salida
      */
-    public static List<Linea> readArrayLineasBus (InputStream in) throws IOException {
-        return(readArray(in, 1));
+    public static List<Linea> readArrayLineasBus(InputStream in) throws IOException {
+        return (readArray(in, 1));
+    }
+
+    /**
+     * Metodo para obtener todas las estimaciones de buses
+     *
+     * @param in InputStream del JSON con las lineas de buses
+     * @return Lista con todas las lineas
+     * @throws IOException excepcion de entrada/salida
+     */
+    public static List<Estimacion> readArrayEstimacionesBus(InputStream in) throws IOException {
+        return (readArray(in, 2));
     }
 
 
     public static List readArray(InputStream in, int tipo) throws IOException {
         //0 -> Paradas
         //1 -> Lineas
-            List<Parada> listParadasBus = new ArrayList<>();
-            List<Linea> listLineasBus = new ArrayList<>();
+        List<Parada> listParadasBus = new ArrayList<>();
+        List<Linea> listLineasBus = new ArrayList<>();
+        List<Estimacion> listEstimacionesBus = new ArrayList<>();
 
-            JsonReader reader = new JsonReader(new InputStreamReader(in, "UTF-8"));
-            reader.beginObject(); //summary y resources
-            while (reader.hasNext()){
-                String name = reader.nextName();
-                if(name.equals ("resources")){
-                    reader.beginArray(); //cada elemento del array es un object
-                    while(reader.hasNext())
-                        if(tipo==0)
-                            listParadasBus.add(readParada(reader));
-                        else if(tipo==1){
-                            listLineasBus.add(readLinea(reader));
-                        }
-                }else{
-                    reader.skipValue();
-                }
+        JsonReader reader = new JsonReader(new InputStreamReader(in, "UTF-8"));
+        reader.beginObject(); //summary y resources
+        while (reader.hasNext()) {
+            String name = reader.nextName();
+            if (name.equals("resources")) {
+                reader.beginArray(); //cada elemento del array es un object
+                while (reader.hasNext())
+                    if (tipo == 0)
+                        listParadasBus.add(readParada(reader));
+                    else if (tipo == 1) {
+                        listLineasBus.add(readLinea(reader));
+                    } else if (tipo == 2) {
+                        listEstimacionesBus.add(readEstimacion(reader));
+                    }
+            } else {
+                reader.skipValue();
             }
+        }
 
-            if(tipo==0) {
-                return listParadasBus;
-            }else{
-                return listLineasBus;
-            }
+        if (tipo == 0) {
+            return listParadasBus;
+        } else if(tipo ==1) {
+            return listLineasBus;
+        }else
+        {
+            return listEstimacionesBus;
+        }
     }
 
     /**
      * Lee una Parada
+     *
      * @param reader lector
      * @return parada a leer
      * @throws IOException excepcion de entrada/salida
      */
-    private static Parada readParada (JsonReader reader) throws IOException {
-        return ((Parada)read(reader, 1));
+    private static Parada readParada(JsonReader reader) throws IOException {
+        return ((Parada) read(reader, 1));
     }
+
     /**
      * Lee una Linea
+     *
      * @param reader lector
      * @return parada a leer
      * @throws IOException excepcion de entrada/salida
      */
-    private static Linea readLinea (JsonReader reader) throws IOException {
-        return ((Linea)read(reader, 0));
+    private static Linea readLinea(JsonReader reader) throws IOException {
+        return ((Linea) read(reader, 0));
     }
 
-    private static Object read(JsonReader reader, int tipo) throws IOException{
-        reader.beginObject(); //Leemos un object
-        String name ="";
-        String numero="";
-        int identifier=-1;
+    private static Estimacion readEstimacion(JsonReader reader) throws IOException {
+        return ((Estimacion) read(reader, 2));
+    }
 
-        while(reader.hasNext()) {
+    private static Object read(JsonReader reader, int tipo) throws IOException {
+        reader.beginObject(); //Leemos un object
+        String name = "";
+        String numero = "";
+        int identifier = -1;
+        int paradaId = 0;
+        int distancia1 = 0;
+        int tiempo1 = 0;
+        String linea="";
+
+        while (reader.hasNext()) {
             String n = reader.nextName();
             //linea
-            if(tipo==0){
-                switch (n){
+            if (tipo == 0) {
+                switch (n) {
                     case "ayto:numero":
                         numero = reader.nextString();
                         break;
@@ -114,8 +146,8 @@ public class ParserJSON{
                         reader.skipValue();
                         break;
                 }
-            }else{
-                switch (n){
+            } else if (tipo == 1) {
+                switch (n) {
                     case "ayto:numero":
                         numero = reader.nextString();
                         break;
@@ -129,14 +161,42 @@ public class ParserJSON{
                         reader.skipValue();
                         break;
                 }
+            } else if (tipo == 2) {
+                switch (n) {
+                    case "ayto:tiempo1":
+                        tiempo1 = reader.nextInt();
+                        break;
+                    case "ayto:distancia1":
+                        distancia1 = reader.nextInt();
+                        break;
+                    case "ayto:paradaId":
+                        paradaId = reader.nextInt();
+                        break;
+                    case "dc:identifier":
+                        identifier = reader.nextInt();
+                        break;
+                    case "ayto:etiqLinea":
+                        linea = reader.nextString();
+                        break;
+                    default:
+                        reader.skipValue();
+                        break;
+                }
             }
         }
         reader.endObject();
-        if(tipo==0){
+        if (tipo == 0) {
             return new Linea(name, numero, identifier);
-        }else{
-            return new Parada(name,numero,identifier);
+        } else if (tipo == 1) {
+            return new Parada(name, numero, identifier);
+        } else  if(tipo==2){
+            return new Estimacion(distancia1, tiempo1, identifier, paradaId,linea);
+        }
+        else
+        {
+            return null;
         }
     }
+
 
 }//ParserJSON

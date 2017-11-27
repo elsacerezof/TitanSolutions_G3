@@ -1,12 +1,10 @@
 package es.unican.g3.tus.views;
-
+import java.util.List;
 import android.app.ProgressDialog;
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.app.ListFragment;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.SearchView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -16,72 +14,87 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
 import es.unican.g3.tus.R;
-import es.unican.g3.tus.model.Linea;
+import es.unican.g3.tus.model.Estimacion;
 import es.unican.g3.tus.model.Parada;
+import es.unican.g3.tus.presenter.ListEstimacionesPresenter;
 import es.unican.g3.tus.presenter.ListParadasPresenter;
 
 /**
  * A fragment representing a list of Items.
  */
-public class ParadasFragment extends ListFragment implements IListParadasView{
-    private List<Parada> listAux=new ArrayList<>();
+public class EstimacionesFragment extends ListFragment implements IListEstimacionesView{
+
     private ProgressDialog dialog;
-    private ListParadasPresenter listParadasPresenter;
+    private ListEstimacionesPresenter listEstimacionesPresenter;
+    private String paradaId;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        return(inflater.inflate(R.layout.fragment_paradas_list, container, false));
+        //super.onActivityCreated(savedInstanceState);
+        //this.listEstimacionesPresenter = new ListEstimacionesPresenter(getContext(),this);
+        return(inflater.inflate(R.layout.fragment_estimaciones_list, container, false));
     }
 
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        this.listParadasPresenter = new ListParadasPresenter(getContext(),this);
-        listParadasPresenter.getListaParadasBus().get(3).setAlias("mi casita");
-        listParadasPresenter.getListaParadasBus().get(5).setNotas("domino");
-        this.dialog = new ProgressDialog(getContext());
-        setHasOptionsMenu(true);
+        this.listEstimacionesPresenter = new ListEstimacionesPresenter(getContext(),this);
+        this.listEstimacionesPresenter = new ListEstimacionesPresenter(getContext(),this);
     }
 
     @Override
     public void onListItemClick(ListView listView, View view, int position, long id) {
         Log.d("pulsado", ""+Integer.toString(position));
         //Haciendo uso de la interfaz DataCommunzication podemos enviar los datos entre fragmentos
-        EstimacionesFragment fragmentEstimaciones = new EstimacionesFragment();
-        fragmentEstimaciones.añadeParada(listAux.get(position).getNumero());
-        FragmentManager fm = getActivity().getSupportFragmentManager();
-        FragmentTransaction ft = fm.beginTransaction();
-        ft.replace(R.id.frameLayoutElements, fragmentEstimaciones);
-        ft.commit();
+
     }
 
     @Override
-    public void showList(List<Parada> lineaList, boolean ordenadas) {
+    public void showList(List<Estimacion> lineaList, boolean ordenadas) {
         if(lineaList!=null) {
-            listAux=lineaList;
-            ListParadasAdapter listParadasAdapter;
-            if(ordenadas) {
-                Collections.sort(lineaList);
-                listParadasAdapter = new ListParadasAdapter(getContext(), lineaList);
-                getListView().setAdapter(listParadasAdapter);
-            }else{
 
-                listParadasAdapter = new ListParadasAdapter(getContext(), lineaList);
-                getListView().setAdapter(listParadasAdapter);
-            }
+
+
+            ListEstimacionesAdapter lista= new ListEstimacionesAdapter(getContext(),estimacionesPorParada(lineaList,paradaId));
+
+            getListView().setAdapter(lista);
+
         }
         else{
+
+
+
             dialog.dismiss();
         }
     }
+    public List<Estimacion> estimacionesPorParada(List<Estimacion> lineaList,String id)
+    {
+        List<Estimacion> listAux= new ArrayList<Estimacion>();
+        for(int i=0;i<lineaList.size();i++)
+        {
+            if(lineaList.get(i).getParadaId()==Integer.parseInt(id))
+            {
+                listAux.add(lineaList.get(i));
+            }
+        }
+        if(listAux.size()==0)
+        {
+            Toast toast1 =
+                    Toast.makeText(this.getContext(),
+                            "En estos momentos no disponemos de estimaciones para esta parada", Toast.LENGTH_SHORT);
+            toast1.show();
 
+        }
+        return listAux;
+    }
 
     /**
      * Este método cuando es llamado se encarga de mostrar un progressDialog
@@ -126,32 +139,7 @@ public class ParadasFragment extends ListFragment implements IListParadasView{
         return paradaFiltradas;
     }
 
-    @Override
-    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
 
-        inflater.inflate(R.menu.menu,menu);
-
-        // Interfaz gráfica búsqueda
-        SearchView searchView = (SearchView) menu.findItem(R.id.action_search).getActionView();
-        searchView.setQueryHint(getString(R.string.search_placeholder));
-
-        // Atención de las consultas de búsqueda
-        SearchView.OnQueryTextListener queryTextListener = new SearchView.OnQueryTextListener() {
-            private List<Parada> paradas = listParadasPresenter.getListaParadasBus();
-
-            public boolean onQueryTextChange(String filterText) {
-                showList(searchFilterList(paradas, filterText), false);
-                return true;
-            }
-
-            public boolean onQueryTextSubmit(String query) {
-                return true;
-            }
-        };
-
-        searchView.setOnQueryTextListener(queryTextListener);
-
-    }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item){
@@ -161,15 +149,16 @@ public class ParadasFragment extends ListFragment implements IListParadasView{
         if(item.getItemId()==R.id.action_search) {
             resultado= true;
         } else {
-            List<Parada> paradaList = listParadasPresenter.getListaParadasBus();
-            if (paradaList != null) {
-                Collections.sort(paradaList);
-            }
-            showList(paradaList, true);
+            List<Estimacion> estimacionList = listEstimacionesPresenter.getListaEstimacionesBus();
+            showList(estimacionList, true);
             resultado= true;
         }
 
         return resultado;
 
+    }
+    public void añadeParada(String id)
+    {
+        paradaId=id;
     }
 }
