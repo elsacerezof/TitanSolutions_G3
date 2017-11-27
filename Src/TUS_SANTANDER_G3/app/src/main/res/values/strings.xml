@@ -18,4 +18,5 @@
     <string name="window_delete_text">¿Desea realmente eliminar %%TITULO%%?</string>
     <string name="window_cancel">Cancelar</string>
     <string name="paradas_listavacia">Aún no hay paradas en esta vista</string>
+    <string name="lineas_listavacia">No hay líneas disponibles en este momento</string>
 </resources>

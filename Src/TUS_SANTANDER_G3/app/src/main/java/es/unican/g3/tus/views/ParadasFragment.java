@@ -41,8 +41,6 @@ public class ParadasFragment extends ListFragment implements IListParadasView{
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         this.listParadasPresenter = new ListParadasPresenter(getContext(),this);
-        this.listParadasPresenter.getListaParadasBus().get(3).setAlias("mi casita");
-        this.listParadasPresenter.getListaParadasBus().get(5).setNotas("domino");
         this.dialog = new ProgressDialog(getContext());
         // Habilitar opciones menú superior
         setHasOptionsMenu(true);
