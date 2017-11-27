@@ -10,7 +10,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
 
 import es.unican.g3.tus.R;
-import es.unican.g3.tus.model.Database;
 
 
 public class MainActivity extends AppCompatActivity implements DataCommunication {

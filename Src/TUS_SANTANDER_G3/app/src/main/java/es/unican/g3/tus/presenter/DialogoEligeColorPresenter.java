@@ -2,18 +2,12 @@ package es.unican.g3.tus.presenter;
 
 import android.content.Context;
 
-import java.util.ArrayList;
-import java.util.HashMap;
+
 import java.util.List;
-
-
 import es.unican.g3.tus.model.Database;
 import es.unican.g3.tus.model.Grupo;
-import es.unican.g3.tus.model.Parada;
 import es.unican.g3.tus.views.DialogoEligeColorFragment;
-import es.unican.g3.tus.views.GruposFragment;
 import es.unican.g3.tus.views.IListEligeColorView;
-import es.unican.g3.tus.views.IListGruposView;
 
 public class DialogoEligeColorPresenter  {
     private IListEligeColorView listDialogoEligeColorView;

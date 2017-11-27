@@ -60,7 +60,6 @@ public class ListGruposAdapter extends ArrayAdapter {
         return (getItemViewType(position) == TIPO_PARADA);
     }
 
-    @NonNull
     @Override
     public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
 
@@ -68,34 +67,41 @@ public class ListGruposAdapter extends ArrayAdapter {
 
         int type = getItemViewType(position);
         if (convertView == null) {
-            switch (type) {
-                case TIPO_PARADA:
-                    convertView = layoutInflater.inflate(R.layout.custom_list_paradas_layout, parent, false);
-                    break;
-                case TIPO_GRUPO:
-                    convertView = layoutInflater.inflate(R.layout.custom_list_grupocabecera_layout, parent, false);
-                    break;
+            if(type==TIPO_PARADA) {
+                convertView = layoutInflater.inflate(R.layout.custom_list_paradas_layout, parent, false);
+            }else if(type==TIPO_GRUPO) {
+                convertView = layoutInflater.inflate(R.layout.custom_list_grupocabecera_layout, parent, false);
             }
         }
 
-        switch (type) {
-            case TIPO_PARADA:
-                Parada parada = (Parada)getItem(position);
-                TextView textViewName = convertView.findViewById(R.id.textViewName);
-                TextView textViewNumero =  convertView.findViewById(R.id.textViewNumero);
-                textViewName.setText(parada.getName().trim());
-                textViewNumero.setText(parada.getNumero().trim());
-
-                break;
-            case TIPO_GRUPO:
-                Grupo grupo = (Grupo)getItem(position);
-                TextView title = (TextView)convertView.findViewById(R.id.groupTitle);
-                LinearLayout grupoCabecera = (LinearLayout)convertView.findViewById(R.id.linearLayoutGrupoCabecera);
-                title.setText(grupo.getNombre());
-                grupoCabecera.setBackgroundColor(Color.parseColor(grupo.getColor()));
-                break;
+        if(type==TIPO_PARADA){
+            Parada parada = (Parada)getItem(position);
+            TextView textViewName=null;
+            TextView textViewNumero=null;
+            try {
+                if(convertView!=null) {
+                    textViewName = convertView.findViewById(R.id.textViewName);
+                    textViewNumero = convertView.findViewById(R.id.textViewNumero);
+                    textViewName.setText(parada.getName().trim());
+                    textViewNumero.setText(parada.getNumero().trim());
+                }
+            }catch (NullPointerException e){
+                Log.d("","");
+            }
+        }else if(type==TIPO_GRUPO){
+            Grupo grupo = (Grupo)getItem(position);
+            TextView title=null;
+            try {
+                if(convertView!=null) {
+                    title = convertView.findViewById(R.id.groupTitle);
+                    LinearLayout grupoCabecera = convertView.findViewById(R.id.linearLayoutGrupoCabecera);
+                    title.setText(grupo.getNombre());
+                    grupoCabecera.setBackgroundColor(Color.parseColor(grupo.getColor()));
+                }
+            }catch (NullPointerException e){
+                Log.d("","");
+            }
         }
-
         return convertView;
     }
 
