@@ -25,10 +25,10 @@ public class OrdenarAlfabeticamenteTest {
     public void ordenarAlfabeticamentePU1() throws Exception {
 
         List<Parada> lista = new LinkedList<>();
-        Parada p1= new Parada("Camarreal Penacastillo","499", 42063);
-        Parada p2= new Parada("Ortega y Gasset.28","500", 42064);
-        Parada p3= new Parada("Avenida de Cantabria.35","505", 50693);
-        Parada p4= new Parada("Nuevo Parque","307", 100);
+        Parada p1= new Parada(1,"Camarreal Penacastillo","499", 42063);
+        Parada p2= new Parada(2,"Ortega y Gasset.28","500", 42064);
+        Parada p3= new Parada(3,"Avenida de Cantabria.35","505", 50693);
+        Parada p4= new Parada(4,"Nuevo Parque","307", 100);
 
         lista.add(p4);
         lista.add(p2);
@@ -65,10 +65,10 @@ public class OrdenarAlfabeticamenteTest {
     public void ordenarAlfabeticamentePU2() throws Exception {
 
         List<Parada> lista = new LinkedList<>();
-        Parada p1= new Parada("Camarreal Peñacastillo","499", 42063);
-        Parada p2= new Parada("Ortega y Gasset.28","500", 42064);
-        Parada p3= new Parada("Avenida de Cantabria.35","505", 50693);
-        Parada p4= new Parada("Nuevo Parque","307", 100);
+        Parada p1= new Parada(1,"Camarreal Peñacastillo","499", 42063);
+        Parada p2= new Parada(2,"Ortega y Gasset.28","500", 42064);
+        Parada p3= new Parada(3,"Avenida de Cantabria.35","505", 50693);
+        Parada p4= new Parada(4,"Nuevo Parque","307", 100);
 
         //Si le paso una lista vacia
         assertTrue(lista.size()==0);

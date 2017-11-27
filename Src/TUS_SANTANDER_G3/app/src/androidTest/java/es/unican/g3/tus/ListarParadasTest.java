@@ -38,10 +38,10 @@ public class ListarParadasTest {
 
         // Paradas que deberían obtenerse
         List<Parada> paradasResultadoA = new ArrayList<Parada>();
-        Parada parada1 = new Parada("Camarreal Penacastillo", "499", 42063);
-        Parada parada2 = new Parada("Ortega y Gasset.28", "500", 42064);
-        Parada parada3 = new Parada("Avenida de Cantabria.35", "505", 50693);
-        Parada parada4 = new Parada("Nuevo Parque", "307", 100);
+        Parada parada1 = new Parada(1,"Camarreal Penacastillo", "499", 42063);
+        Parada parada2 = new Parada(2,"Ortega y Gasset.28", "500", 42064);
+        Parada parada3 = new Parada(3,"Avenida de Cantabria.35", "505", 50693);
+        Parada parada4 = new Parada(4,"Nuevo Parque", "307", 100);
         paradasResultadoA.add(parada1);
         paradasResultadoA.add(parada2);
         paradasResultadoA.add(parada3);

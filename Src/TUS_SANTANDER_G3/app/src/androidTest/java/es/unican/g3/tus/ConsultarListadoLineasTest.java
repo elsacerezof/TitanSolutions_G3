@@ -1,8 +1,5 @@
 package es.unican.g3.tus;
 
-/**
- * Created by fernando on 13/11/17.
- */
 
 import android.support.test.InstrumentationRegistry;
 

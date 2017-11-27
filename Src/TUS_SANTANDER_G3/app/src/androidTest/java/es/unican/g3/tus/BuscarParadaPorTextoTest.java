@@ -24,10 +24,10 @@ public class BuscarParadaPorTextoTest {
     public void buscarParadaTextoTestPU1() throws Exception {
         // Paradas que deberían leerse y procesarse en el método searchFilterList
         List<Parada> paradasEntrada = new ArrayList<Parada>();
-        Parada parada1 = new Parada("Avenida de Cantabria 10", "213", 322);
-        Parada parada2 = new Parada("Avenida Cantabria 12", "221", 323);
+        Parada parada1 = new Parada(1,"Avenida de Cantabria 10", "213", 322);
+        Parada parada2 = new Parada(2,"Avenida Cantabria 12", "221", 323);
         parada2.setAlias("Mi casita");
-        Parada parada3 = new Parada("Los Castros 63", "73", 45);
+        Parada parada3 = new Parada(3,"Los Castros 63", "73", 45);
         parada3.setNotas("Domino");
         paradasEntrada.add(parada1);
         paradasEntrada.add(parada2);

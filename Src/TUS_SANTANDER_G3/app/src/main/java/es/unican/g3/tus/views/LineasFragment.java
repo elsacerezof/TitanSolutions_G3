@@ -5,8 +5,6 @@ import android.os.Bundle;
 import android.support.v4.app.ListFragment;
 import android.util.Log;
 import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
@@ -38,7 +36,7 @@ public class LineasFragment extends ListFragment implements IListLineasView{
         super.onActivityCreated(savedInstanceState);
         this.listLineasPresenter = new ListLineasPresenter(getContext(),this);
         this.dialog = new ProgressDialog(getContext());
-        setHasOptionsMenu(true);
+        setHasOptionsMenu(false);
     }
 
     @Override
@@ -60,9 +58,6 @@ public class LineasFragment extends ListFragment implements IListLineasView{
                 getListView().setAdapter(listLineasAdapter);
             }
         }
-        else{
-            dialog.dismiss();
-        }
     }
 
 
@@ -78,12 +73,6 @@ public class LineasFragment extends ListFragment implements IListLineasView{
         }else{
             dialog.dismiss();
         }
-
-    }
-    @Override
-    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-
-        inflater.inflate(R.menu.menu,menu);
 
     }
 

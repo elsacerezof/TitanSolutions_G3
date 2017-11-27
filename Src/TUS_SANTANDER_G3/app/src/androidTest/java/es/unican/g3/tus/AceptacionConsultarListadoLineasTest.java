@@ -1,4 +1,4 @@
-package es.unican.g3.tus.views;
+package es.unican.g3.tus;
 
 
 import android.support.test.espresso.ViewInteraction;
@@ -17,6 +17,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import es.unican.g3.tus.R;
+import es.unican.g3.tus.views.ActivityInicialLogo;
 
 import static android.support.test.espresso.Espresso.onView;
 import static android.support.test.espresso.action.ViewActions.click;
@@ -45,7 +46,7 @@ public class AceptacionConsultarListadoLineasTest {
         }
 
         ViewInteraction bottomNavigationItemView = onView(
-                allOf(withId(R.id.navigation_dashboard), isDisplayed()));
+                allOf(withId(R.id.navigation_lineas), isDisplayed()));
         bottomNavigationItemView.perform(click());
 
         ViewInteraction textView = onView(
