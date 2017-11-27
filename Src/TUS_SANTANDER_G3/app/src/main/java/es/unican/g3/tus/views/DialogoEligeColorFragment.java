@@ -25,7 +25,7 @@ public class DialogoEligeColorFragment extends DialogFragment implements OnItemC
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.dialog_fragment, null, false);
-        listaGruposView = (ListView) view.findViewById(R.id.list);
+        listaGruposView = view.findViewById(R.id.list);
         getDialog().getWindow().requestFeature(Window.FEATURE_NO_TITLE);
         return view;
     }
@@ -38,7 +38,7 @@ public class DialogoEligeColorFragment extends DialogFragment implements OnItemC
 
     @Override
     public void showList(List<Grupo> gruposList) {
-        ArrayAdapter<Grupo> adapter = new ArrayAdapter<Grupo>(getActivity(), android.R.layout.simple_list_item_1, gruposList);
+        ArrayAdapter<Grupo> adapter = new ArrayAdapter<>(getActivity(), android.R.layout.simple_list_item_1, gruposList);
         listaGruposView.setAdapter(adapter);
         listaGruposView.setOnItemClickListener(this);
     }

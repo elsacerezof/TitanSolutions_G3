@@ -11,7 +11,6 @@ import android.util.Log;
 import android.widget.Toast;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 
 import es.unican.g3.tus.R;
@@ -83,7 +82,7 @@ public class Database extends SQLiteOpenHelper {
         SQLiteDatabase db = sqLiteDatabase;
 
         // Carga de grupos inicial
-        List<Grupo> grupos = new ArrayList<Grupo>();
+        List<Grupo> grupos = new ArrayList<>();
         grupos.add(new Grupo(0, "Aguamarina", "#00C2C2"));
         grupos.add(new Grupo(0, "Amarillo", "#FFC501"));
         grupos.add(new Grupo(0, "Azul", "#0062D8"));
@@ -298,11 +297,11 @@ public class Database extends SQLiteOpenHelper {
                             listaParadas.add(parada);
                         } while (c.moveToNext());
                     }
+                    c.close();
                 }else{
                     muestraErrorBBDD();
                 }
                 db.close();
-                c.close();
             }else{
                 muestraErrorBBDD();
             }
@@ -344,7 +343,7 @@ public class Database extends SQLiteOpenHelper {
 
     public List<Grupo> recuperarGrupos() {
         SQLiteDatabase db = getReadableDatabase();
-        List<Grupo> listaGrupos = new ArrayList<Grupo>();
+        List<Grupo> listaGrupos = new ArrayList<>();
 
         try {
             if(db != null){
@@ -372,7 +371,7 @@ public class Database extends SQLiteOpenHelper {
 
     public List<GrupoParada> recuperarParadasGrupo(List<Parada> paradas, List<Grupo> grupos) {
         SQLiteDatabase db = getReadableDatabase();
-        List<GrupoParada> listaGrupoParada = new ArrayList<GrupoParada>();
+        List<GrupoParada> listaGrupoParada = new ArrayList<>();
 
         try {
             if(db != null){
@@ -409,11 +408,11 @@ public class Database extends SQLiteOpenHelper {
             }else{
                 muestraErrorBBDD();
             }
+        }catch(SQLiteConstraintException sqlException){
+            Log.d("sql", ""+sqlException);
         }catch (SQLException sqlException) {
             Log.d("sql", ""+sqlException);
-            if(!(sqlException instanceof SQLiteConstraintException)){
-                muestraErrorBBDD();
-            }
+            muestraErrorBBDD();
         }
     }
 
