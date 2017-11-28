@@ -90,7 +90,7 @@ public class EstimacionesFragment extends ListFragment implements IListEstimacio
             Toast toast1 =
                     Toast.makeText(this.getContext(),
                             "En estos momentos no disponemos de estimaciones para esta parada", Toast.LENGTH_SHORT);
-            toast1.show();
+            //toast1.show();
 
         }
         return listAux;

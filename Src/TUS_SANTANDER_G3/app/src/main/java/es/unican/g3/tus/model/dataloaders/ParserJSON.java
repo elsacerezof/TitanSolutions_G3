@@ -187,19 +187,15 @@ public class ParserJSON {
         reader.endObject();
         if (tipo == 0) {
             return new Linea(name, numero, identifier);
-<<<<<<< HEAD
+
         } else if (tipo == 1) {
-            return new Parada(name, numero, identifier);
+            return new Parada(0,name, numero, identifier);
         } else  if(tipo==2){
             return new Estimacion(distancia1, tiempo1, identifier, paradaId,linea);
         }
         else
         {
             return null;
-=======
-        }else{
-            return new Parada(0, name, numero, identifier);
->>>>>>> 4fdde6a8b5d5e9c158e7cdeae9c45927fe0b3417
         }
     }
 

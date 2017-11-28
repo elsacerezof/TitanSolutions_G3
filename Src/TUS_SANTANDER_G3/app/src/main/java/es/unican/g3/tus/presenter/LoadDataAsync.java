@@ -189,7 +189,7 @@ public class LoadDataAsync extends AsyncTask<Object, Boolean, Boolean> {
             Toast.makeText(contextLlamador, R.string.app_carga_datos_ok, Toast.LENGTH_SHORT).show();
             // Sincronización de datos remotos con locales
             Database db = new Database(contextLlamador);
-            //db.reiniciar();
+            //db.reiniciar(null);
             db.sincronizarParadas(getListaParadasBus());
             db.sincronizarLineas(getListaLineasBus());
             db.sincronizarEstimaciones(getListaEstimacionesBus());

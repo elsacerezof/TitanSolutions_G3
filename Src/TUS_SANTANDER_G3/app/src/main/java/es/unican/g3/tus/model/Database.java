@@ -38,10 +38,10 @@ public class Database extends SQLiteOpenHelper {
     private static final String TABLA_LINEAS = "CREATE TABLE lineas " +
             "(_id INTEGER PRIMARY KEY AUTOINCREMENT, NUMERO TEXT, NOMBRE TEXT, IDENTIFICADOR INT)";
 
-<<<<<<< HEAD
+
     private static final String TABLA_ESTIMACIONES = "CREATE TABLE estimaciones " +
             "(_id INTEGER PRIMARY KEY AUTOINCREMENT, DISTANCIA INT, TIEMPO INT, IDENTIFICADOR INT,PARADAID INT,LINEA TEXT)";
-=======
+
     private static final String TABLA_GRUPOS = "CREATE TABLE grupos " +
             "(_id INTEGER PRIMARY KEY AUTOINCREMENT, NOMBRE TEXT, COLOR TEXT)";
 
@@ -51,35 +51,35 @@ public class Database extends SQLiteOpenHelper {
 
     private static final String UNIQUEINDEX_GRUPOS_PARADAS = "CREATE UNIQUE INDEX grupo_parada " +
             "ON grupos_paradas (PARADA_ID,GRUPO_ID);";
->>>>>>> 4fdde6a8b5d5e9c158e7cdeae9c45927fe0b3417
+
 
     // Campos tabla
     private static final String NOMBRE = "NOMBRE";
     private static final String COLOR = "COLOR";
     private static final String ALIAS = "ALIAS";
     private static final String NOTAS = "NOTAS";
-<<<<<<< HEAD
+
     private static final String NUMERO ="NUMERO";
     private static final String IDENTIFICADOR ="IDENTIFICADOR";
     private static final String DISTANCIA ="DISTANCIA";
     private static final String TIEMPO ="TIEMPO";
     private static final String PARADAID ="PARADAID";
+    private static final String PARADA_ID ="PARADA_ID";
     private static final String LINEA ="LINEA";
     private static final String NOMBRE_PARADAS ="paradas";
     private static final String NOMBRE_LINEAS ="lineas";
     private static final String NOMBRE_ESTIMACIONES ="estimaciones";
     private static final String DROP_TABLE="DROP TABLE IF EXISTS '";
-=======
-    private static final String NUMERO = "NUMERO";
-    private static final String PARADA_ID = "PARADA_ID";
+
+
     private static final String GRUPO_ID = "GRUPO_ID";
-    private static final String IDENTIFICADOR = "IDENTIFICADOR";
-    private static final String NOMBRE_PARADAS = "paradas";
-    private static final String NOMBRE_LINEAS = "lineas";
+
+
+
     private static final String NOMBRE_GRUPOS = "grupos";
     private static final String NOMBRE_GRUPOS_PARADAS = "grupos_paradas";
-    private static final String DROP_TABLE = "DROP TABLE IF EXISTS '";
->>>>>>> 4fdde6a8b5d5e9c158e7cdeae9c45927fe0b3417
+
+
 
     public Database(Context context) {
         super(context, NOMBRE_BASEDATOS, null, VERSION_BASEDATOS);
@@ -88,35 +88,14 @@ public class Database extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase sqLiteDatabase) {
-<<<<<<< HEAD
-        sqLiteDatabase.execSQL(TABLA_PARADAS);
-        sqLiteDatabase.execSQL(TABLA_LINEAS);
-        sqLiteDatabase.execSQL(TABLA_ESTIMACIONES);
-=======
+
+
         reiniciar(sqLiteDatabase);
->>>>>>> 4fdde6a8b5d5e9c158e7cdeae9c45927fe0b3417
+
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase sqLiteDatabase, int oldVersion, int newVersion) {
-<<<<<<< HEAD
-        sqLiteDatabase.execSQL(DROP_TABLE + TABLA_PARADAS+ "'");
-        sqLiteDatabase.execSQL(DROP_TABLE + TABLA_LINEAS+ "'");
-        sqLiteDatabase.execSQL(DROP_TABLE + TABLA_ESTIMACIONES+ "'");
-        onCreate(sqLiteDatabase);
-    }
-
-    public void reiniciar(){
-        SQLiteDatabase db = getWritableDatabase();
-        if(db != null) {
-            db.execSQL(DROP_TABLE + NOMBRE_PARADAS + "'");
-            db.execSQL(DROP_TABLE + NOMBRE_LINEAS + "'");
-            db.execSQL(DROP_TABLE + NOMBRE_ESTIMACIONES + "'");
-            db.execSQL(TABLA_PARADAS);
-            db.execSQL(TABLA_LINEAS);
-            db.execSQL(TABLA_ESTIMACIONES);
-            db.close();
-=======
         onCreate(sqLiteDatabase);
     }
 
@@ -181,6 +160,7 @@ public class Database extends SQLiteOpenHelper {
                 eliminarEstructura(db);
                 db.execSQL(TABLA_PARADAS);
                 db.execSQL(TABLA_LINEAS);
+                db.execSQL(TABLA_ESTIMACIONES);
                 inicializarGrupos(db);
             }else{
                 muestraErrorBBDD();
@@ -208,13 +188,14 @@ public class Database extends SQLiteOpenHelper {
                 db.execSQL(DROP_TABLE + NOMBRE_LINEAS + "'");
                 db.execSQL(DROP_TABLE + NOMBRE_GRUPOS + "'");
                 db.execSQL(DROP_TABLE + NOMBRE_GRUPOS_PARADAS + "'");
+                db.execSQL(DROP_TABLE + NOMBRE_ESTIMACIONES + "'");
             }else{
                 muestraErrorBBDD();
             }
         }catch (SQLException sqlException) {
             Log.d("sql", ""+sqlException);
             muestraErrorBBDD();
->>>>>>> 4fdde6a8b5d5e9c158e7cdeae9c45927fe0b3417
+
         }
     }
 

@@ -2,6 +2,7 @@ package es.unican.g3.tus.views;
 
 import android.content.Context;
 import android.graphics.Color;
+import android.graphics.drawable.GradientDrawable;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
@@ -47,94 +48,80 @@ public class ListEstimacionesAdapter extends ArrayAdapter {
         TextView textViewNumero = viewRow.findViewById(R.id.textViewLineaa);
         textViewNumero.setText(estimacionesBus.get(position).getLinea());
         //textViewParadaId.setText(String.valueOf(estimacionesBus.get(position).getParadaId()));
-        textViewDistancia.setText(String.valueOf("Distancia: "+estimacionesBus.get(position).getDistancia())+" m");
+        textViewDistancia.setText(String.valueOf("Distancia: "+Math.round(estimacionesBus.get(position).getTiempo()))+" m");
 
-        textViewTiempo.setText(String.valueOf("Tiempo: "+Math.round(estimacionesBus.get(position).getTiempo()/60))+" min");
+        textViewTiempo.setText(String.valueOf("Tiempo: "+Math.round(estimacionesBus.get(position).getDistancia()/60))+" min");
+        int color;
         switch (estimacionesBus.get(position).getLinea())
         {
             case "1":
-                textViewNumero.setTextColor(Color.parseColor("#ff0000"));
-
+                color = Color.parseColor("#ff0000");
                 break;
             case "2":
-                textViewNumero.setTextColor(Color.parseColor("#a800d0"));
-
+                color = Color.parseColor("#a800d0");
                 break;
             case "3":
-                textViewNumero.setTextColor(Color.parseColor("#ffcd00"));
-
+                color = Color.parseColor("#ffcd00");
                 break;
             case "4":
-                textViewNumero.setTextColor(Color.parseColor("#25b3d8"));
-
+                color = Color.parseColor("#25b3d8");
                 break;
             case "5C1":
             case "5C2":
-                textViewNumero.setTextColor(Color.parseColor("#969696"));
-
+                color = Color.parseColor("#969696");
                 break;
             case "6C1":
             case "6C2":
-                textViewNumero.setTextColor(Color.parseColor("#008032"));
-
+                color = Color.parseColor("#008032");
                 break;
             case "7C1":
             case "7C2":
-                textViewNumero.setTextColor(Color.parseColor("#f66210"));
-
+                color = Color.parseColor("#f66210");
                 break;
             case "11":
-                textViewNumero.setTextColor(Color.parseColor("#01125c"));
-
+                color = Color.parseColor("#01125c");
                 break;
             case "12":
-                textViewNumero.setTextColor(Color.parseColor("#a2d65c"));
-
+                color = Color.parseColor("#a2d65c");
                 break;
             case "13":
-                textViewNumero.setTextColor(Color.parseColor("#9080b0"));
-
+                color = Color.parseColor("#9080b0");
                 break;
             case "14":
-                textViewNumero.setTextColor(Color.parseColor("#0066b0"));
-
+                color = Color.parseColor("#0066b0");
                 break;
             case "16":
-                textViewNumero.setTextColor(Color.parseColor("#631637"));
-
+                color = Color.parseColor("#631637");
                 break;
             case "17":
-                textViewNumero.setTextColor(Color.parseColor("#f98083"));
-
+                color = Color.parseColor("#f98083");
                 break;
             case "19":
-                textViewNumero.setTextColor(Color.parseColor("#038495"));
-
+                color = Color.parseColor("#038495");
                 break;
             case "18":
-                textViewNumero.setTextColor(Color.parseColor("#b0e8df"));
-
+                color = Color.parseColor("#b0e8df");
                 break;
             case "20":
-                textViewNumero.setTextColor(Color.parseColor("#78fa9e"));
-
+                color = Color.parseColor("#78fa9e");
                 break;
             case "21":
-                textViewNumero.setTextColor(Color.parseColor("#a1d55d"));
-
+                color = Color.parseColor("#a1d55d");
                 break;
             case "23":
-                textViewNumero.setTextColor(Color.parseColor("#cacaca"));
-
+                color = Color.parseColor("#cacaca");
                 break;
             case "N1":
             case "N2":
             case "N3":
             default:
-                textViewNumero.setTextColor(Color.parseColor("#000000"));
-
+                color = Color.parseColor("#000000");
                 break;
         }
+
+        textViewNumero.setTextColor(Color.parseColor("#FFFFFF"));
+        GradientDrawable drawable = (GradientDrawable) textViewNumero.getBackground();
+        drawable.setColor(color);
 
         return viewRow;
     }
