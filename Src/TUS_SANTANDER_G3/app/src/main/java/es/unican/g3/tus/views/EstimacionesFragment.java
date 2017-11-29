@@ -2,29 +2,26 @@ package es.unican.g3.tus.views;
 import java.util.List;
 import android.app.ProgressDialog;
 import android.os.Bundle;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentTransaction;
+
 import android.support.v4.app.ListFragment;
-import android.support.v7.widget.SearchView;
+
 import android.util.Log;
 import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuInflater;
+
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
-import android.widget.Toast;
+
 
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
+
 
 import es.unican.g3.tus.R;
 import es.unican.g3.tus.model.Estimacion;
 import es.unican.g3.tus.model.Parada;
 import es.unican.g3.tus.presenter.ListEstimacionesPresenter;
-import es.unican.g3.tus.presenter.ListParadasPresenter;
+
 
 /**
  * A fragment representing a list of Items.
@@ -38,8 +35,6 @@ public class EstimacionesFragment extends ListFragment implements IListEstimacio
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        //super.onActivityCreated(savedInstanceState);
-        //this.listEstimacionesPresenter = new ListEstimacionesPresenter(getContext(),this);
         return(inflater.inflate(R.layout.fragment_estimaciones_list, container, false));
     }
 
@@ -61,10 +56,7 @@ public class EstimacionesFragment extends ListFragment implements IListEstimacio
     public void showList(List<Estimacion> lineaList, boolean ordenadas) {
         if(lineaList!=null) {
 
-
-
             ListEstimacionesAdapter lista= new ListEstimacionesAdapter(getContext(),estimacionesPorParada(lineaList,paradaId));
-
             getListView().setAdapter(lista);
 
         }
@@ -77,7 +69,7 @@ public class EstimacionesFragment extends ListFragment implements IListEstimacio
     }
     public List<Estimacion> estimacionesPorParada(List<Estimacion> lineaList,String id)
     {
-        List<Estimacion> listAux= new ArrayList<Estimacion>();
+        List<Estimacion> listAux= new ArrayList<>();
         for(int i=0;i<lineaList.size();i++)
         {
             if(lineaList.get(i).getParadaId()==Integer.parseInt(id))
@@ -85,14 +77,8 @@ public class EstimacionesFragment extends ListFragment implements IListEstimacio
                 listAux.add(lineaList.get(i));
             }
         }
-        if(listAux.size()==0)
-        {
-            Toast toast1 =
-                    Toast.makeText(this.getContext(),
-                            "En estos momentos no disponemos de estimaciones para esta parada", Toast.LENGTH_SHORT);
-            //toast1.show();
-
-        }
+        //Aqui antes se lanzaba un toast que ahora es inutil (se ha eliminado)
+        //(Estimaciones no disponibles)
         return listAux;
     }
 
@@ -116,7 +102,7 @@ public class EstimacionesFragment extends ListFragment implements IListEstimacio
      * coincidencia en alguno de sus campos con el texto indicado
      *
      * @param filterText texto con el que filtrar los resultados
-     * @return
+     * @return lista de paradas
      */
     public static List<Parada> searchFilterList (List<Parada> paradas, String filterText) {
 
@@ -157,7 +143,7 @@ public class EstimacionesFragment extends ListFragment implements IListEstimacio
         return resultado;
 
     }
-    public void añadeParada(String id)
+    public void anhadeParada(String id)
     {
         paradaId=id;
     }

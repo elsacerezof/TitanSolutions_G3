@@ -17,10 +17,7 @@ import es.unican.g3.tus.R;
 import es.unican.g3.tus.model.Estimacion;
 import es.unican.g3.tus.model.Parada;
 
-/**
- * Created by alejandro on 10/08/17.
- * //http://www.viralandroid.com/2016/04/custom-android-listview-example.html
- */
+
 
 public class ListEstimacionesAdapter extends ArrayAdapter {
     private List<Estimacion> estimacionesBus;
@@ -47,10 +44,9 @@ public class ListEstimacionesAdapter extends ArrayAdapter {
         TextView textViewTiempo =  viewRow.findViewById(R.id.textViewTiempo);
         TextView textViewNumero = viewRow.findViewById(R.id.textViewLineaa);
         textViewNumero.setText(estimacionesBus.get(position).getLinea());
-        //textViewParadaId.setText(String.valueOf(estimacionesBus.get(position).getParadaId()));
-        textViewDistancia.setText(String.valueOf("Distancia: "+Math.round(estimacionesBus.get(position).getTiempo()))+" m");
+        textViewDistancia.setText(String.valueOf("Distancia: "+(estimacionesBus.get(position).getTiempo()))+" m");
 
-        textViewTiempo.setText(String.valueOf("Tiempo: "+Math.round(estimacionesBus.get(position).getDistancia()/60))+" min");
+        textViewTiempo.setText(String.valueOf("Tiempo: "+ Math.round(estimacionesBus.get(position).getDistancia()/60.0))+" min");
         int color;
         switch (estimacionesBus.get(position).getLinea())
         {

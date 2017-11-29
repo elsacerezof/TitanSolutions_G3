@@ -1,12 +1,10 @@
 package es.unican.g3.tus.views;
 
 import android.app.ProgressDialog;
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.app.ListFragment;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.SearchView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -23,7 +21,6 @@ import java.util.Collections;
 import java.util.List;
 
 import es.unican.g3.tus.R;
-import es.unican.g3.tus.model.Linea;
 import es.unican.g3.tus.model.Parada;
 import es.unican.g3.tus.presenter.ListParadasPresenter;
 
@@ -67,7 +64,7 @@ public class ParadasFragment extends ListFragment implements IListParadasView{
         Log.d("pulsado", ""+Integer.toString(position));
         //Haciendo uso de la interfaz DataCommunzication podemos enviar los datos entre fragmentos
         EstimacionesFragment fragmentEstimaciones = new EstimacionesFragment();
-        fragmentEstimaciones.añadeParada(listAux.get(position).getNumero());
+        fragmentEstimaciones.anhadeParada(listAux.get(position).getNumero());
         FragmentManager fm = getActivity().getSupportFragmentManager();
         FragmentTransaction ft = fm.beginTransaction();
         ft.replace(R.id.frameLayoutElements, fragmentEstimaciones);

@@ -19,6 +19,9 @@ import es.unican.g3.tus.model.Parada;
  */
 public class ParserJSON {
 
+    public static final String DC_IDENTIFIER = "dc:identifier";
+    public static final String AYTO_NUMERO = "ayto:numero";
+
     private ParserJSON() {
     }
 
@@ -69,26 +72,33 @@ public class ParserJSON {
             String name = reader.nextName();
             if (name.equals("resources")) {
                 reader.beginArray(); //cada elemento del array es un object
-                while (reader.hasNext())
-                    if (tipo == 0)
-                        listParadasBus.add(readParada(reader));
-                    else if (tipo == 1) {
-                        listLineasBus.add(readLinea(reader));
-                    } else if (tipo == 2) {
-                        listEstimacionesBus.add(readEstimacion(reader));
+                while (reader.hasNext()) {
+                    switch (tipo) {
+                        case 0:
+                            listParadasBus.add(readParada(reader));
+                            break;
+                        case 1:
+                            listLineasBus.add(readLinea(reader));
+                            break;
+                        case 2:
+                            listEstimacionesBus.add(readEstimacion(reader));
+                            break;
+                        default:
+                            break;
                     }
+                }
             } else {
                 reader.skipValue();
             }
         }
 
-        if (tipo == 0) {
-            return listParadasBus;
-        } else if(tipo ==1) {
-            return listLineasBus;
-        }else
-        {
-            return listEstimacionesBus;
+        switch(tipo){
+            case 0:
+                return listParadasBus;
+            case 1:
+                return listLineasBus;
+            default:
+                return listEstimacionesBus;
         }
     }
 
@@ -133,13 +143,13 @@ public class ParserJSON {
             //linea
             if (tipo == 0) {
                 switch (n) {
-                    case "ayto:numero":
+                    case AYTO_NUMERO:
                         numero = reader.nextString();
                         break;
                     case "dc:name":
                         name = reader.nextString();
                         break;
-                    case "dc:identifier":
+                    case DC_IDENTIFIER:
                         identifier = reader.nextInt();
                         break;
                     default:
@@ -148,13 +158,13 @@ public class ParserJSON {
                 }
             } else if (tipo == 1) {
                 switch (n) {
-                    case "ayto:numero":
+                    case AYTO_NUMERO:
                         numero = reader.nextString();
                         break;
                     case "ayto:parada":
                         name = reader.nextString();
                         break;
-                    case "dc:identifier":
+                    case DC_IDENTIFIER:
                         identifier = reader.nextInt();
                         break;
                     default:
@@ -172,7 +182,7 @@ public class ParserJSON {
                     case "ayto:paradaId":
                         paradaId = reader.nextInt();
                         break;
-                    case "dc:identifier":
+                    case DC_IDENTIFIER:
                         identifier = reader.nextInt();
                         break;
                     case "ayto:etiqLinea":
@@ -185,17 +195,17 @@ public class ParserJSON {
             }
         }
         reader.endObject();
-        if (tipo == 0) {
-            return new Linea(name, numero, identifier);
 
-        } else if (tipo == 1) {
-            return new Parada(0,name, numero, identifier);
-        } else  if(tipo==2){
-            return new Estimacion(distancia1, tiempo1, identifier, paradaId,linea);
-        }
-        else
-        {
-            return null;
+
+        switch(tipo){
+            case 0:
+                return new Linea(name, numero, identifier);
+            case 1:
+                return new Parada(0,name,numero,identifier);
+            case 2:
+                return new Estimacion(distancia1,tiempo1,identifier,paradaId,linea);
+            default:
+                return null;
         }
     }
 

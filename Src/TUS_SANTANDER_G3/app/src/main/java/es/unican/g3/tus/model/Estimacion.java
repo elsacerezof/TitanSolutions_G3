@@ -1,6 +1,5 @@
 package es.unican.g3.tus.model;
 
-import android.support.annotation.NonNull;
 
 /**
  * Clase que almacena la información referente a una línea de TUS

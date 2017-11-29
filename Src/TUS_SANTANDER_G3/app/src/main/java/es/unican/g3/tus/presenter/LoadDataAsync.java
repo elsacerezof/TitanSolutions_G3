@@ -28,6 +28,7 @@ import es.unican.g3.tus.model.dataloaders.RemoteFetch;
 
 public class LoadDataAsync extends AsyncTask<Object, Boolean, Boolean> {
 
+    public static final String ENTRA = "ENTRA";
     private List<Parada> listaParadasBus;
     private RemoteFetch remoteFetchParadas;
     private List<Linea> listaLineasBus;
@@ -76,7 +77,7 @@ public class LoadDataAsync extends AsyncTask<Object, Boolean, Boolean> {
             remoteFetchLineas.getJSON(RemoteFetch.URL_LINEAS_BUS);
             return remoteFetchLineas.getBufferedData();
         } catch (IOException e) {
-            Log.w("Error", e);
+            Log.w(ERROR, e);
             return null;
         }
     }
@@ -91,7 +92,7 @@ public class LoadDataAsync extends AsyncTask<Object, Boolean, Boolean> {
             remoteFetchEstimaciones.getJSON(RemoteFetch.URL_ESTIMACIONES_BUS);
             return remoteFetchEstimaciones.getBufferedData();
         } catch (IOException e) {
-            Log.w("Error", e);
+            Log.w(ERROR, e);
             return null;
         }
     }
@@ -106,7 +107,7 @@ public class LoadDataAsync extends AsyncTask<Object, Boolean, Boolean> {
         try {
             if(i != null) {
                 listaParadasBus = ParserJSON.readArrayParadasBus(i);
-                Log.d("ENTRA", "Obten paradas: " + listaParadasBus.size());
+                Log.d(ENTRA, "Obten paradas: " + listaParadasBus.size());
                 return true;
             }else{
                 Log.e(ERROR, "Input obtenparadas nulo");
@@ -123,7 +124,7 @@ public class LoadDataAsync extends AsyncTask<Object, Boolean, Boolean> {
         try {
             if(i != null) {
                 listaLineasBus = ParserJSON.readArrayLineasBus(i);
-                Log.d("ENTRA", "Obten lineas: " + listaLineasBus.size());
+                Log.d(ENTRA, "Obten lineas: " + listaLineasBus.size());
                 return true;
             }else{
                 Log.e(ERROR, "Input obten lineas nulo");
@@ -139,7 +140,7 @@ public class LoadDataAsync extends AsyncTask<Object, Boolean, Boolean> {
         try {
             if(i != null) {
                 listaEstimacionesBus = ParserJSON.readArrayEstimacionesBus(i);
-                Log.d("ENTRA", "Obten lineas: " + listaEstimacionesBus.size());
+                Log.d(ENTRA, "Obten lineas: " + listaEstimacionesBus.size());
                 return true;
             }else{
                 Log.e(ERROR, "Input obten estimaciones nulo");
@@ -186,7 +187,6 @@ public class LoadDataAsync extends AsyncTask<Object, Boolean, Boolean> {
         } else {
             // Sincronización de datos remotos con locales
             Database db = new Database(contextLlamador);
-            //db.reiniciar(null);
             db.sincronizarParadas(getListaParadasBus());
             db.sincronizarLineas(getListaLineasBus());
             db.sincronizarEstimaciones(getListaEstimacionesBus());

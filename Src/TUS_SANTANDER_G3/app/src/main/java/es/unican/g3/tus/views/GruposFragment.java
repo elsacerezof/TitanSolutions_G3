@@ -18,7 +18,7 @@ import java.util.List;
 import es.unican.g3.tus.R;
 import es.unican.g3.tus.model.Parada;
 import es.unican.g3.tus.presenter.ListGruposPresenter;
-import es.unican.g3.tus.presenter.LoadDataAsync;
+
 
 /**
  * A fragment representing a list of Items.
@@ -57,7 +57,6 @@ public class GruposFragment extends ListFragment implements IListGruposView {
         Log.d("pulsado", ""+Integer.toString(position));
         //Haciendo uso de la interfaz DataCommunzication podemos enviar los datos entre fragmentos
         List<Parada> listaP=new ArrayList<>();
-        int i=0;
         for (Object p:listAux)
         {
             if(p.toString().contains("Parada"))
@@ -68,10 +67,9 @@ public class GruposFragment extends ListFragment implements IListGruposView {
             {
                 listaP.add(null);
             }
-            i++;
         }
         EstimacionesFragment fragmentEstimaciones = new EstimacionesFragment();
-        fragmentEstimaciones.añadeParada(listaP.get(position).getNumero());
+        fragmentEstimaciones.anhadeParada(listaP.get(position).getNumero());
         FragmentManager fm = getActivity().getSupportFragmentManager();
         FragmentTransaction ft = fm.beginTransaction();
         ft.replace(R.id.frameLayoutElements, fragmentEstimaciones);

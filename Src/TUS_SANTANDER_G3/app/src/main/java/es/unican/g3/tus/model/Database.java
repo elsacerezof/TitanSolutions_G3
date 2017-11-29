@@ -388,7 +388,6 @@ public class Database extends SQLiteOpenHelper {
         String[] valoresRecuperar = {"_id", Database.DISTANCIA, Database.TIEMPO, Database.IDENTIFICADOR,Database.PARADAID,Database.LINEA};
         Cursor c = db.query(Database.NOMBRE_ESTIMACIONES, valoresRecuperar, null,
                 null, null, null, null, null);
-        //Cursos c2=db.rawQuery("SELECT * FROM estimaciones");
         if(c.moveToFirst()) {
             do {
                 Estimacion estimacion = new Estimacion(c.getInt(2), c.getInt(1), c.getInt(3),c.getInt(4),c.getString(5));
@@ -548,12 +547,6 @@ public class Database extends SQLiteOpenHelper {
     public void sincronizarEstimaciones(List<Estimacion> estimacionesRemotas) {
 
         // Obtener listado líneas locales
-        List<Estimacion> estimacionesLocales = recuperarEstimaciones();
-
-        //for(int i=0;i<estimacionesLocales.size();i++)
-        //{
-         //   borrarEstimacion(estimacionesLocales.get(i).getIdentifier());
-        //}
         SQLiteDatabase db = getWritableDatabase();
         db.execSQL(DROP_TABLE + NOMBRE_ESTIMACIONES + "'");
         db.execSQL(TABLA_ESTIMACIONES);
@@ -561,9 +554,7 @@ public class Database extends SQLiteOpenHelper {
         // Sincronización de datos locales con remotos
         for (Estimacion estimacion : estimacionesRemotas) {
             // Si la línea remota no existe en las descargadas en la aplicación, se inserta
-
-                insertarEstimacion(estimacion.getDistancia(), estimacion.getTiempo(), estimacion.getIdentifier(),estimacion.getParadaId(),estimacion.getLinea());
-
+            insertarEstimacion(estimacion.getDistancia(), estimacion.getTiempo(), estimacion.getIdentifier(),estimacion.getParadaId(),estimacion.getLinea());
         }
 
     }
