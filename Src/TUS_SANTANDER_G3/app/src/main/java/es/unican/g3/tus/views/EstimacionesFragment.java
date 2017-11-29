@@ -4,6 +4,8 @@ import android.app.ProgressDialog;
 import android.os.Bundle;
 
 import android.support.v4.app.ListFragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -42,7 +44,6 @@ public class EstimacionesFragment extends ListFragment implements IListEstimacio
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         this.listEstimacionesPresenter = new ListEstimacionesPresenter(getContext(),this);
-        this.listEstimacionesPresenter = new ListEstimacionesPresenter(getContext(),this);
     }
 
     @Override
@@ -56,7 +57,7 @@ public class EstimacionesFragment extends ListFragment implements IListEstimacio
     public void showList(List<Estimacion> lineaList, boolean ordenadas) {
         if(lineaList!=null) {
 
-            ListEstimacionesAdapter lista= new ListEstimacionesAdapter(getContext(),estimacionesPorParada(lineaList,paradaId));
+            ListEstimacionesAdapter lista= new ListEstimacionesAdapter(getContext(), estimacionesPorParada(lineaList,paradaId));
             getListView().setAdapter(lista);
 
         }

@@ -22,6 +22,7 @@ import java.util.List;
 
 import es.unican.g3.tus.R;
 import es.unican.g3.tus.model.Parada;
+import es.unican.g3.tus.presenter.EstimacionesAsync;
 import es.unican.g3.tus.presenter.ListParadasPresenter;
 
 /**
@@ -62,13 +63,7 @@ public class ParadasFragment extends ListFragment implements IListParadasView{
     @Override
     public void onListItemClick(ListView listView, View view, int position, long id) {
         Log.d("pulsado", ""+Integer.toString(position));
-        //Haciendo uso de la interfaz DataCommunzication podemos enviar los datos entre fragmentos
-        EstimacionesFragment fragmentEstimaciones = new EstimacionesFragment();
-        fragmentEstimaciones.anhadeParada(listAux.get(position).getNumero());
-        FragmentManager fm = getActivity().getSupportFragmentManager();
-        FragmentTransaction ft = fm.beginTransaction();
-        ft.replace(R.id.frameLayoutElements, fragmentEstimaciones);
-        ft.commit();
+        new EstimacionesAsync( getActivity(), getContext(), listAux.get(position), getFragmentManager()).execute();
     }
 
     @Override

@@ -491,6 +491,21 @@ public class Database extends SQLiteOpenHelper {
         }
     }
 
+    public void eliminaEstimacionParada(int paradaId){
+        SQLiteDatabase db = getWritableDatabase();
+        try {
+            if(db != null){
+                db.delete(Database.NOMBRE_ESTIMACIONES, Database.PARADAID + "=?", new String[]{Integer.toString(paradaId)});
+                db.close();
+            }else{
+                muestraErrorBBDD();
+            }
+        }catch (SQLException sqlException) {
+            Log.d("sql", ""+sqlException);
+            muestraErrorBBDD();
+        }
+    }
+
     public void eliminaParadasDeGrupos(){
         SQLiteDatabase db = getWritableDatabase();
         try {
@@ -547,11 +562,6 @@ public class Database extends SQLiteOpenHelper {
     }
     public void sincronizarEstimaciones(List<Estimacion> estimacionesRemotas) {
 
-        // Obtener listado líneas locales
-        SQLiteDatabase db = getWritableDatabase();
-        db.execSQL(DROP_TABLE + NOMBRE_ESTIMACIONES + "'");
-        db.execSQL(TABLA_ESTIMACIONES);
-        db.close();
         // Sincronización de datos locales con remotos
         for (Estimacion estimacion : estimacionesRemotas) {
             // Si la línea remota no existe en las descargadas en la aplicación, se inserta

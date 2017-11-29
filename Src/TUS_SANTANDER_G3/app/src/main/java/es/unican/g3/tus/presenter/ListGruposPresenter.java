@@ -51,8 +51,8 @@ public class ListGruposPresenter  {
         return listadoGruposConParadas;
     }
 
-    public List<Grupo> getListaGrupos() {
-        return listaGrupos;
+    public List<Object> getListaGruposConParadas() {
+        return listadoGruposConParadas;
     }//getListaGrupos
 
     public IListGruposView getlistGruposView(){

@@ -3,11 +3,16 @@ package es.unican.g3.tus.presenter;
 import android.app.Activity;
 import android.content.Context;
 import android.os.AsyncTask;
+import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.widget.Toast;
 
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
+
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.ArrayList;
 import java.util.List;
 
 import es.unican.g3.tus.R;
@@ -17,16 +22,17 @@ import es.unican.g3.tus.model.Linea;
 import es.unican.g3.tus.model.Parada;
 import es.unican.g3.tus.model.dataloaders.ParserJSON;
 import es.unican.g3.tus.model.dataloaders.RemoteFetch;
+import es.unican.g3.tus.views.EstimacionesFragment;
 
 /** Clase para obtener y sincronizar asincronamente los datos proporcionados por el
  *  Ayuntamiento de Santander sobre el servicio TUS.
  *
- *  Una vez realizado se invoca la actividad principal.
+ *  Una vez realizado se invoca el fragmento de estimaciones.
  *
  * Created by fernando on 9/11/17.
  */
 
-public class LoadDataAsync extends AsyncTask<Object, Boolean, Boolean> {
+public class EstimacionesAsync extends AsyncTask<Object, Boolean, Boolean> {
 
     public static final String ENTRA = "ENTRA";
     private List<Parada> listaParadasBus;
@@ -37,50 +43,28 @@ public class LoadDataAsync extends AsyncTask<Object, Boolean, Boolean> {
     private RemoteFetch remoteFetchEstimaciones;
     private Context contextLlamador;
     private Activity activityLlamadora;
+    private Parada paradaLlamadora;
     private static final String ERROR="ERROR";
+    private EstimacionesFragment fragmentEstimaciones;
+    private FragmentManager fm;
 
-    public LoadDataAsync(Activity activity, Context context) {
+
+    public EstimacionesAsync(Activity activity, Context context, Parada paradaLlamadora, FragmentManager fm) {
         this.remoteFetchParadas = new RemoteFetch();
         this.remoteFetchLineas = new RemoteFetch();
         this.remoteFetchEstimaciones = new RemoteFetch();
         this.contextLlamador = context;
         this.activityLlamadora = activity;
+        this.paradaLlamadora = paradaLlamadora;
+        this.fragmentEstimaciones = new EstimacionesFragment();
+        this.fm = fm;
+        fragmentEstimaciones.anhadeParada(paradaLlamadora.getNumero());
     }
 
     public Activity getActivityLlamadora(){
         return activityLlamadora;
     }
 
-    /**
-     * Descarga las paradas del servicio remoto externo.
-     *
-     * @return InputStream
-     */
-    private InputStream descargaParadas()
-    {
-        try {
-            remoteFetchParadas.getJSON(RemoteFetch.URL_PARADAS_BUS);
-            return remoteFetchParadas.getBufferedData();
-        } catch (IOException e) {
-            Log.w("Error", e);
-            return null;
-        }
-    }
-    /**
-     * Descarga las lineas del servicio remoto externo.
-     *
-     * @return InputStream
-     */
-    private InputStream descargaLineas()
-    {
-        try {
-            remoteFetchLineas.getJSON(RemoteFetch.URL_LINEAS_BUS);
-            return remoteFetchLineas.getBufferedData();
-        } catch (IOException e) {
-            Log.w(ERROR, e);
-            return null;
-        }
-    }
     /**
      * Descarga las estimaciones del servicio remoto externo.
      *
@@ -97,45 +81,6 @@ public class LoadDataAsync extends AsyncTask<Object, Boolean, Boolean> {
         }
     }
 
-    /**
-     * Método a través del cual se almacenan las paradas de buses en el atributo listaParadasBus
-     * de esta clase. Para ello se parsea el JSON recibido por argumento.
-     * @param i stream que contiene el JSON
-     * @return boolean
-     */
-    public boolean obtenParadas(InputStream i) {
-        try {
-            if(i != null) {
-                listaParadasBus = ParserJSON.readArrayParadasBus(i);
-                Log.d(ENTRA, "Obten paradas: " + listaParadasBus.size());
-                return true;
-            }else{
-                Log.e(ERROR, "Input obtenparadas nulo");
-                return false;
-            }
-        }catch(Exception e){
-            Log.e(ERROR,"Error en la obtención de las paradas de bus: "+e.getMessage());
-            Log.w("", e);
-            return false;
-        }//try
-    }//obtenParadas
-
-    public boolean obtenLineas(InputStream i) {
-        try {
-            if(i != null) {
-                listaLineasBus = ParserJSON.readArrayLineasBus(i);
-                Log.d(ENTRA, "Obten lineas: " + listaLineasBus.size());
-                return true;
-            }else{
-                Log.e(ERROR, "Input obten lineas nulo");
-                return false;
-            }
-        }catch(Exception e){
-            Log.e(ERROR,"Error en la obtención de las lineas de bus: "+e.getMessage());
-            Log.w("", e);
-            return false;
-        }//try
-    }//obtenParadas
     public boolean obtenEstimaciones(InputStream i) {
         try {
             if(i != null) {
@@ -166,9 +111,22 @@ public class LoadDataAsync extends AsyncTask<Object, Boolean, Boolean> {
 
     @Override
     protected Boolean doInBackground(Object... objects) {
-        // Se descargan "de fondo" las paradas y líneas
-        obtenParadas(descargaParadas());
-        obtenLineas(descargaLineas());
+        // Se cargan "de fondo" las paradas
+
+        if(obtenEstimaciones(descargaEstimaciones())){
+            List<Estimacion> estimacionesTotales = getListaEstimacionesBus();
+            List<Estimacion> estimacionesFiltradas= new ArrayList<Estimacion>();
+
+            for(Estimacion estimacion : estimacionesTotales){
+                if(estimacion.getParadaId() == Integer.parseInt(paradaLlamadora.getNumero()) && estimacion.getDistancia() != 0){
+                    estimacionesFiltradas.add(estimacion);
+                }
+            }
+
+            Database db = new Database(this.contextLlamador);
+            db.eliminaEstimacionParada(Integer.parseInt(paradaLlamadora.getNumero()));
+            db.sincronizarEstimaciones(estimacionesFiltradas);
+        }
         return true;
     }
 
@@ -180,17 +138,12 @@ public class LoadDataAsync extends AsyncTask<Object, Boolean, Boolean> {
     @Override
     protected void onPostExecute(Boolean bool) {
         // Se muestra mensaje de error o correcto
-        if(getListaParadasBus() == null || getListaLineasBus()==null) {
+        if(getListaEstimacionesBus()==null) {
             // Mensaje de error
             Toast.makeText(contextLlamador, R.string.app_fallo_conexion, Toast.LENGTH_SHORT).show();
-        } else {
-            // Sincronización de datos remotos con locales
-            Database db = new Database(contextLlamador);
-            db.sincronizarParadas(getListaParadasBus());
-            db.sincronizarLineas(getListaLineasBus());
-            // Mensaje correcto
-            Toast.makeText(contextLlamador, R.string.app_carga_datos_ok, Toast.LENGTH_SHORT).show();
         }
+        this.fm.beginTransaction()
+                .replace(R.id.frameLayoutElements, fragmentEstimaciones).commit();
     }
 
 }

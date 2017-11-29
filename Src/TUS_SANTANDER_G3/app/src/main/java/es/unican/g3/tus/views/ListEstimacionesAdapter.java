@@ -45,8 +45,14 @@ public class ListEstimacionesAdapter extends ArrayAdapter {
         TextView textViewNumero = viewRow.findViewById(R.id.textViewLineaa);
         textViewNumero.setText(estimacionesBus.get(position).getLinea());
         textViewDistancia.setText(String.valueOf("Distancia: "+(estimacionesBus.get(position).getTiempo()))+" m");
-
-        textViewTiempo.setText(String.valueOf("Tiempo: "+ Math.round(estimacionesBus.get(position).getDistancia()/60.0))+" min");
+        long tiempoRedondeo = Math.round(estimacionesBus.get(position).getDistancia()/60.0);
+        String tiempoTexto;
+        if(tiempoRedondeo == 0){
+            tiempoTexto = "Menos de un minuto";
+        }else{
+            tiempoTexto = Long.toString(tiempoRedondeo) + " min";
+        }
+        textViewTiempo.setText(String.valueOf("Tiempo: "+ tiempoTexto));
         int color;
         switch (estimacionesBus.get(position).getLinea())
         {
