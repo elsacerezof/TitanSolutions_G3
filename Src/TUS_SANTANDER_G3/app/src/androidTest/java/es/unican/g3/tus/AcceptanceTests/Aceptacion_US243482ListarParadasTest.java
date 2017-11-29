@@ -29,7 +29,7 @@ import static org.hamcrest.Matchers.allOf;
 
 @LargeTest
 @RunWith(AndroidJUnit4.class)
-public class AceptacionListarParadasTest {
+public class Aceptacion_US243482ListarParadasTest {
 
     @Rule
     public ActivityTestRule<ActivityInicialLogo> mActivityTestRule = new ActivityTestRule<>(ActivityInicialLogo.class);
@@ -128,16 +128,6 @@ public class AceptacionListarParadasTest {
                         7),
                         isDisplayed()));
         linearLayout8.check(matches(isDisplayed()));
-
-        ViewInteraction linearLayout9 = onView(
-                allOf(childAtPosition(
-                        allOf(withId(android.R.id.list),
-                                childAtPosition(
-                                        IsInstanceOf.<View>instanceOf(android.widget.LinearLayout.class),
-                                        0)),
-                        8),
-                        isDisplayed()));
-        linearLayout9.check(matches(isDisplayed()));
 
     }
 

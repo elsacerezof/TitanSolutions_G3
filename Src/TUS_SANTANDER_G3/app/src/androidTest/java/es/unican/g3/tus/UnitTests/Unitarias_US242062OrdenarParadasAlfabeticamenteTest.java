@@ -14,7 +14,7 @@ import static junit.framework.Assert.assertEquals;
 import static junit.framework.Assert.assertTrue;
 
 
-public class OrdenarAlfabeticamenteTest {
+public class Unitarias_US242062OrdenarParadasAlfabeticamenteTest {
 
     /**
      * Test para comprobar la que el sistema de ordenación de paradas, funciona correctamente.
@@ -22,7 +22,7 @@ public class OrdenarAlfabeticamenteTest {
      */
 
     @Test
-    public void ordenarAlfabeticamentePU1() throws Exception {
+    public void PU1US242062() throws Exception {
 
         List<Parada> lista = new LinkedList<>();
         Parada p1= new Parada(1,"Camarreal Penacastillo","499", 42063);
@@ -62,7 +62,7 @@ public class OrdenarAlfabeticamenteTest {
     }// tesParadas
 
     @Test
-    public void ordenarAlfabeticamentePU2() throws Exception {
+    public void PU2US242062() throws Exception {
 
         List<Parada> lista = new LinkedList<>();
         Parada p1= new Parada(1,"Camarreal Peñacastillo","499", 42063);

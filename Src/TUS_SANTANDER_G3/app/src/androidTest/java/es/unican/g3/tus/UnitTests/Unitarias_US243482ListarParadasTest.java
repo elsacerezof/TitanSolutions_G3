@@ -20,7 +20,7 @@ import static org.junit.Assert.assertTrue;
  * Clase que implementa los tests unitarios del caso de uso "Listar paradas"
  */
 
-public class ListarParadasTest {
+public class Unitarias_US243482ListarParadasTest {
 
     /**
      * Test para comprobar el parseo y procesamiento del JSON correspondiente a las paradas de TUS Santander
@@ -28,7 +28,7 @@ public class ListarParadasTest {
      * @throws Exception excepcion
      */
     @Test
-    public void listarParadasTestPU1() throws Exception {
+    public void PU1US243482() throws Exception {
 
         // Paradas almacenadas en el JSON local
         InputStream is = InstrumentationRegistry.getTargetContext().getResources().openRawResource(R.raw.paradas_bus);
@@ -60,7 +60,7 @@ public class ListarParadasTest {
      * @throws Exception excepcion
      */
     @Test
-    public void listarParadasTestPU2() throws Exception {
+    public void PI2US243482() throws Exception {
         LoadDataAsync loadDataAsync = new LoadDataAsync(null, null);
         List<Parada> paradas = loadDataAsync.getListaParadasBus();
         // Comprobación de que no se devuelven paradas

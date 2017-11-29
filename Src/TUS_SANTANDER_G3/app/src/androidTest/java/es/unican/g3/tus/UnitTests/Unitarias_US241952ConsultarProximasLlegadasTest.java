@@ -13,7 +13,7 @@ import es.unican.g3.tus.presenter.LoadDataAsync;
 
 import static org.junit.Assert.assertTrue;
 
-public class Unitarias_US241952ConsultarProximasLlegadas {
+public class Unitarias_US241952ConsultarProximasLlegadasTest {
     /**
      * Test para comprobar el correcto funcionamiento de las estimaciones
      * Caso: JSON proporcionado correcto

@@ -14,14 +14,14 @@ import es.unican.g3.tus.model.dataloaders.RemoteFetch;
 
 import static junit.framework.Assert.assertEquals;
 
-public class PruebasIntegracionTest {
+public class Integracion_US243482ListarParadas_US242062OrdenarParadasAlfabeticamenteTest {
 
     /**
      * Test que implementa la prueba de integración PI1
      * @throws Exception excepcion
      */
     @Test
-    public void pruebaIntegracion1() throws Exception {
+    public void PI1US243482() throws Exception {
 
         InputStream is = InstrumentationRegistry.getTargetContext().getResources().openRawResource(R.raw.paradas_bus);
 
@@ -60,7 +60,7 @@ public class PruebasIntegracionTest {
      * @throws Exception excepcion
      */
     @Test
-    public void pruebaIntegracion2() throws Exception {
+    public void PI2US242062() throws Exception {
 
         RemoteFetch remoteFetch = new RemoteFetch();
         remoteFetch.getJSON(RemoteFetch.URL_PARADAS_BUS);

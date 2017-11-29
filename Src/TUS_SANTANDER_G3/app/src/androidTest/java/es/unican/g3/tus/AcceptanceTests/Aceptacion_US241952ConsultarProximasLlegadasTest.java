@@ -37,7 +37,7 @@ import static org.hamcrest.Matchers.is;
 
 @LargeTest
 @RunWith(AndroidJUnit4.class)
-public class Aceptacion_US241952ConsultarProximasLlegadas {
+public class Aceptacion_US241952ConsultarProximasLlegadasTest {
 
     @Rule
     public ActivityTestRule<ActivityInicialLogo> mActivityTestRule = new ActivityTestRule<>(ActivityInicialLogo.class);

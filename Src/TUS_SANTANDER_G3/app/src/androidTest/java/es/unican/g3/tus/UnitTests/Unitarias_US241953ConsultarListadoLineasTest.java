@@ -21,7 +21,7 @@ import static org.junit.Assert.assertTrue;
 /** Pruebas unitarias: Consultar listado de líneas
  * Clase que implementa los tests unitarios del caso de uso "Consultar listado de líneas"
  */
-public class ConsultarListadoLineasTest {
+public class Unitarias_US241953ConsultarListadoLineasTest {
 
     /**
      * Test para comprobar el correcto funcionamiento del listado de líneas
@@ -29,7 +29,7 @@ public class ConsultarListadoLineasTest {
      * @throws Exception excepcion
      */
     @Test
-    public void listarLineasTestPU1() throws Exception {
+    public void PU1US241953() throws Exception {
 
         // Líneas almacenadas en el JSON local
         InputStream is = InstrumentationRegistry.getTargetContext().getResources().openRawResource(R.raw.lineas_test);
@@ -64,7 +64,7 @@ public class ConsultarListadoLineasTest {
      * @throws Exception excepcion
      */
     @Test
-    public void listarLineasTestPU2() throws Exception {
+    public void PU2US241953() throws Exception {
         LoadDataAsync loadDataAsync = new LoadDataAsync(null, null);
         List<Linea> lineas = loadDataAsync.getListaLineasBus();
         // Comprobación de que no se devuelven líneas

@@ -18,7 +18,7 @@ import static junit.framework.Assert.assertTrue;
  * Created by LuisOsle on 28/11/17.
  */
 
-public class Integracion_US241952ConsultarProximasLlegadas {
+public class Integracion_US241952ConsultarProximasLlegadasTest {
 
     @Test
     public void PI1US241952() throws Exception {

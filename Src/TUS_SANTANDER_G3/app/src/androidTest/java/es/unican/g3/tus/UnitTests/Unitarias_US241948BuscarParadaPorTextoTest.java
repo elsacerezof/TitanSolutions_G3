@@ -13,7 +13,7 @@ import static org.junit.Assert.assertTrue;
 /** Pruebas unitarias: Buscar parada por texto
  * Clase que implementa los tests unitarios del caso de uso "Buscar parada por texto"
  */
-public class BuscarParadaPorTextoTest {
+public class Unitarias_US241948BuscarParadaPorTextoTest {
 
     /**
      * Test para comprobar el filtrado de paradas en base a una cadena de caracteres
@@ -21,7 +21,7 @@ public class BuscarParadaPorTextoTest {
      * @throws Exception excepcion
      */
     @Test
-    public void buscarParadaTextoTestPU1() throws Exception {
+    public void PU1US241948() throws Exception {
         // Paradas que deberían leerse y procesarse en el método searchFilterList
         List<Parada> paradasEntrada = new ArrayList<Parada>();
         Parada parada1 = new Parada(1,"Avenida de Cantabria 10", "213", 322);
@@ -63,7 +63,7 @@ public class BuscarParadaPorTextoTest {
      * @throws Exception excepcion
      */
     @Test
-    public void buscarParadaTextoTestPU2() throws Exception {
+    public void PU2US241948() throws Exception {
         // Paradas que deberían leerse y procesarse en el método searchFilterList
         List<Parada> paradasEntrada = new ArrayList<Parada>();
 

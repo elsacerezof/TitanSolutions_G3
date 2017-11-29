@@ -1,4 +1,4 @@
-package es.unican.g3.tus.views;
+package es.unican.g3.tus;
 
 
 import android.support.test.espresso.ViewInteraction;
@@ -26,13 +26,13 @@ import static org.hamcrest.Matchers.allOf;
 
 @LargeTest
 @RunWith(AndroidJUnit4.class)
-public class AceptacionActivityInicialLogoTest {
+public class Aceptacion_US242580VisualizarLogoEnArranqueTest {
 
     @Rule
     public ActivityTestRule<ActivityInicialLogo> mActivityTestRule = new ActivityTestRule<>(ActivityInicialLogo.class);
 
     @Test
-    public void activityInicialLogoTest() {
+    public void PA1US242580() {
         // Added a sleep statement to match the app's execution delay.
         // The recommended way to handle such scenarios is to use Espresso idling resources:
         // https://google.github.io/android-testing-support-library/docs/espresso/idling-resource/index.html

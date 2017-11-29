@@ -22,7 +22,7 @@ import static org.junit.Assert.assertTrue;
  * Created by LuisOsle on 26/11/17.
  */
 
-public class Integracion_US242777AnhadirParadaAGrupo {
+public class Integracion_US242777AnhadirParadaAGrupoTest {
 
     @Test
     public void PI1US242777() throws Exception {

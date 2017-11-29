@@ -32,21 +32,16 @@ import static org.hamcrest.Matchers.allOf;
 
 @LargeTest
 @RunWith(AndroidJUnit4.class)
-public class AceptacionBuscarParadaPorTextoTest {
+public class Aceptacion_US241948BuscarParadaPorTextoTest {
 
     @Rule
     public ActivityTestRule<ActivityInicialLogo> mActivityTestRule = new ActivityTestRule<>(ActivityInicialLogo.class);
 
     @Test
-    public void aceptacionBuscarParadaPorTextoTest() {
+    public void PA1US241948() {
         // Added a sleep statement to match the app's execution delay.
         // The recommended way to handle such scenarios is to use Espresso idling resources:
         // https://google.github.io/android-testing-support-library/docs/espresso/idling-resource/index.html
-        try {
-            Thread.sleep(3000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
 
         ViewInteraction appCompatImageView = onView(
                 allOf(withId(R.id.search_button), withContentDescription("Search"),
@@ -141,13 +136,26 @@ public class AceptacionBuscarParadaPorTextoTest {
                                 1),
                         isDisplayed()));
         textView8.check(matches(withText("Barrio de Ojaiz 7")));
+    }
 
-        ViewInteraction appCompatImageView2 = onView(
-                allOf(withId(R.id.search_close_btn), withContentDescription("Clear query"),
-                        withParent(allOf(withId(R.id.search_plate),
-                                withParent(withId(R.id.search_edit_frame)))),
+    @Test
+    public void PA2US241948() {
+
+        // Added a sleep statement to match the app's execution delay.
+        // The recommended way to handle such scenarios is to use Espresso idling resources:
+        // https://google.github.io/android-testing-support-library/docs/espresso/idling-resource/index.html
+        try {
+            Thread.sleep(3000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        ViewInteraction appCompatImageView = onView(
+                allOf(withId(R.id.search_button), withContentDescription("Search"),
+                        withParent(allOf(withId(R.id.search_bar),
+                                withParent(withId(R.id.action_search)))),
                         isDisplayed()));
-        appCompatImageView2.perform(click());
+        appCompatImageView.perform(click());
 
         ViewInteraction searchAutoComplete2 = onView(
                 allOf(withId(R.id.search_src_text),
@@ -175,13 +183,26 @@ public class AceptacionBuscarParadaPorTextoTest {
                                 1),
                         isDisplayed()));
         textView10.check(matches(withText("Jose Ortega y Gasset - 2")));
+    }
 
-        ViewInteraction appCompatImageView3 = onView(
-                allOf(withId(R.id.search_close_btn), withContentDescription("Clear query"),
-                        withParent(allOf(withId(R.id.search_plate),
-                                withParent(withId(R.id.search_edit_frame)))),
+    @Test
+    public void PA3US241948() {
+
+        // Added a sleep statement to match the app's execution delay.
+        // The recommended way to handle such scenarios is to use Espresso idling resources:
+        // https://google.github.io/android-testing-support-library/docs/espresso/idling-resource/index.html
+        try {
+            Thread.sleep(3000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        ViewInteraction appCompatImageView = onView(
+                allOf(withId(R.id.search_button), withContentDescription("Search"),
+                        withParent(allOf(withId(R.id.search_bar),
+                                withParent(withId(R.id.action_search)))),
                         isDisplayed()));
-        appCompatImageView3.perform(click());
+        appCompatImageView.perform(click());
 
         ViewInteraction searchAutoComplete3 = onView(
                 allOf(withId(R.id.search_src_text),
@@ -191,31 +212,44 @@ public class AceptacionBuscarParadaPorTextoTest {
         searchAutoComplete3.perform(replaceText("mi casita"), closeSoftKeyboard());
 
         ViewInteraction textView11 = onView(
-                allOf(withId(R.id.textViewNumero), withText("499"),
+                allOf(withId(R.id.textViewNumero), withText("221"),
                         childAtPosition(
                                 childAtPosition(
                                         withId(android.R.id.list),
                                         0),
                                 0),
                         isDisplayed()));
-        textView11.check(matches(withText("499")));
+        textView11.check(matches(withText("221")));
 
         ViewInteraction textView12 = onView(
-                allOf(withId(R.id.textViewName), withText("Camarreal Peñacastillo"),
+                allOf(withId(R.id.textViewName), withText("Avenida Cantabria 12"),
                         childAtPosition(
                                 childAtPosition(
                                         withId(android.R.id.list),
                                         0),
                                 1),
                         isDisplayed()));
-        textView12.check(matches(withText("Camarreal Peñacastillo")));
+        textView12.check(matches(withText("Avenida Cantabria 12")));
+    }
 
-        ViewInteraction appCompatImageView4 = onView(
-                allOf(withId(R.id.search_close_btn), withContentDescription("Clear query"),
-                        withParent(allOf(withId(R.id.search_plate),
-                                withParent(withId(R.id.search_edit_frame)))),
+    @Test
+    public void PA4US241948() {
+
+        // Added a sleep statement to match the app's execution delay.
+        // The recommended way to handle such scenarios is to use Espresso idling resources:
+        // https://google.github.io/android-testing-support-library/docs/espresso/idling-resource/index.html
+        try {
+            Thread.sleep(3000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        ViewInteraction appCompatImageView = onView(
+                allOf(withId(R.id.search_button), withContentDescription("Search"),
+                        withParent(allOf(withId(R.id.search_bar),
+                                withParent(withId(R.id.action_search)))),
                         isDisplayed()));
-        appCompatImageView4.perform(click());
+        appCompatImageView.perform(click());
 
         ViewInteraction searchAutoComplete4 = onView(
                 allOf(withId(R.id.search_src_text),
@@ -225,24 +259,24 @@ public class AceptacionBuscarParadaPorTextoTest {
         searchAutoComplete4.perform(replaceText("domino"), closeSoftKeyboard());
 
         ViewInteraction textView13 = onView(
-                allOf(withId(R.id.textViewNumero), withText("481"),
+                allOf(withId(R.id.textViewNumero), withText("73"),
                         childAtPosition(
                                 childAtPosition(
                                         withId(android.R.id.list),
                                         0),
                                 0),
                         isDisplayed()));
-        textView13.check(matches(withText("481")));
+        textView13.check(matches(withText("73")));
 
         ViewInteraction textView14 = onView(
-                allOf(withId(R.id.textViewName), withText("Jeronimo Sainz de la Maza ( Mercado Mexico )"),
+                allOf(withId(R.id.textViewName), withText("Los Castros 63"),
                         childAtPosition(
                                 childAtPosition(
                                         withId(android.R.id.list),
                                         0),
                                 1),
                         isDisplayed()));
-        textView14.check(matches(withText("Jeronimo Sainz de la Maza ( Mercado Mexico )")));
+        textView14.check(matches(withText("Los Castros 63")));
 
     }
 

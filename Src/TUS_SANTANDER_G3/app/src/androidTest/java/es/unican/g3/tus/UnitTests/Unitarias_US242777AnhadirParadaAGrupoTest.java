@@ -17,7 +17,7 @@ import static org.junit.Assert.assertTrue;
  * Clase que implementa las pruebas unitarias asociadas a la historia
  * de usuario "Anhadir parada a grupo"
  */
-public class Unitarias_US242777AnhadirParadaAGrupo {
+public class Unitarias_US242777AnhadirParadaAGrupoTest {
 
     @Test
     public void PU1US242777(){

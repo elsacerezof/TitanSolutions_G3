@@ -19,7 +19,7 @@ import static org.junit.Assert.assertTrue;
  * Clase que implementa los tests de integración del segundo sprint
  */
 
-public class IntegracionSprint2Test {
+public class Integracion_US241953ConsultarListadoLineas_US241948BuscarParaPorTextoTest {
 
     /**
      * Test que implementa la prueba de integración PI1 utiliando un JSON local completo
@@ -27,7 +27,7 @@ public class IntegracionSprint2Test {
      * @throws Exception excepcion
      */
     @Test
-    public void integracionSprint2PU1() throws Exception {
+    public void PI1US241953_US241948() throws Exception {
 
         InputStream is;
         LoadDataAsync loadDataAsync;

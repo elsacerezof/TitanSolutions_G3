@@ -31,13 +31,13 @@ import static org.hamcrest.Matchers.allOf;
 
 @LargeTest
 @RunWith(AndroidJUnit4.class)
-public class AceptacionOrdenarParadasAlfabeticamenteTest {
+public class Aceptacion_US242062OrdenarParadasAlfabeticamenteTest {
 
     @Rule
     public ActivityTestRule<ActivityInicialLogo> mActivityTestRule = new ActivityTestRule<>(ActivityInicialLogo.class);
 
     @Test
-    public void aceptacionOrdenarParadasAlfabeticamenteTest() {
+    public void PA1US242062O() {
         // Added a sleep statement to match the app's execution delay.
         // The recommended way to handle such scenarios is to use Espresso idling resources:
         // https://google.github.io/android-testing-support-library/docs/espresso/idling-resource/index.html

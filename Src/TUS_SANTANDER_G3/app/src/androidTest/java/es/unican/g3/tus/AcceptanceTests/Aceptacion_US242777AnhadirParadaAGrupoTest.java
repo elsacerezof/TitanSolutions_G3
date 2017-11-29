@@ -38,7 +38,7 @@ import static org.hamcrest.CoreMatchers.not;
 
 @LargeTest
 @RunWith(AndroidJUnit4.class)
-public class Aceptacion_US242777AnhadirParadaAGrupo {
+public class Aceptacion_US242777AnhadirParadaAGrupoTest {
 
     @Rule
     public ActivityTestRule<ActivityInicialLogo> mActivityTestRule = new ActivityTestRule<>(ActivityInicialLogo.class);

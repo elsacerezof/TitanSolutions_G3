@@ -19,14 +19,14 @@ import static junit.framework.Assert.assertTrue;
 /** Pruebas unitarias: Visualizar logo en arranque
  * Clase que implementa los tests unitarios del caso de uso "Visualizar logo en arranque"
  */
-public class VisualizarLogoArranqueTest {
+public class Unitarias_US242580VisualizarLogoArranqueTest {
 
     /**
      * Test para comprobar que el logo se encuentra correctamente en el proyecto
      * @throws Exception excepcion
      */
     @Test
-    public void visualizarLogoTestPU1() throws Exception {
+    public void PU1US242580() throws Exception {
         Context context = InstrumentationRegistry.getTargetContext();
 
         // Se comprueba si existe la imagen del logo en la carpeta mipmap del proyecto
