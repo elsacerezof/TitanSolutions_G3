@@ -17,6 +17,9 @@ public class RemoteFetch {
     // URL para obtener un listado de las paradas de Bus de Santander
     public static final String URL_PARADAS_BUS = "http://datos.santander.es/api/rest/datasets/paradas_bus.json";
 
+    // URL para obtener un listado de las paradas de Bus de Santander
+    public static final String URL_ESTIMACIONES_BUS = "http://datos.santander.es/api/rest/datasets/control_flotas_estimaciones.json";
+
     // Contenido del JSON
     private BufferedInputStream bufferedData;
 

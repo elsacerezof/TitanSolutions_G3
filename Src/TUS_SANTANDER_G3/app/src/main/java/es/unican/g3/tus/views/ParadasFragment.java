@@ -2,6 +2,8 @@ package es.unican.g3.tus.views;
 
 import android.app.ProgressDialog;
 import android.os.Bundle;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.app.ListFragment;
 import android.support.v7.widget.SearchView;
 import android.util.Log;
@@ -20,13 +22,14 @@ import java.util.List;
 
 import es.unican.g3.tus.R;
 import es.unican.g3.tus.model.Parada;
+import es.unican.g3.tus.presenter.EstimacionesAsync;
 import es.unican.g3.tus.presenter.ListParadasPresenter;
 
 /**
  * A fragment representing a list of Items.
  */
 public class ParadasFragment extends ListFragment implements IListParadasView{
-
+    private List<Parada> listAux=new ArrayList<>();
     private ProgressDialog dialog;
     private ListParadasPresenter listParadasPresenter;
     private List<Parada> fragmentListParadas;
@@ -60,12 +63,13 @@ public class ParadasFragment extends ListFragment implements IListParadasView{
     @Override
     public void onListItemClick(ListView listView, View view, int position, long id) {
         Log.d("pulsado", ""+Integer.toString(position));
-        //Haciendo uso de la interfaz DataCommunzication podemos enviar los datos entre fragmentos
+        new EstimacionesAsync( getActivity(), getContext(), listAux.get(position), getFragmentManager()).execute();
     }
 
     @Override
     public void showList(List<Parada> lineaList, boolean ordenadas) {
         if(lineaList!=null) {
+            listAux=lineaList;
             ListParadasAdapter listParadasAdapter;
             if(ordenadas) {
                 List<Parada> lineaListOrdenada = new ArrayList<>(lineaList);
@@ -74,6 +78,7 @@ public class ParadasFragment extends ListFragment implements IListParadasView{
                 getListView().setAdapter(listParadasAdapter);
                 this.fragmentListParadas = lineaListOrdenada;
             }else{
+
                 listParadasAdapter = new ListParadasAdapter(getContext(), lineaList);
                 getListView().setAdapter(listParadasAdapter);
                 this.fragmentListParadas = lineaList;

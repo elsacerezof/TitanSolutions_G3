@@ -1,6 +1,8 @@
 package es.unican.g3.tus.views;
 
 import android.os.Bundle;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.app.ListFragment;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -10,10 +12,14 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import es.unican.g3.tus.R;
+import es.unican.g3.tus.model.Parada;
+import es.unican.g3.tus.presenter.EstimacionesAsync;
 import es.unican.g3.tus.presenter.ListGruposPresenter;
+
 
 /**
  * A fragment representing a list of Items.
@@ -40,6 +46,7 @@ public class GruposFragment extends ListFragment implements IListGruposView {
             @Override
             public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
                 listGruposPresenter.eliminaParadaColor(position);
+
                 return true;
             }
         });
@@ -49,6 +56,7 @@ public class GruposFragment extends ListFragment implements IListGruposView {
     public void onListItemClick(ListView listView, View view, int position, long id) {
         Log.d("pulsado", ""+Integer.toString(position));
         //Haciendo uso de la interfaz DataCommunzication podemos enviar los datos entre fragmentos
+        new EstimacionesAsync( getActivity(), getContext(), (Parada)listGruposPresenter.getListaGruposConParadas().get(position), getFragmentManager()).execute();
     }
 
     @Override

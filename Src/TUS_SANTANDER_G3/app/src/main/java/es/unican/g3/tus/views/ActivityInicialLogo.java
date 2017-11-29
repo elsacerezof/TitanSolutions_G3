@@ -10,7 +10,7 @@ import es.unican.g3.tus.presenter.LoadDataAsync;
 
 public class ActivityInicialLogo extends AppCompatActivity {
     // Duración en milisegundos que se mostrará el splash
-    private static final int DURACION_SPLASH = 3000; // 3 segundos
+    private static final int DURACION_SPLASH = 2000; // 3 segundos
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
