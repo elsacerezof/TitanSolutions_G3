@@ -179,20 +179,19 @@ public class LoadDataAsync extends AsyncTask<Object, Boolean, Boolean> {
      */
     @Override
     protected void onPostExecute(Boolean bool) {
-
         // Se muestra mensaje de error o correcto
         if(getListaParadasBus() == null || getListaLineasBus()==null || getListaEstimacionesBus()==null) {
             // Mensaje de error
             Toast.makeText(contextLlamador, R.string.app_fallo_conexion, Toast.LENGTH_SHORT).show();
         } else {
-            // Mensaje correcto
-            Toast.makeText(contextLlamador, R.string.app_carga_datos_ok, Toast.LENGTH_SHORT).show();
             // Sincronización de datos remotos con locales
             Database db = new Database(contextLlamador);
             //db.reiniciar(null);
             db.sincronizarParadas(getListaParadasBus());
             db.sincronizarLineas(getListaLineasBus());
             db.sincronizarEstimaciones(getListaEstimacionesBus());
+            // Mensaje correcto
+            Toast.makeText(contextLlamador, R.string.app_carga_datos_ok, Toast.LENGTH_SHORT).show();
         }
     }
 

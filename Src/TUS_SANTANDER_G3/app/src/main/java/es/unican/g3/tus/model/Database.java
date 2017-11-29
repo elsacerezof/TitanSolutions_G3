@@ -26,7 +26,7 @@ public class Database extends SQLiteOpenHelper {
     private Context context;
 
     // Version
-    private static final int VERSION_BASEDATOS = 2;
+    private static final int VERSION_BASEDATOS = 3;
 
     // Nombre de nuestro archivo de base de datos
     private static final String NOMBRE_BASEDATOS = "database_g3.db";
