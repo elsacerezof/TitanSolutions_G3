@@ -238,7 +238,7 @@ public class Database extends SQLiteOpenHelper {
             muestraErrorBBDD();
         }
     }
-    public void insertarEstimacion(int distancia, int tiempo, int identificador, int paradaId,String linea){
+    public void insertarEstimacion(int distancia, int tiempo, int identificador, int paradaId, String linea){
         SQLiteDatabase db = getWritableDatabase();
         if(db != null){
             ContentValues valores = new ContentValues();
@@ -336,6 +336,8 @@ public class Database extends SQLiteOpenHelper {
                     if(c.moveToFirst()){
                         do {
                             Parada parada = new Parada(c.getInt(0), c.getString(1), c.getString(4), c.getInt(5));
+                            parada.setAlias(c.getString(2));
+                            parada.setNotas(c.getString(3));
                             listaParadas.add(parada);
                         } while (c.moveToNext());
                     }
@@ -512,9 +514,8 @@ public class Database extends SQLiteOpenHelper {
         for (Parada parada : paradasRemotas) {
             // Si la parada remota no existe en las descargadas en la aplicación, se inserta
             if(!paradasLocales.contains(parada)){
-
-                String alias = null;
-                String notas = null;
+                String alias = "";
+                String notas = "";
 
                 // Simulación de las funciones de tag y notas en dos paradas
                 if(parada.getIdentifier() == 323){
